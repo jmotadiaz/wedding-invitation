@@ -10,6 +10,8 @@ export default {
 			},
 			animation: {
 				'appear': 'appear 0.8s ease-in-out',
+				'ltr': 'ltr 0.8s ease-in-out',
+				'rtl': 'rtl 0.8s ease-in-out',
 			},
 			keyframes: {
 				appear: {
@@ -18,6 +20,22 @@ export default {
 					},
 					"100%": {
 						opacity: "1",
+					},
+				},
+				ltr: {
+					"0%": {
+						transform: "translate(-50%)",
+					},
+					"100%": {
+						transform: "translate(0)",
+					},
+				},
+				rtl: {
+					"0%": {
+						transform: "translate(50%)",
+					},
+					"100%": {
+						transform: "translate(0)",
 					},
 				},
 			}
