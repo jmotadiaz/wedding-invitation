@@ -5,7 +5,7 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				cav: ['Caveat', 'cursive', ...defaultTheme.fontFamily.sans],
+				hand: ['Caveat', 'cursive', ...defaultTheme.fontFamily.sans],
 				indie: ['"Indie Flower"', 'cursive', ...defaultTheme.fontFamily.sans],
 			},
 			animation: {

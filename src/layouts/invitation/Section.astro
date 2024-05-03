@@ -1,3 +1,11 @@
-<section class="h-screen lg:mx-20 mx-5 flex flex-col justify-center items-center snap-start">
+---
+interface Props {
+	extraClass?: string;
+}
+
+const { extraClass } = Astro.props;
+---
+
+<section class=`h-screen lg:px-20 px-5 flex flex-col justify-center items-center snap-start ${extraClass}`>
   <slot />
 </section>
