@@ -10,8 +10,10 @@ export default {
 			},
 			animation: {
 				'appear': 'appear 0.8s ease-in-out',
-				'ltr': 'ltr 0.6s ease-in-out',
-				'rtl': 'rtl 0.6s ease-in-out',
+				'ltr': 'ltr 0.8s ease-out',
+				'rtl': 'rtl 0.8s ease-out',
+				'ttb': 'ttb 0.8s ease-out',
+				'btt': 'btt 0.8s ease-out',
 			},
 			keyframes: {
 				appear: {
@@ -33,6 +35,22 @@ export default {
 				rtl: {
 					"0%": {
 						transform: "translate(100%)",
+					},
+					"100%": {
+						transform: "translate(0)",
+					},
+				},
+				ttb: {
+					"0%": {
+						transform: "translate(0, -100%)",
+					},
+					"100%": {
+						transform: "translate(0)",
+					},
+				},
+				btt: {
+					"0%": {
+						transform: "translate(0, 100%)",
 					},
 					"100%": {
 						transform: "translate(0)",
