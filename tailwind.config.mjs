@@ -10,8 +10,8 @@ export default {
 			},
 			animation: {
 				'appear': 'appear 0.8s ease-in-out',
-				'ltr': 'ltr 0.8s ease-in-out',
-				'rtl': 'rtl 0.8s ease-in-out',
+				'ltr': 'ltr 0.8s linear',
+				'rtl': 'rtl 0.8s linear',
 			},
 			keyframes: {
 				appear: {
