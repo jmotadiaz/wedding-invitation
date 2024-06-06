@@ -1,0 +1,57 @@
+<div class="timeline p-8 h-[1800px]">
+  <div class="timeline-item relative mb-8 pl-8">
+      <div class="text-sm text-gray-500">12 de Junio, 2023</div>
+      <div class="mt-1 text-lg font-bold">Evento 1: Bienvenida</div>
+      <div class="mt-1 text-gray-600">Descripción del evento de bienvenida.</div>
+  </div>
+  <div class="timeline-item relative mb-8 pl-8">
+      <div class="text-sm text-gray-500">13 de Junio, 2023</div>
+      <div class="mt-1 text-lg font-bold">Evento 2: Almuerzo</div>
+      <div class="mt-1 text-gray-600">Descripción del evento de almuerzo.</div>
+  </div>
+  <div class="timeline-item relative mb-8 pl-8">
+      <div class="text-sm text-gray-500">14 de Junio, 2023</div>
+      <div class="mt-1 text-lg font-bold">Evento 3: Cena</div>
+      <div class="mt-1 text-gray-600">Descripción del evento de cena.</div>
+  </div>
+</div>
+<style>
+  .timeline {
+      border-left: 4px solid #ccc;
+      margin-left: 10px;
+      position: relative;
+  }
+
+  .timeline-item::before {
+      content: '';
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #ccc;
+      border: 2px solid white;
+      position: absolute;
+      left: -8px;
+      top: 0;
+  }
+
+  @keyframes fadeIn {
+      from {
+          opacity: 0;
+          transform: translateY(20px);
+      }
+      to {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+
+  @scroll-timeline scrollTimeline {
+      source: auto;
+      orientation: block;
+  }
+
+  .timeline-item {
+      animation: fadeIn 1s ease-out;
+      animation-timeline: scrollTimeline;
+  }
+</style>
