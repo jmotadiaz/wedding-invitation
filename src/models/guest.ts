@@ -4,5 +4,6 @@ export interface Guest {
   name: string;
   expectedAttendees: number;
   confirmedAttendees: number;
+  bus: boolean;
   allergies?: string;
 }

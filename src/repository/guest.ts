@@ -2,8 +2,20 @@
 import type { Guest } from "../models/guest";
 
 let guests: Guest[] = [
-  { id: 1, name: "John Doe", expectedAttendees: 2, confirmedAttendees: 2 },
-  { id: 2, name: "Jane Smith", expectedAttendees: 4, confirmedAttendees: 3 },
+  {
+    id: 1,
+    name: "John Doe",
+    expectedAttendees: 2,
+    confirmedAttendees: 2,
+    bus: false,
+  },
+  {
+    id: 2,
+    name: "Jane Smith",
+    expectedAttendees: 4,
+    confirmedAttendees: 3,
+    bus: false,
+  },
 ];
 
 export function getGuests(): Guest[] {

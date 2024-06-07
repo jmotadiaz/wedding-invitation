@@ -8,7 +8,8 @@ if (Astro.request.method === "POST") {
   addGuest({
     name: data.get("name") as string,
     expectedAttendees: parseInt(data.get("expectedAttendees") as string),
-    confirmedAttendees: 0
+    confirmedAttendees: 0,
+    bus: false
   });
 }
 const guests = getGuests();
