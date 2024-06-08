@@ -3,7 +3,7 @@ import { createClient } from "@vercel/postgres";
 export async function GET() {
   try {
     const client = createClient({
-      connectionString: "postgres://postgres@localhost:5432/postgres",
+      connectionString: import.meta.env.POSTGRES_URL,
     });
     const result = await client.sql`CREATE TABLE Guest (
         id SERIAL PRIMARY KEY,
