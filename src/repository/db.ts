@@ -19,5 +19,5 @@ export type Guest = Selectable<GuestTable>;
 export type GuestInput = Insertable<GuestTable>;
 
 export default createKysely<Database>({
-  connectionString: import.meta.env.POSTGRES_URL_NON_POOLING,
+  connectionString: import.meta.env.POSTGRES_URL,
 });
