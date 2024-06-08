@@ -6,6 +6,7 @@ export async function GET() {
     client = createClient({
       connectionString: import.meta.env.POSTGRES_URL_NON_POOLING,
     });
+    await client.connect();
     const result = await client.sql`CREATE TABLE Guest (
         id SERIAL PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
@@ -27,6 +28,6 @@ export async function GET() {
       })
     );
   } finally {
-    await client.end();
+    await client?.end();
   }
 }
