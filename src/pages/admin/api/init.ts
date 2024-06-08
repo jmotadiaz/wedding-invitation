@@ -1,8 +1,9 @@
 import { createClient } from "@vercel/postgres";
 
 export async function GET() {
+  let client;
   try {
-    const client = createClient({
+    client = createClient({
       connectionString: import.meta.env.POSTGRES_URL_NON_POOLING,
     });
     const result = await client.sql`CREATE TABLE Guest (
@@ -25,5 +26,7 @@ export async function GET() {
         error,
       })
     );
+  } finally {
+    await client.end();
   }
 }
