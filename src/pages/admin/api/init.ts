@@ -14,6 +14,11 @@ export async function GET() {
         allergies TEXT,
         modified_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );`;
+    return new Response(
+      JSON.stringify({
+        result,
+      })
+    );
   } catch (error) {
     return new Response(
       JSON.stringify({
