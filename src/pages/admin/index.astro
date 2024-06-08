@@ -2,7 +2,8 @@
 import { getGuests } from '@repository/guest';
 import Layout from '@layouts/Layout.astro'
 import GuestList from '@components/GuestList.astro'
-const guests = getGuests();
+const guests = await getGuests();
+
 ---
 
 <Layout title="Guest List">

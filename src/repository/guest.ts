@@ -1,46 +1,43 @@
 // src/data.ts
-import type { Guest } from "../models/guest";
+import db from "./db";
+import type { Guest, GuestInput } from "./db";
 
-let guests: Guest[] = [
-  {
-    id: 1,
-    name: "John Doe",
-    expectedAttendees: 2,
-    confirmedAttendees: 2,
-    bus: false,
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    expectedAttendees: 4,
-    confirmedAttendees: 3,
-    bus: false,
-  },
-];
-
-export function getGuests(): Guest[] {
-  return guests;
+export function getGuests(): Promise<
+  Pick<
+    Guest,
+    | "allergies"
+    | "bus"
+    | "expected_attendees"
+    | "confirmed_attendees"
+    | "id"
+    | "name"
+  >[]
+> {
+  return db
+    .selectFrom("guest")
+    .select([
+      "id",
+      "allergies",
+      "expected_attendees",
+      "confirmed_attendees",
+      "bus",
+      "name",
+    ])
+    .execute();
 }
 
-export function getGuest(id: number): Guest | undefined {
-  return guests.find((guest) => guest.id === id);
+export function getGuest(id: number): Promise<Guest | undefined> {
+  return db
+    .selectFrom("guest")
+    .where("id", "=", id)
+    .selectAll()
+    .executeTakeFirst();
 }
 
-export function addGuest(guest: Omit<Guest, "id">): void {
-  const newGuest = { ...guest, id: guests.length + 1 };
-  guests.push(newGuest);
-}
-
-export function updateGuest(
-  id: number,
-  updatedGuest: Partial<Omit<Guest, "id">>
-): void {
-  const index = guests.findIndex((guest) => guest.id === id);
-  if (index !== -1) {
-    guests[index] = { ...guests[index], ...updatedGuest };
-  }
+export function addGuest(guest: Omit<GuestInput, "id" | "modified_at">): void {
+  db.insertInto("guest").values(guest).execute();
 }
 
 export function deleteGuest(id: number): void {
-  guests = guests.filter((guest) => guest.id !== id);
+  db.deleteFrom("guest").where("id", "=", id).execute();
 }

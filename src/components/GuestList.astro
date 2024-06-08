@@ -1,5 +1,5 @@
 ---
-import type { Guest } from '@models/guest';
+import type { Guest } from '@repository/db';
 const guests = Astro.props.guests as Guest[];
 ---
   <div class="w-full overflow-x-auto">
@@ -18,8 +18,8 @@ const guests = Astro.props.guests as Guest[];
         {guests.map(guest => (
           <tr>
             <td class="border px-4 py-2">{guest.name}</td>
-            <td class="border px-4 py-2">{guest.expectedAttendees}</td>
-            <td class="border px-4 py-2">{guest.confirmedAttendees}</td>
+            <td class="border px-4 py-2">{guest.expected_attendees}</td>
+            <td class="border px-4 py-2">{guest.confirmed_attendees}</td>
             <td class="border px-4 py-2">{guest.bus ? "SI" : "NO"}</td>
             <td class="border px-4 py-2">{guest.allergies}</td>
             <td class="border px-4 py-2">
