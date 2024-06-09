@@ -1,23 +1,29 @@
 import { createKysely } from "@vercel/postgres-kysely";
-import type { Generated, ColumnType, Selectable, Insertable } from "kysely";
-
-interface GuestTable {
-  id: Generated<number>;
-  name: string;
-  expected_attendees: number;
-  confirmed_attendees: number;
-  bus: boolean;
-  allergies?: string;
-  modified_at: ColumnType<Date, string | undefined, never>;
-}
+import SQLite from "better-sqlite3";
+import { Kysely, SqliteDialect } from "kysely";
+import type { GuestTable } from "./model";
+import { SerializePlugin } from "kysely-plugin-serialize";
 
 interface Database {
   guest: GuestTable;
 }
 
-export type Guest = Selectable<GuestTable>;
-export type GuestInput = Insertable<GuestTable>;
+const createProdDB = () =>
+  createKysely<Database>({
+    connectionString: import.meta.env.POSTGRES_URL,
+  });
 
-export default createKysely<Database>({
-  connectionString: import.meta.env.POSTGRES_URL,
-});
+const createDevDB = () => {
+  const dialect = new SqliteDialect({
+    database: new SQLite("local.db"),
+  });
+  return new Kysely<Database>({
+    dialect,
+    plugins: [new SerializePlugin()],
+  });
+};
+
+const db =
+  import.meta.env.MODE === "development" ? createDevDB() : createProdDB();
+
+export default db;

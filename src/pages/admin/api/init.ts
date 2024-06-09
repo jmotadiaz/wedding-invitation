@@ -1,32 +1,27 @@
-import { createClient } from "@vercel/postgres";
+import db from "@repository/db";
+import type { APIRoute } from "astro";
 
-export async function GET() {
-  let client;
+export const GET: APIRoute = async ({ redirect }) => {
   try {
-    client = createClient({
-      connectionString: import.meta.env.POSTGRES_URL_NON_POOLING,
-    });
-    await client.connect();
-    const result = await client.sql`CREATE TABLE other (
-        id SERIAL PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
-        expected_attendees INTEGER NOT NULL,
-        confirmed_attendees INTEGER NOT NULL,
-        bus BOOLEAN NOT NULL,
-        allergies TEXT,
-      );`;
-    return new Response(
-      JSON.stringify({
-        result,
-      })
-    );
+    await db.schema
+      .createTable("guest")
+      .addColumn("id", "integer", (cb) =>
+        cb.primaryKey().autoIncrement().notNull()
+      )
+      .addColumn("name", "text", (cb) => cb.notNull())
+      .addColumn("expected_attendees", "integer")
+      .addColumn("confirmed_attendees", "integer")
+      .addColumn("bus", "boolean")
+      .addColumn("allergies", "text")
+      .addColumn("modified_at", "text")
+      .execute();
+
+    return redirect("/admin", 307);
   } catch (error) {
     return new Response(
       JSON.stringify({
         error,
       })
     );
-  } finally {
-    await client?.end();
   }
-}
+};
