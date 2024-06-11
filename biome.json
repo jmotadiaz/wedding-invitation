@@ -1,5 +1,16 @@
 {
 	"$schema": "https://biomejs.dev/schemas/1.8.1/schema.json",
+	"files": {
+		"ignore": [
+			"vendor",
+			"**/dist/**",
+			"**/smoke/**",
+			"**/fixtures/**",
+			"**/vendor/**",
+			"**/.vercel/**"
+		],
+		"include": ["src/**"]
+	},
 	"organizeImports": {
 		"enabled": true
 	},

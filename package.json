@@ -7,8 +7,8 @@
 		"start": "astro dev --host",
 		"build": "astro check && astro build",
 		"preview": "astro preview",
-		"format": "biome format --write ./src",
-		"lint": "biome check --write ./src",
+		"format": "biome format --write",
+		"lint": "biome check --write",
 		"astro": "astro",
 		"prepare": "husky"
 	},

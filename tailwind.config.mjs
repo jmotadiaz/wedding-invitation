@@ -10,10 +10,10 @@ export default {
 			},
 			animation: {
 				appear: "appear 0.5s ease-in-out",
-				ltr: "ltr 0.5s ease-out",
-				rtl: "rtl 0.5s ease-out",
-				ttb: "ttb 0.5s ease-out",
-				btt: "btt 0.5s ease-out",
+				ltr: "ltr 0.5s ease-in-out",
+				rtl: "rtl 0.5s ease-in-out",
+				ttb: "ttb 0.5s ease-in-out",
+				btt: "btt 0.5s ease-in-out",
 			},
 			keyframes: {
 				appear: {
