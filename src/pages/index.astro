@@ -26,8 +26,8 @@ import Timer from '@components/Timer.astro'
     <Timer />
   </Section>
   <Section>
-    <h2 class="text-5xl font-hand mb-10">Donde y Cuando</h2>
-    <div class="image-container overflow-hidden">
+    <h2 :class="shown && 'animate-rtl'" class="text-5xl font-hand mb-10 mt-20">Donde y Cuando</h2>
+    <div :class="shown && 'animate-ltr'" class="image-container overflow-hidden">
         <img src="/hacienda.jpg" alt="Imagen" class="w-full h-1/2 object-cover">
         <div class="border-b border-l border-r border-gray-300 rounded-b-md p-10 mb-5 flex flex-col justify-center items-center">
             <p class="text-3xl font-hand">Hacienda Los Frailes</p>
@@ -36,7 +36,6 @@ import Timer from '@components/Timer.astro'
             <a href="https://www.google.com/maps/place/Hacienda+los+Frailes+de+San+Alberto/@37.1979631,-5.9244053,15z/data=!4m2!3m1!1s0x0:0xddf4a405f884e20b?sa=X&ved=1t:2428&ictx=111" class="font-sans text-blue-500 underline hover:text-blue-700 hover:cursor-pointer">Ver Mapa</a>
         </div>
     </div>
-  </div>
   </Section>
 </main>
 </Layout>

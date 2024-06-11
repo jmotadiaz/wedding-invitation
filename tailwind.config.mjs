@@ -9,11 +9,11 @@ export default {
 				indie: ['"Indie Flower"', 'cursive', ...defaultTheme.fontFamily.sans],
 			},
 			animation: {
-				'appear': 'appear 0.8s ease-in-out',
-				'ltr': 'ltr 0.8s ease-out',
-				'rtl': 'rtl 0.8s ease-out',
-				'ttb': 'ttb 0.8s ease-out',
-				'btt': 'btt 0.8s ease-out',
+				'appear': 'appear 0.5s ease-in-out',
+				'ltr': 'ltr 0.5s ease-out',
+				'rtl': 'rtl 0.5s ease-out',
+				'ttb': 'ttb 0.5s ease-out',
+				'btt': 'btt 0.5s ease-out',
 			},
 			keyframes: {
 				appear: {
@@ -26,7 +26,7 @@ export default {
 				},
 				ltr: {
 					"0%": {
-						transform: "translate(-100%)",
+						transform: "translate(-50%)",
 					},
 					"100%": {
 						transform: "translate(0)",
@@ -34,7 +34,7 @@ export default {
 				},
 				rtl: {
 					"0%": {
-						transform: "translate(100%)",
+						transform: "translate(50%)",
 					},
 					"100%": {
 						transform: "translate(0)",
@@ -42,7 +42,7 @@ export default {
 				},
 				ttb: {
 					"0%": {
-						transform: "translate(0, -100%)",
+						transform: "translate(0, -50%)",
 					},
 					"100%": {
 						transform: "translate(0)",
@@ -50,7 +50,7 @@ export default {
 				},
 				btt: {
 					"0%": {
-						transform: "translate(0, 100%)",
+						transform: "translate(0, 50%)",
 					},
 					"100%": {
 						transform: "translate(0)",
