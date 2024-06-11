@@ -8,7 +8,10 @@ interface Database {
   guest: GuestTable;
 }
 
-const createProdDB = () => createKysely<Database>();
+const createProdDB = () =>
+  createKysely<Database>({
+    connectionString: import.meta.env.POSTGRES_URL,
+  });
 
 const createDevDB = () => {
   const dialect = new SqliteDialect({
