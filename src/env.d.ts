@@ -2,10 +2,10 @@
 /// <reference types="astro/client" />
 
 interface Window {
-  Alpine: import("alpinejs").Alpine;
+	Alpine: import("alpinejs").Alpine;
 }
 
 interface ImportMetaEnv {
-  readonly POSTGRES_URL: string;
-  // more env variables...
+	readonly POSTGRES_URL: string;
+	// more env variables...
 }

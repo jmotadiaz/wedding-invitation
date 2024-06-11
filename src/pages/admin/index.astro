@@ -1,9 +1,8 @@
 ---
-import { getGuests } from '@repository/guest';
-import Layout from '@layouts/Layout.astro'
-import GuestList from '@components/GuestList.astro'
+import GuestList from "@components/GuestList.astro";
+import Layout from "@layouts/Layout.astro";
+import { getGuests } from "@repository/guest";
 const guests = await getGuests();
-
 ---
 
 <Layout title="Guest List">

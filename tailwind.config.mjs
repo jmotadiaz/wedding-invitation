@@ -1,19 +1,19 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme');
+const defaultTheme = require("tailwindcss/defaultTheme");
 export default {
-	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
 	theme: {
 		extend: {
 			fontFamily: {
-				hand: ['Caveat', 'cursive', ...defaultTheme.fontFamily.sans],
-				indie: ['"Indie Flower"', 'cursive', ...defaultTheme.fontFamily.sans],
+				hand: ["Caveat", "cursive", ...defaultTheme.fontFamily.sans],
+				indie: ['"Indie Flower"', "cursive", ...defaultTheme.fontFamily.sans],
 			},
 			animation: {
-				'appear': 'appear 0.5s ease-in-out',
-				'ltr': 'ltr 0.5s ease-out',
-				'rtl': 'rtl 0.5s ease-out',
-				'ttb': 'ttb 0.5s ease-out',
-				'btt': 'btt 0.5s ease-out',
+				appear: "appear 0.5s ease-in-out",
+				ltr: "ltr 0.5s ease-out",
+				rtl: "rtl 0.5s ease-out",
+				ttb: "ttb 0.5s ease-out",
+				btt: "btt 0.5s ease-out",
 			},
 			keyframes: {
 				appear: {
@@ -56,8 +56,8 @@ export default {
 						transform: "translate(0)",
 					},
 				},
-			}
+			},
 		},
 	},
 	plugins: [],
-}
+};

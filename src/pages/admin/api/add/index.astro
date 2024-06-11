@@ -1,15 +1,17 @@
 ---
-import { addGuest, getGuests } from "@repository/guest";
 import GuestList from "@components/GuestList.astro";
+import { addGuest, getGuests } from "@repository/guest";
 
 if (Astro.request.method === "POST") {
-  const data = await Astro.request.formData();
-  await addGuest({
-    name: data.get("name") as string,
-    expected_attendees: parseInt(data.get("expectedAttendees") as string),
-    confirmed_attendees: 0,
-    bus: false
-  });
+	const data = await Astro.request.formData();
+	await addGuest({
+		name: data.get("name") as string,
+		expected_attendees: Number.parseInt(
+			data.get("expectedAttendees") as string,
+		),
+		confirmed_attendees: 0,
+		bus: false,
+	});
 }
 const guests = await getGuests();
 ---
