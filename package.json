@@ -40,8 +40,8 @@
 	},
 	"lint-staged": {
 		"*.{astro, ts}": [
-			"biome format --write",
-			"biome check --write"
+			"biome check --write",
+			"biome format --write"
 		]
 	}
 }
