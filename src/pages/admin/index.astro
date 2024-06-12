@@ -1,7 +1,7 @@
 ---
 import GuestList from "@components/GuestList.astro";
+import { getGuests } from "@domain/Guest";
 import Layout from "@layouts/Layout.astro";
-import { getGuests } from "@repository/guest";
 const guests = await getGuests();
 ---
 

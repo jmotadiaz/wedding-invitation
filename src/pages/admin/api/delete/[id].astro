@@ -1,13 +1,13 @@
 ---
 
 import GuestList from "@components/GuestList.astro";
-import { deleteGuest, getGuests } from "@repository/guest";
+import { deleteGuest, getGuests } from "@domain/Guest";
 
 if (Astro.request.method === "DELETE") {
 	console.log("Method allowed");
 
 	const { id } = Astro.params as { id: string };
-	await deleteGuest(+id);
+	await deleteGuest(id);
 }
 
 const guests = await getGuests();

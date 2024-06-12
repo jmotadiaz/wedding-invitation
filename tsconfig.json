@@ -5,8 +5,8 @@
 		"paths": {
 			"@components/*": ["src/components/*"],
 			"@layouts/*": ["src/layouts/*"],
-			"@models/*": ["src/models/*"],
-			"@repository/*": ["src/repository/*"]
+			"@domain/*": ["src/domain/*"],
+			"@repository/*": ["src/repository/*"],
 		}
 	}
 }

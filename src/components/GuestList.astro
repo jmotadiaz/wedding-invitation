@@ -1,6 +1,11 @@
 ---
-import type { Guest } from "@repository/model";
-const guests = Astro.props.guests as Guest[];
+import type { Guest } from "@domain/Guest/model";
+
+export interface Props {
+	guests: Guest[];
+}
+
+const guests = Astro.props.guests;
 ---
   <div class="w-full overflow-x-auto">
     <table class="table-auto w-full mb-4">
@@ -18,12 +23,12 @@ const guests = Astro.props.guests as Guest[];
         {guests.map(guest => (
           <tr>
             <td class="border px-4 py-2">{guest.name}</td>
-            <td class="border px-4 py-2">{guest.expected_attendees}</td>
-            <td class="border px-4 py-2">{guest.confirmed_attendees}</td>
+            <td class="border px-4 py-2">{guest.expectedAttendees}</td>
+            <td class="border px-4 py-2">{guest.confirmedAttendees}</td>
             <td class="border px-4 py-2">{guest.bus ? "SI" : "NO"}</td>
             <td class="border px-4 py-2">{guest.allergies}</td>
             <td class="border px-4 py-2">
-              <a href="#" hx-delete={`/admin/api/delete/${guest.id}`} hx-target="#guest-list" class="text-red-500">Delete</a>
+              <a href="#" hx-delete={`/admin/api/delete/${guest.uuid}`} hx-target="#guest-list" class="text-red-500">Delete</a>
             </td>
           </tr>
         ))}
