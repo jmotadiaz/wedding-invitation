@@ -8,13 +8,13 @@ export const GET: APIRoute = async ({ redirect }) => {
       .addColumn("id", "integer", (cb) =>
         cb.primaryKey().autoIncrement().notNull()
       )
-      .addColumn("uuid", "text", (cb) => cb.unique().notNull())
+      .addColumn("uuid", "varchar(36)", (cb) => cb.unique().notNull())
       .addColumn("name", "text", (cb) => cb.notNull())
       .addColumn("expected_attendees", "integer")
       .addColumn("confirmed_attendees", "integer")
       .addColumn("bus", "boolean")
       .addColumn("allergies", "text")
-      .addColumn("modified_at", "text")
+      .addColumn("modified_at", "varchar(200)")
       .execute();
 
     return new Response(
