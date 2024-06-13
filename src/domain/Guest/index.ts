@@ -13,7 +13,7 @@ export const addGuest = async ({
   Guest,
   "uuid" | "bus" | "allergies" | "confirmedAttendees"
 >): Promise<void> => {
-  return GuestRepository.addGuest({
+  await GuestRepository.addGuest({
     name,
     expectedAttendees,
     uuid: nanoid(),
@@ -24,5 +24,5 @@ export const addGuest = async ({
 };
 
 export const deleteGuest = async (id: string): Promise<void> => {
-  return GuestRepository.deleteGuest(id);
+  await GuestRepository.deleteGuest(id);
 };
