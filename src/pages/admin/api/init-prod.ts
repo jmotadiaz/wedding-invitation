@@ -13,6 +13,8 @@ export async function GET() {
         name TEXT NOT NULL,
         expected_attendees INTEGER NOT NULL,
         confirmed_attendees INTEGER NOT NULL,
+				bus_stop VARCHAR(255),
+				bus_seats INTEGER,
         bus BOOLEAN NOT NULL,
         allergies TEXT,
         modified_at TIMESTAMPTZ NOT NULL DEFAULT NOW()

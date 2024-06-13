@@ -13,6 +13,8 @@ export const GET: APIRoute = async () => {
       .addColumn("expected_attendees", "integer")
       .addColumn("confirmed_attendees", "integer")
       .addColumn("bus", "boolean")
+      .addColumn("bus_stop", "varchar(255)")
+      .addColumn("bus_seats", "integer")
       .addColumn("allergies", "text")
       .addColumn("modified_at", "varchar(200)")
       .execute();

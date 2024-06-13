@@ -1,8 +1,8 @@
 import { createKysely } from "@vercel/postgres-kysely";
 import SQLite from "better-sqlite3";
 import { Kysely, SqliteDialect } from "kysely";
-import { SerializePlugin } from "kysely-plugin-serialize";
 import type { ColumnType, Generated, Insertable, Selectable } from "kysely";
+import { SerializePlugin } from "kysely-plugin-serialize";
 
 export interface GuestTable {
   id: Generated<number>;
@@ -12,6 +12,8 @@ export interface GuestTable {
   confirmed_attendees: number;
   bus: boolean;
   allergies: string;
+  bus_stop: string | null;
+  bus_seats: number | null;
   modified_at?: ColumnType<Date, string | undefined, never>;
 }
 

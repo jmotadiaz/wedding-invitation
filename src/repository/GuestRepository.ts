@@ -1,5 +1,5 @@
-import db from "./db";
 import type { Guest } from "@domain/Guest/model";
+import db from "./db";
 
 export function getGuests(): Promise<Guest[]> {
   return db
@@ -9,6 +9,8 @@ export function getGuests(): Promise<Guest[]> {
       "name",
       "expected_attendees as expectedAttendees",
       "confirmed_attendees as confirmedAttendees",
+      "bus_stop as busStop",
+      "bus_seats as busSeats",
       "bus",
       "allergies",
     ])
@@ -24,6 +26,8 @@ export function getGuest(uuid: string): Promise<Guest | undefined> {
       "name",
       "expected_attendees as expectedAttendees",
       "confirmed_attendees as confirmedAttendees",
+      "bus_stop as busStop",
+      "bus_seats as busSeats",
       "bus",
       "allergies",
     ])
@@ -41,6 +45,25 @@ export async function addGuest(guest: Guest): Promise<void> {
       bus: guest.bus,
       allergies: guest.allergies,
     })
+    .execute();
+}
+
+export async function updateGuest(
+  uuid: string,
+  guest: Partial<Guest>
+): Promise<void> {
+  await db
+    .updateTable("guest")
+    .set({
+      name: guest.name,
+      expected_attendees: guest.expectedAttendees,
+      confirmed_attendees: guest.confirmedAttendees,
+      bus: guest.bus,
+      bus_stop: guest.busStop,
+      bus_seats: guest.busSeats,
+      allergies: guest.allergies,
+    })
+    .where("uuid", "=", uuid)
     .execute();
 }
 

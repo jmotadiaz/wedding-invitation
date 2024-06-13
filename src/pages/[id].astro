@@ -5,6 +5,9 @@ import Container from "@layouts/Container.astro";
 import Layout from "@layouts/Layout.astro";
 import Section from "@layouts/Section.astro";
 import frailesImg from "../assets/hacienda.jpg";
+import PersonalInfo from "../components/PersonalInfo.astro";
+
+const id = Astro.params.id as string;
 ---
 
 <Layout title="Weding Invitation">
@@ -45,14 +48,14 @@ import frailesImg from "../assets/hacienda.jpg";
     </Section>
     <Section>
       <h2
-        :class="shown ? 'translate-0 opacity-1' : 'opacity-0 translate-x-[-20%]'"
+        :class="shown ? 'translate-y-0 opacity-1' : 'opacity-0 translate-y-[100%]'"
         class="text-5xl font-hand mb-10 lg:mt-20 transition-all ease-in-out duration-700"
       >
         Donde y Cuando
       </h2>
       <div
-        :class="shown ? 'translate-0 opacity-1' : 'opacity-0 translate-x-[20%]'"
-        class="image-container overflow-hidden transition-all ease-in-out duration-700"
+        :class="shown ? 'opacity-1' : 'opacity-0'"
+        class="image-container overflow-hidden delay-100 transition-all ease-in-out duration-700"
       >
         <Image
           src={frailesImg}
@@ -74,6 +77,9 @@ import frailesImg from "../assets/hacienda.jpg";
           >
         </div>
       </div>
+    </Section>
+    <Section extraClass="bg-slate-100">
+      <PersonalInfo id={id} />
     </Section>
   </Container>
 </Layout>
