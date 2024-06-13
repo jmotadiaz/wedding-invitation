@@ -15,6 +15,7 @@ export async function GET() {
         confirmed_attendees INTEGER NOT NULL,
         bus BOOLEAN NOT NULL,
         allergies TEXT,
+        modified_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );`;
     return new Response(
       JSON.stringify({
