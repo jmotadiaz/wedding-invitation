@@ -1,0 +1,35 @@
+---
+import { Image } from "astro:assets";
+import frailesImg from "../../assets/hacienda.jpg";
+---
+
+<h2
+  :class="shown ? 'translate-y-0 opacity-1' : 'opacity-0 translate-y-[100%]'"
+  class="text-5xl font-hand mb-10 lg:mt-20 transition-all ease-in-out duration-700"
+>
+  Donde y Cuando
+</h2>
+<div
+  :class="shown ? 'opacity-1' : 'opacity-0'"
+  class="image-container overflow-hidden delay-100 transition-all ease-in-out duration-700"
+>
+  <Image
+    src={frailesImg}
+    alt="Hacienda Los Frailes de San Alberto"
+    widths={[240, 540, 720, frailesImg.width]}
+    sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${frailesImg.width}px`}
+    class="w-full h-1/2 object-cover"
+  />
+  <div
+    class="border-b border-l border-r border-gray-300 rounded-b-md p-10 mb-5 flex flex-col justify-center items-center"
+  >
+    <p class="text-3xl font-hand">Hacienda Los Frailes</p>
+    <p class="text-3xl font-hand mb-3">de San Alberto.</p>
+    <p class="font-sans mb-3 text-center">12:00 PM</p>
+    <a
+      href="https://www.google.com/maps/place/Hacienda+los+Frailes+de+San+Alberto/@37.1979631,-5.9244053,15z/data=!4m2!3m1!1s0x0:0xddf4a405f884e20b?sa=X&ved=1t:2428&ictx=111"
+      class="font-sans text-blue-500 text-lg underline hover:text-blue-700 hover:cursor-pointer"
+      >Ver Mapa</a
+    >
+  </div>
+</div>

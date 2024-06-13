@@ -1,11 +1,11 @@
 ---
-import { Image } from "astro:assets";
-import Timer from "@components/Timer.astro";
-import Container from "@layouts/Container.astro";
-import Layout from "@layouts/Layout.astro";
-import Section from "@layouts/Section.astro";
-import frailesImg from "../assets/hacienda.jpg";
-import PersonalInfo from "../components/PersonalInfo.astro";
+import Container from "@components/Container.astro";
+import Layout from "@components/Layout.astro";
+import Section from "@components/Section.astro";
+import ConfigForm from "@components/sections/ConfigForm.astro";
+import Countdown from "@components/sections/Countdown.astro";
+import HeroBannerSection from "@components/sections/HeroBanner.astro";
+import WhenAndWhere from "@components/sections/WhenAndWhere.astro";
 
 const id = Astro.params.id as string;
 ---
@@ -13,75 +13,16 @@ const id = Astro.params.id as string;
 <Layout title="Weding Invitation">
   <Container>
     <Section>
-      <h1 class="text-lg mb-8 mt-[-15%] font-sans">NOS CASAMOS</h1>
-      <p class="text-8xl font-hand animate-ltr">Rocío</p>
-      <p class="text-6xl font-hand">y</p>
-      <p class="text-8xl font-hand animate-rtl">Javier</p>
-      <p class="text-lg mt-12 font-sans">14 DE DICIEMBRE 2024</p>
-      <div class="animate-bounce w-10 h-10 mt-20">
-        <svg
-          data-slot="icon"
-          fill="none"
-          stroke-width="1.5"
-          stroke="#000"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"></path>
-        </svg>
-      </div>
+      <HeroBannerSection />
     </Section>
     <Section extraClass="bg-slate-100">
-      <p class="text-lg font-sans mt-[-15%]">A veces lo que empieza como una</p>
-      <p class="text-lg font-sans">locura se convierte en lo mejor de</p>
-      <p class="text-lg font-sans mb-20">tu vida</p>
-      <p class="text-6xl font-hand animate-ttp mb-10  transition-all ease-in-out duration-700"
-        :class="shown ? 'translate-0 opacity-1' : 'opacity-0 translate-y-[-50px]'"
-      >Faltan</p>
-      <div class=" transition-all ease-in-out duration-700" :class="shown ? 'translate-0 opacity-1' : 'opacity-0 translate-y-[50px]'">
-        <Timer />
-      </div>
+      <Countdown />
     </Section>
     <Section>
-      <h2
-        :class="shown ? 'translate-y-0 opacity-1' : 'opacity-0 translate-y-[100%]'"
-        class="text-5xl font-hand mb-10 lg:mt-20 transition-all ease-in-out duration-700"
-      >
-        Donde y Cuando
-      </h2>
-      <div
-        :class="shown ? 'opacity-1' : 'opacity-0'"
-        class="image-container overflow-hidden delay-100 transition-all ease-in-out duration-700"
-      >
-        <Image
-          src={frailesImg}
-          alt="Hacienda Los Frailes de San Alberto"
-          widths={[240, 540, 720, frailesImg.width]}
-          sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${frailesImg.width}px`}
-          class="w-full h-1/2 object-cover"
-        />
-        <div
-          class="border-b border-l border-r border-gray-300 rounded-b-md p-10 mb-5 flex flex-col justify-center items-center"
-        >
-          <p class="text-3xl font-hand">Hacienda Los Frailes</p>
-          <p class="text-3xl font-hand mb-3">de San Alberto.</p>
-          <p class="font-sans mb-3 text-center">
-            12:00 PM
-          </p>
-          <a
-            href="https://www.google.com/maps/place/Hacienda+los+Frailes+de+San+Alberto/@37.1979631,-5.9244053,15z/data=!4m2!3m1!1s0x0:0xddf4a405f884e20b?sa=X&ved=1t:2428&ictx=111"
-            class="font-sans text-blue-500 text-lg underline hover:text-blue-700 hover:cursor-pointer"
-            >Ver Mapa</a
-          >
-        </div>
-      </div>
+      <WhenAndWhere />
     </Section>
     <Section extraClass="bg-slate-100">
-      <PersonalInfo id={id} />
+      <ConfigForm id={id} />
     </Section>
   </Container>
 </Layout>
