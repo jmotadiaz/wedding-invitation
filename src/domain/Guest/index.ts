@@ -7,6 +7,7 @@ export enum ValidationError {
   BUS_STOP_REQUIRED,
   BUS_SEATS_REQUIRED,
   BUS_SEATS_OVER_CONFIRMED_ATTENDEES,
+  GENERIC,
 }
 
 export const getGuests = async (): Promise<Guest[]> => {

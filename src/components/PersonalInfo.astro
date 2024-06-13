@@ -23,7 +23,7 @@ const arrayFrom = (n: number) => Array.from({ length: n }, (_, i) => i + 1);
   x-bind:class="shown ? 'opacity-1' : 'opacity-0'"
   class="bg-white p-6 shadow-md rounded-md w-full max-w-screen-md transition-all ease-in-out delay-100 duration-700">
     <h3 class="text-xl mb-4 text-center w-full">Confirma tus datos</h3>
-    <form class="space-y-4" hx-put={`/api/confirm/${guest.uuid}`} hx-target="#confirmation-message">
+    <form class="space-y-4" hx-patch={`/api/confirm/${guest.uuid}`} hx-target="#confirmation-message">
       <!-- Asistentes -->
       <Field>
         <label for="confirmedAttendees" class="font-bold"

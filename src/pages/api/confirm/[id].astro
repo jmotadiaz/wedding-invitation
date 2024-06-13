@@ -1,12 +1,12 @@
 ---
 
-import { confirmGuest, getGuest } from "@domain/Guest";
+import { confirmGuest } from "@domain/Guest";
 import { ValidationError } from "@domain/Guest";
 
 const { id } = Astro.params as { id: string };
-const guest = getGuest(id);
 let errors: ValidationError[] | null = null;
-if (Astro.request.method === "PUT") {
+
+if (Astro.request.method === "PATHCH") {
 	const formData = await Astro.request.formData();
 	try {
 		await confirmGuest(id, {
@@ -19,10 +19,11 @@ if (Astro.request.method === "PUT") {
 			busStop: formData.get("busStop") as string,
 		});
 	} catch (e) {
-		errors = e as ValidationError[];
+		errors = Array.isArray(e)
+			? (e as ValidationError[])
+			: [ValidationError.GENERIC];
 	}
 }
-const update = !!(await guest)?.confirmedAttendees;
 
 const getErrorMessage = (error: ValidationError) => {
 	switch (error) {
@@ -33,7 +34,7 @@ const getErrorMessage = (error: ValidationError) => {
 		case ValidationError.BUS_SEATS_OVER_CONFIRMED_ATTENDEES:
 			return "El numero de asientos no puede ser superior al numero de asistentes confirmados";
 		default:
-			return "Error desconocido";
+			return "Error desconocido, vuelva a intentarlo";
 	}
 };
 ---
@@ -45,6 +46,6 @@ const getErrorMessage = (error: ValidationError) => {
 	</div>
 	:
 	<span id="guest-submit" hx-swap-oob="true">Actualizar</span>
-	<p class="text-green-500 animate-appear mt-5"> {update ? "Informacion Actualizada" : "Asistencia confirmada"} </p>
+	<p class="text-green-500 animate-appear mt-5"> Informacion Actualizada </p>
 }
 
