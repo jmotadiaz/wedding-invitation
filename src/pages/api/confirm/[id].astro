@@ -44,6 +44,7 @@ const getErrorMessage = (error: ValidationError) => {
 		))}
 	</div>
 	:
+	<span id="guest-submit" hx-swap-oob="true">Actualizar</span>
 	<p class="text-green-500 animate-appear mt-5"> {update ? "Informacion Actualizada" : "Asistencia confirmada"} </p>
 }
 
