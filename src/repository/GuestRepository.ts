@@ -30,8 +30,9 @@ export function getGuest(uuid: string): Promise<Guest | undefined> {
     .executeTakeFirst();
 }
 
-export function addGuest(guest: Guest): void {
-  db.insertInto("guest")
+export async function addGuest(guest: Guest): Promise<void> {
+  await db
+    .insertInto("guest")
     .values({
       uuid: guest.uuid,
       name: guest.name,
@@ -43,6 +44,6 @@ export function addGuest(guest: Guest): void {
     .execute();
 }
 
-export function deleteGuest(uuid: string): void {
-  db.deleteFrom("guest").where("uuid", "=", uuid).execute();
+export async function deleteGuest(uuid: string): Promise<void> {
+  await db.deleteFrom("guest").where("uuid", "=", uuid).execute();
 }
