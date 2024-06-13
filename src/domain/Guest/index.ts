@@ -1,4 +1,4 @@
-import * as GuestRepository from "@repository/Guest";
+import * as GuestRepository from "@repository/guest";
 import type { Guest } from "./model";
 import { nanoid } from "nanoid";
 

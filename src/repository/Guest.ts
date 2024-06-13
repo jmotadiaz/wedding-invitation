@@ -1,5 +1,4 @@
 import db from "./db";
-import type { SelectableGuest, GuestInput } from "./db";
 import type { Guest } from "@domain/Guest/model";
 
 export function getGuests(): Promise<Guest[]> {
