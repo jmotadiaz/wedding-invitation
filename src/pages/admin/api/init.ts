@@ -1,22 +1,21 @@
-import db from "@repository/db";
-import type { APIRoute } from "astro";
+import { createClient } from "@vercel/postgres";
 
-export const GET: APIRoute = async ({ redirect }) => {
+export async function GET() {
+  let client;
   try {
-    const result = await db.schema
-      .createTable("guest")
-      .addColumn("id", "integer", (cb) =>
-        cb.primaryKey().autoIncrement().notNull()
-      )
-      .addColumn("uuid", "varchar(36)", (cb) => cb.unique().notNull())
-      .addColumn("name", "text", (cb) => cb.notNull())
-      .addColumn("expected_attendees", "integer")
-      .addColumn("confirmed_attendees", "integer")
-      .addColumn("bus", "boolean")
-      .addColumn("allergies", "text")
-      .addColumn("modified_at", "varchar(200)")
-      .execute();
-
+    client = createClient({
+      connectionString: import.meta.env.POSTGRES_URL_NON_POOLING,
+    });
+    await client.connect();
+    const result = await client.sql`CREATE TABLE other (
+        id SERIAL PRIMARY KEY,
+        uuid VARCHAR(36) UNIQUE NOT NULL,
+        name TEXT NOT NULL,
+        expected_attendees INTEGER NOT NULL,
+        confirmed_attendees INTEGER NOT NULL,
+        bus BOOLEAN NOT NULL,
+        allergies TEXT,
+      );`;
     return new Response(
       JSON.stringify({
         result,
@@ -28,5 +27,7 @@ export const GET: APIRoute = async ({ redirect }) => {
         error,
       })
     );
+  } finally {
+    await client?.end();
   }
-};
+}
