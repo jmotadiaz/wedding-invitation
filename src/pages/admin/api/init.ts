@@ -9,7 +9,7 @@ export async function GET() {
     await client.connect();
     const result = await client.sql`CREATE TABLE other (
         id SERIAL PRIMARY KEY,
-        uuid VARCHAR(36) UNIQUE NOT NULL,
+        uuid VARCHAR(36) NOT NULL,
         name TEXT NOT NULL,
         expected_attendees INTEGER NOT NULL,
         confirmed_attendees INTEGER NOT NULL,
