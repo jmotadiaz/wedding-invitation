@@ -6,7 +6,7 @@ import { ValidationError } from "@domain/Guest";
 const { id } = Astro.params as { id: string };
 let errors: ValidationError[] | null = null;
 
-if (Astro.request.method === "PATHCH") {
+if (Astro.request.method === "PATCH") {
 	const formData = await Astro.request.formData();
 	try {
 		await confirmGuest(id, {
