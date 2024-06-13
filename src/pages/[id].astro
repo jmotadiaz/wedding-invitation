@@ -59,7 +59,9 @@ const id = Astro.params.id as string;
       >
         <Image
           src={frailesImg}
-          alt="Imagen"
+          alt="Hacienda Los Frailes de San Alberto"
+          widths={[240, 540, 720, frailesImg.width]}
+          sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${frailesImg.width}px`}
           class="w-full h-1/2 object-cover"
         />
         <div
