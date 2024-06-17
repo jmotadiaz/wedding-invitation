@@ -7,7 +7,5 @@ import alpinejs from "@astrojs/alpinejs";
 export default defineConfig({
 	integrations: [tailwind(), alpinejs({ entrypoint: "/src/config/alpine" })],
 	output: "server",
-	adapter: vercel({
-		webAnalytics: true
-	}),
+	adapter: vercel(),
 });
