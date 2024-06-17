@@ -26,6 +26,7 @@
 		"@vercel/speed-insights": "^1.0.12",
 		"alpinejs": "^3.14.0",
 		"astro": "^4.7.0",
+		"astro-google-fonts-optimizer": "^0.2.2",
 		"better-sqlite3": "^11.0.0",
 		"kysely": "^0.27.3",
 		"kysely-plugin-serialize": "^0.6.1",
