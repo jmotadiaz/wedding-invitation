@@ -2,6 +2,8 @@
 import GuestList from "@components/GuestList.astro";
 import { addGuest, getGuests } from "@domain/Guest";
 
+export const partial = true;
+
 if (Astro.request.method === "POST") {
 	const data = await Astro.request.formData();
 	await addGuest({

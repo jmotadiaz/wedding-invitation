@@ -3,6 +3,8 @@
 import GuestList from "@components/GuestList.astro";
 import { deleteGuest, getGuests } from "@domain/Guest";
 
+export const partial = true;
+
 if (Astro.request.method === "DELETE") {
 	const { id } = Astro.params as { id: string };
 	await deleteGuest(id);

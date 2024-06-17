@@ -3,6 +3,8 @@
 import { confirmGuest } from "@domain/Guest";
 import { ValidationError } from "@domain/Guest";
 
+export const partial = true;
+
 const { id } = Astro.params as { id: string };
 let errors: ValidationError[] | null = null;
 
