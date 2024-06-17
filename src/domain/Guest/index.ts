@@ -4,6 +4,7 @@ import type { Guest } from "./model";
 
 export const stops = ["Sevilla", "Los Palacios", "Trajano"];
 export enum ValidationError {
+  CONFIRMATION_REQUIRED,
   BUS_STOP_REQUIRED,
   BUS_SEATS_REQUIRED,
   BUS_SEATS_OVER_CONFIRMED_ATTENDEES,
@@ -45,15 +46,22 @@ const validateGuest = (
   >
 ): ValidationError[] => {
   const errors: ValidationError[] = [];
-  if (guest.bus && !guest.busStop) {
-    errors.push(ValidationError.BUS_STOP_REQUIRED);
-  }
-  if (guest.bus && !guest.busSeats) {
-    errors.push(ValidationError.BUS_SEATS_REQUIRED);
+  if (!guest.confirmedAttendees) {
+    errors.push(ValidationError.CONFIRMATION_REQUIRED);
   }
 
-  if (guest.busSeats && guest.busSeats > guest.confirmedAttendees) {
-    errors.push(ValidationError.BUS_SEATS_OVER_CONFIRMED_ATTENDEES);
+  if (guest.bus) {
+    if (!guest.busStop) {
+      errors.push(ValidationError.BUS_STOP_REQUIRED);
+    }
+
+    if (!guest.busSeats) {
+      errors.push(ValidationError.BUS_SEATS_REQUIRED);
+    }
+
+    if (guest.busSeats && guest.busSeats > guest.confirmedAttendees) {
+      errors.push(ValidationError.BUS_SEATS_OVER_CONFIRMED_ATTENDEES);
+    }
   }
 
   return errors;
@@ -72,22 +80,18 @@ export const confirmGuest = async (
     "allergies" | "confirmedAttendees" | "bus" | "busSeats" | "busStop"
   >
 ): Promise<void> => {
-  const errors = validateGuest({
-    allergies,
-    confirmedAttendees,
-    bus,
-    busSeats,
-    busStop,
-  });
-  if (errors.length) {
-    return Promise.reject(errors);
-  }
-
-  return GuestRepository.updateGuest(id, {
+  const parsedGuest = {
     allergies,
     confirmedAttendees,
     bus,
     busSeats: bus ? busSeats : null,
     busStop: bus ? busStop : null,
-  });
+  };
+
+  const errors = validateGuest(parsedGuest);
+  if (errors.length) {
+    return Promise.reject(errors);
+  }
+
+  return GuestRepository.updateGuest(id, parsedGuest);
 };

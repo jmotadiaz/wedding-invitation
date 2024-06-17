@@ -27,6 +27,8 @@ if (Astro.request.method === "PATCH") {
 
 const getErrorMessage = (error: ValidationError) => {
 	switch (error) {
+		case ValidationError.CONFIRMATION_REQUIRED:
+			return "Debes confirmar tu asistencia";
 		case ValidationError.BUS_STOP_REQUIRED:
 			return "Si quieres autobus, debes seleccionar una parada";
 		case ValidationError.BUS_SEATS_REQUIRED:
