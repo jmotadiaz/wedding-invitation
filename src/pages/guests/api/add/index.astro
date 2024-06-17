@@ -1,14 +1,15 @@
 ---
 import GuestList from "@components/GuestList.astro";
 import { addGuest, getGuests } from "@domain/Guest";
+import { createFormDataWrapper } from "@utils";
 
 export const partial = true;
 
 if (Astro.request.method === "POST") {
-	const data = await Astro.request.formData();
+	const formData = createFormDataWrapper(await Astro.request.formData());
 	await addGuest({
-		name: data.get("name") as string,
-		expectedAttendees: Number.parseInt(data.get("expectedAttendees") as string),
+		name: formData.get("name"),
+		expectedAttendees: Number.parseInt(formData.get("expectedAttendees")),
 	});
 }
 const guests = await getGuests();
