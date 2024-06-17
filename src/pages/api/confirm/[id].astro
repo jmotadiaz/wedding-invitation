@@ -1,7 +1,8 @@
 ---
 
-import { confirmGuest } from "@domain/Guest";
+import { confirmGuest, stops } from "@domain/Guest";
 import { ValidationError } from "@domain/Guest";
+import { createFormDataWrapper } from "@utils";
 
 export const partial = true;
 
@@ -9,16 +10,15 @@ const { id } = Astro.params as { id: string };
 let errors: ValidationError[] | null = null;
 
 if (Astro.request.method === "PATCH") {
-	const formData = await Astro.request.formData();
+	const formData = createFormDataWrapper(await Astro.request.formData());
+
 	try {
 		await confirmGuest(id, {
-			allergies: formData.get("allergies") as string,
-			confirmedAttendees: Number.parseInt(
-				formData.get("confirmedAttendees") as string,
-			),
-			busSeats: Number.parseInt(formData.get("busSeats") as string),
+			allergies: formData.get("allergies"),
+			confirmedAttendees: Number.parseInt(formData.get("confirmedAttendees")),
+			busSeats: Number.parseInt(formData.get("busSeats")),
 			bus: formData.has("bus"),
-			busStop: formData.get("busStop") as string,
+			busStop: formData.get("busStop"),
 		});
 	} catch (e) {
 		errors = Array.isArray(e)
@@ -37,6 +37,8 @@ const getErrorMessage = (error: ValidationError) => {
 			return "Si quieres autobus, debes seleccionar el numero de asientos";
 		case ValidationError.BUS_SEATS_OVER_CONFIRMED_ATTENDEES:
 			return "El numero de asientos no puede ser superior al numero de asistentes confirmados";
+		case ValidationError.BUS_STOP_ERROR:
+			return `La parada debe ser una de las siguientes: ${stops.join(", ")}`;
 		default:
 			return "Error desconocido, vuelva a intentarlo";
 	}

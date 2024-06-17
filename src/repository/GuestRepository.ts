@@ -45,7 +45,7 @@ export async function addGuest(guest: Guest): Promise<void> {
       bus: guest.bus,
       allergies: guest.allergies,
     })
-    .execute();
+    .executeTakeFirst();
 }
 
 export async function updateGuest(

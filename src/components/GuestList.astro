@@ -32,7 +32,7 @@ const guests = Astro.props.guests;
             <td class="border px-4 py-2">{guest.busSeats}</td>
             <td class="border px-4 py-2">{guest.busStop}</td>
             <td class="border px-4 py-2 whitespace-nowrap">
-              <a href="#" hx-delete={`/admin/api/delete/${guest.uuid}`} hx-target="#guest-list" class="text-red-500 mr-5">Delete</a>
+              <a href="#" hx-delete={`/guests/api/delete/${guest.uuid}`} hx-target="#guest-list" class="text-red-500 mr-5">Delete</a>
               <a href={`/${guest.uuid}`} class="text-blue-500">Go</a>
             </td>
           </tr>

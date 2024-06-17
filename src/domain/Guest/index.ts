@@ -6,6 +6,7 @@ export const stops = ["Sevilla", "Los Palacios", "Trajano"];
 export enum ValidationError {
   CONFIRMATION_REQUIRED,
   BUS_STOP_REQUIRED,
+  BUS_STOP_ERROR,
   BUS_SEATS_REQUIRED,
   BUS_SEATS_OVER_CONFIRMED_ATTENDEES,
   GENERIC,
@@ -61,6 +62,10 @@ const validateGuest = (
 
     if (guest.busSeats && guest.busSeats > guest.confirmedAttendees) {
       errors.push(ValidationError.BUS_SEATS_OVER_CONFIRMED_ATTENDEES);
+    }
+
+    if (guest.busStop && !stops.includes(guest.busStop)) {
+      errors.push(ValidationError.BUS_STOP_ERROR);
     }
   }
 
