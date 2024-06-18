@@ -1,19 +1,20 @@
 ---
-import { Image } from "astro:assets";
 import Layout from "@components/Layout.astro";
-import invitationEnvelopImg from "../../assets/invitationEnvelop.png";
+import invitationEnvelopImgLG from "../../assets/invitationEnvelop-lg.webp";
+import invitationEnvelopImgMD from "../../assets/invitationEnvelop-md.webp";
+import invitationEnvelopImgSM from "../../assets/invitationEnvelop-sm.webp";
+import invitationEnvelopImg from "../../assets/invitationEnvelop.webp";
 
 const id = Astro.params.id as string;
 ---
 
 <Layout title="Weding Invitation">
-  <a href=`/${id}/invitation` class="flex flex-col justify-center items-center">
-    <Image
-      src={invitationEnvelopImg}
-      alt="Sobre de invitación de boda"
-      widths={[240, 540, 720, invitationEnvelopImg.width]}
-      sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${invitationEnvelopImg.width}px`}
-      class="w-auto max-w-full max-h-screen mx-auto"
-    />
+  <a href=`/${id}/invitation` class="h-screen flex flex-col justify-center items-center">
+    <picture>
+      <source srcset=`${invitationEnvelopImgSM.src}` media="(max-width: 360px)" />
+      <source srcset=`${invitationEnvelopImgMD.src}` media="(max-width: 720px)" />
+      <source srcset=`${invitationEnvelopImgLG.src}` media="(max-width: 1600px)" />
+      <img src=`${invitationEnvelopImg.src}` alt="Sobre de invitación de boda" class="w-auto max-h-screen mx-auto">
+    </picture>
   </a>
 </Layout>
