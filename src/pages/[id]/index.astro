@@ -8,7 +8,7 @@ import invitationEnvelopImg from "../../assets/invitationEnvelop.webp";
 const id = Astro.params.id as string;
 ---
 
-<Layout title="Weding Invitation">
+<Layout title="Weding Invitation" font={false}>
   <a href=`/${id}/invitation` class="h-screen flex flex-col justify-center items-center">
     <picture>
       <source srcset=`${invitationEnvelopImgSM.src}` media="(max-width: 360px)" />
