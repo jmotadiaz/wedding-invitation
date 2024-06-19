@@ -1,0 +1,26 @@
+---
+import BlackTieAttiers from "../BlackTieAttiers.astro";
+---
+<div
+  :class="shown ? 'opacity-1 translate-y-0' : 'opacity-0 translate-y-[-20%]'"
+  class="flex flex-col justify-center items-center mb-10 transition-all ease-in-out duration-700"
+>
+  <h2 class="text-4xl font-hand mb-5">
+    Codigo de vestimenta
+  </h2>
+  <p class="text-xl mb-5">Formal</p>
+  <div class="w-1/2"><BlackTieAttiers/></div>
+</div>
+<div
+  :class="shown ? 'opacity-1 translate-y-0' : 'opacity-0 translate-y-[20%]'"
+  class="transition-all ease-in-out duration-700"
+>
+  <h2 class="text-4xl font-hand mb-5">
+    Regalo
+  </h2>
+  <p class="mb-8">Si quieres tener un detalle con nosotros, aqui tienes nuestro numero de cuenta</p>
+  <div x-data="{expanded: false}" class="w-full rounded-xl p-5 shadow-sm shadow-gray-800 cursor-pointer">
+    <p class="text-3xl font-hand" @click="expanded = !expanded">Ver numero de cuenta</p>
+    <p x-show="expanded" x-collapse class="font-light pt-5">ES00 0000 0000 0000 0000 0000</p>
+  </div>
+</div>

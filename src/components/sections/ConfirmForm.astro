@@ -14,7 +14,7 @@ const arrayFrom = (n: number) => Array.from({ length: n }, (_, i) => i + 1);
   <h2 class="text-center">
     <div
       x-bind:class="shown ? 'translate-x-0 opacity-1' : 'opacity-0 translate-x-[50%]'"
-      class="text-2xl font-hand mb-2 transition-all ease-in-out duration-700">Invitacion Para:</div>
+      class="text-3xl font-hand mb-2 transition-all ease-in-out duration-700">Invitacion Para:</div>
     <div
     x-bind:class="shown ? 'translate-x-0 opacity-1' : 'opacity-0 translate-x-[-50%]'"
     class="text-4xl font-hand mb-4 transition-all ease-in-out duration-700">{guest.name}</div>
@@ -23,7 +23,7 @@ const arrayFrom = (n: number) => Array.from({ length: n }, (_, i) => i + 1);
   x-bind:class="shown ? 'opacity-1' : 'opacity-0'"
   class="bg-white p-6 shadow-md rounded-md w-full max-w-screen-md transition-all ease-in-out delay-100 duration-700">
     <h3 class="text-xl mb-4 text-center w-full">Confirma tus datos</h3>
-    <form class="space-y-4" hx-patch={`/api/confirm/${guest.uuid}`} hx-target="#confirmation-message">
+    <form class="space-y-4 text-left" hx-patch={`/api/confirm/${guest.uuid}`} hx-target="#confirmation-message">
       <!-- Asistentes -->
       <Field>
         <label for="confirmedAttendees" class="font-bold"

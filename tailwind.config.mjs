@@ -5,8 +5,7 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				hand: ["Caveat", "cursive", ...defaultTheme.fontFamily.sans],
-				indie: ['"Indie Flower"', "cursive", ...defaultTheme.fontFamily.sans],
+				hand: ["'MonteCarlo'", "cursive", ...defaultTheme.fontFamily.sans],
 			},
 			animation: {
 				appear: "appear 0.5s ease-in-out",

@@ -6,6 +6,7 @@ import ConfigForm from "@components/sections/ConfirmForm.astro";
 import Countdown from "@components/sections/Countdown.astro";
 import HeroBannerSection from "@components/sections/HeroBanner.astro";
 import WhenAndWhere from "@components/sections/WhenAndWhere.astro";
+import Gifts from "../../components/sections/Gifts.astro";
 
 const id = Astro.params.id as string;
 ---
@@ -23,6 +24,9 @@ const id = Astro.params.id as string;
     </Section>
     <Section extraClass="bg-slate-100">
       <ConfigForm id={id} />
+    </Section>
+    <Section>
+      <Gifts />
     </Section>
   </Container>
 </Layout>
