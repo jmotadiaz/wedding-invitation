@@ -64,6 +64,8 @@ const arrayFrom = (n: number) => Array.from({ length: n }, (_, i) => i + 1);
             checked={guest.bus}
             x-on:change={`
               guestWantsBus = $event.target.checked;
+              $refs.busStop.setCustomValidity('');
+              $refs.busSeats.setCustomValidity('');
             `}
           />
         </label>

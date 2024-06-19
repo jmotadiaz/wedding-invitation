@@ -8,13 +8,15 @@ import invitationEnvelopImg from "../../assets/invitationEnvelop.webp";
 const id = Astro.params.id as string;
 ---
 
-<Layout title="Weding Invitation" lightway={true}>
-  <a href=`/${id}/invitation` class="h-screen flex flex-col justify-center items-center">
-    <picture>
-      <source srcset=`${invitationEnvelopImgSM.src}` media="(max-width: 360px)" width=`${invitationEnvelopImgSM.width}` height=`${invitationEnvelopImgSM.height}` />
-      <source srcset=`${invitationEnvelopImgMD.src}` media="(max-width: 720px)" width=`${invitationEnvelopImgMD.width}` height=`${invitationEnvelopImgMD.height}` />
-      <source srcset=`${invitationEnvelopImgLG.src}` media="(max-width: 1600px)" width=`${invitationEnvelopImgLG.width}` height=`${invitationEnvelopImgLG.height}` />
-      <img src=`${invitationEnvelopImg.src}` alt="Sobre de invitación de boda" width=`${invitationEnvelopImg.width}` height=`${invitationEnvelopImg.height}` class="w-auto max-h-screen mx-auto">
-    </picture>
-  </a>
+<Layout title="Weding Invitation">
+  <main class="h-screen flex flex-col justify-center items-center p-10">
+    <a href=`/${id}/invitation`>
+      <picture>
+        <source srcset=`${invitationEnvelopImgSM.src}` media="(max-width: 360px)" width=`${invitationEnvelopImgSM.width}` height=`${invitationEnvelopImgSM.height}` />
+        <source srcset=`${invitationEnvelopImgMD.src}` media="(max-width: 720px)" width=`${invitationEnvelopImgMD.width}` height=`${invitationEnvelopImgMD.height}` />
+        <source srcset=`${invitationEnvelopImgLG.src}` media="(max-width: 1600px)" width=`${invitationEnvelopImgLG.width}` height=`${invitationEnvelopImgLG.height}` />
+        <img src=`${invitationEnvelopImg.src}` alt="Sobre de invitación de boda" width=`${invitationEnvelopImg.width}` height=`${invitationEnvelopImg.height}` class="w-auto max-h-screen mx-auto">
+      </picture>
+    </a>
+  </main>
 </Layout>
