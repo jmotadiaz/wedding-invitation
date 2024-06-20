@@ -37,7 +37,7 @@ const arrayFrom = (n: number) => Array.from({ length: n }, (_, i) => i + 1);
           oninvalid="this.setCustomValidity('Debes seleccionar el numero de asistentes')"
           oninput="this.setCustomValidity('')"
         >
-          <option hidden disabled selected value=""></option>
+          <option hidden disabled selected={!guest.confirmedAttendees} value=""></option>
           {arrayFrom(guest.expectedAttendees).map((numAttendees) => (
             <option selected={guest.confirmedAttendees === numAttendees} value={numAttendees}>{numAttendees}</option>
           ))}
@@ -83,7 +83,7 @@ const arrayFrom = (n: number) => Array.from({ length: n }, (_, i) => i + 1);
             oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar una parada')"
             oninput="this.setCustomValidity('')"
           >
-            <option hidden disabled selected value=""></option>
+            <option hidden disabled selected={!guest.busStop} value=""></option>
             {stops.map((busStop) => (
               <option selected={guest.busStop === busStop} value={busStop}>{busStop}</option>
             ))}
@@ -103,7 +103,7 @@ const arrayFrom = (n: number) => Array.from({ length: n }, (_, i) => i + 1);
             oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar el numero de asientos')"
             oninput="this.setCustomValidity('')"
           >
-            <option hidden disabled selected value=""></option>
+            <option hidden disabled selected={!guest.busSeats} value=""></option>
             {arrayFrom(guest.expectedAttendees).map((numAttendees) => (
               <option selected={guest.busSeats === numAttendees} value={numAttendees}>{numAttendees}</option>
             ))}
