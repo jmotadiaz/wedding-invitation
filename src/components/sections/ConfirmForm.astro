@@ -23,7 +23,7 @@ const arrayFrom = (n: number) => Array.from({ length: n }, (_, i) => i + 1);
   x-bind:class="shown ? 'opacity-1' : 'opacity-0'"
   class="bg-white p-6 shadow-md rounded-md w-full max-w-screen-md transition-all ease-in-out delay-100 duration-700">
     <h3 class="text-xl mb-4 text-center w-full">Confirma tus datos</h3>
-    <form class="space-y-4 text-left" hx-patch={`/api/confirm/${guest.uuid}`} hx-target="#confirmation-message">
+    <form class="text-left" hx-patch={`/api/confirm/${guest.uuid}`} hx-target="#confirmation-message">
       <!-- Asistentes -->
       <Field>
         <label for="confirmedAttendees" class="font-bold"
@@ -37,7 +37,7 @@ const arrayFrom = (n: number) => Array.from({ length: n }, (_, i) => i + 1);
           oninvalid="this.setCustomValidity('Debes seleccionar el numero de asistentes')"
           oninput="this.setCustomValidity('')"
         >
-          <option disabled selected value=""></option>
+          <option hidden disabled selected value=""></option>
           {arrayFrom(guest.expectedAttendees).map((numAttendees) => (
             <option selected={guest.confirmedAttendees === numAttendees} value={numAttendees}>{numAttendees}</option>
           ))}
@@ -83,7 +83,7 @@ const arrayFrom = (n: number) => Array.from({ length: n }, (_, i) => i + 1);
             oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar una parada')"
             oninput="this.setCustomValidity('')"
           >
-            <option disabled selected value=""></option>
+            <option hidden disabled selected value=""></option>
             {stops.map((busStop) => (
               <option selected={guest.busStop === busStop} value={busStop}>{busStop}</option>
             ))}
@@ -103,14 +103,14 @@ const arrayFrom = (n: number) => Array.from({ length: n }, (_, i) => i + 1);
             oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar el numero de asientos')"
             oninput="this.setCustomValidity('')"
           >
-            <option disabled selected value=""></option>
+            <option hidden disabled selected value=""></option>
             {arrayFrom(guest.expectedAttendees).map((numAttendees) => (
               <option selected={guest.busSeats === numAttendees} value={numAttendees}>{numAttendees}</option>
             ))}
           </select>
         </Field>
       </fieldset>
-      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md w-full">
+      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md w-full mt-2">
         <span id="guest-submit">
           {!guest.confirmedAttendees ? "Confirmar" : "Actualizar"}
         </span>

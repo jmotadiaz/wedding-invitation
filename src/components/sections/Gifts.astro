@@ -21,6 +21,10 @@ import BlackTieAttiers from "../BlackTieAttiers.astro";
   <p class="mb-8">Si quieres tener un detalle con nosotros, aqui tienes nuestro numero de cuenta</p>
   <div x-data="{expanded: false}" class="w-full rounded-xl p-5 shadow-sm shadow-gray-800 cursor-pointer">
     <p class="text-3xl font-hand" @click="expanded = !expanded">Ver numero de cuenta</p>
-    <p x-show="expanded" x-collapse class="font-light pt-5">ES00 0000 0000 0000 0000 0000</p>
+    <div x-show="expanded" x-collapse>
+      <p class="font-light pt-5">
+        ES00 0000 0000 0000 0000 0000
+      </p>
+    </div>
   </div>
 </div>
