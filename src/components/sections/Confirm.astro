@@ -8,6 +8,4 @@ export interface Props {
 const guest = await getGuest(Astro.props.id);
 ---
 
-{ guest &&
-<ConfirmForm guest={guest} />
-}
+{ guest && <ConfirmForm guest={guest} /> }
