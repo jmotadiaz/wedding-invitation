@@ -1,0 +1,13 @@
+---
+import { getGuest } from "@domain/Guest";
+import ConfirmForm from "../ConfirmForm.astro";
+export interface Props {
+	id: string;
+}
+
+const guest = await getGuest(Astro.props.id);
+---
+
+{ guest &&
+<ConfirmForm guest={guest} />
+}

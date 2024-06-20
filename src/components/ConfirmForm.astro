@@ -1,0 +1,159 @@
+---
+import { stops } from "@domain/Guest";
+import type { Guest } from "@domain/Guest/model";
+import Field from "./Field.astro";
+export interface Props {
+	guest: Guest;
+}
+
+const guest = Astro.props.guest;
+const arrayFrom = (n: number) => Array.from({ length: n }, (_, i) => i + 1);
+---
+
+<div
+  x-data={`{guestWantsBus: ${guest.bus}}`}
+  class="flex flex-col justify-center items-center w-full"
+>
+  <h2 class="text-center">
+    <div
+      :class="shown ? 'translate-x-0 opacity-1' : 'opacity-0 translate-x-[50%]'"
+      class="text-3xl font-hand mb-2 transition-all ease-in-out duration-700"
+    >
+      Invitacion Para:
+    </div>
+    <div
+      :class="shown ? 'translate-x-0 opacity-1' : 'opacity-0 translate-x-[-50%]'"
+      class="text-4xl font-hand mb-4 transition-all ease-in-out duration-700"
+    >
+      {guest.name}
+    </div>
+  </h2>
+  <div
+    :class="shown ? 'opacity-1' : 'opacity-0'"
+    class="bg-white p-6 shadow-md rounded-md w-full max-w-screen-md transition-all ease-in-out delay-100 duration-700"
+  >
+    <h3 class="text-xl mb-4 text-center w-full">Confirma tus datos</h3>
+    <form
+      class="text-left"
+      hx-patch={`/api/confirm/${guest.uuid}`}
+      hx-target="#confirmation-message"
+    >
+      <!-- Asistentes -->
+      <Field>
+        <label for="confirmedAttendees" class="font-bold">Asistentes:</label>
+        <select
+          id="confirmedAttendees"
+          name="confirmedAttendees"
+          class="border rounded-md px-4 py-2 border-gray-300 bg-white"
+          required
+          oninvalid="this.setCustomValidity('Debes seleccionar el numero de asistentes')"
+          oninput="this.setCustomValidity('')"
+        >
+          <option hidden disabled selected={!guest.confirmedAttendees} value=""
+          ></option>
+          {
+            arrayFrom(guest.expectedAttendees).map((numAttendees) => (
+              <option
+                selected={guest.confirmedAttendees === numAttendees}
+                value={numAttendees}
+              >
+                {numAttendees}
+              </option>
+            ))
+          }
+        </select>
+      </Field>
+      <!-- Alergias -->
+      <Field>
+        <label for="allergies" class="font-bold">Alergias:</label>
+        <textarea
+          id="allergies"
+          name="allergies"
+          rows="3"
+          class="border rounded-md px-4 py-2 border-gray-300"
+          >{guest.allergies}</textarea
+        >
+      </Field>
+      <!-- Bus -->
+      <Field>
+        <label for="bus" class="font-bold"
+          >Quieres autobus?:
+          <input
+            id="bus"
+            name="bus"
+            type="checkbox"
+            checked={guest.bus}
+            x-on:change={`
+              guestWantsBus = $event.target.checked;
+              $refs.busStop.setCustomValidity('');
+              $refs.busSeats.setCustomValidity('');
+            `}
+          />
+        </label>
+      </Field>
+      <!-- Parada -->
+      <fieldset
+        class="grid grid-cols-2 space-x-2"
+        x-show="guestWantsBus"
+        x-collapse
+      >
+        <Field>
+          <label for="busStop" class="font-bold">Parada:</label>
+          <select
+            id="busStop"
+            name="busStop"
+            class="border rounded-md px-4 py-2 border-gray-300 bg-white"
+            x-ref="busStop"
+            :required="guestWantsBus"
+            oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar una parada')"
+            oninput="this.setCustomValidity('')"
+          >
+            <option hidden disabled selected={!guest.busStop} value=""></option>
+            {
+              stops.map((busStop) => (
+                <option selected={guest.busStop === busStop} value={busStop}>
+                  {busStop}
+                </option>
+              ))
+            }
+          </select>
+        </Field>
+        <!-- Asientos -->
+        <Field>
+          <label for="busSeats" class="font-bold">Asientos:</label>
+          <select
+            id="busSeats"
+            name="busSeats"
+            class="border rounded-md px-4 py-2 border-gray-300 bg-white"
+            x-ref="busSeats"
+            :required="guestWantsBus"
+            oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar el numero de asientos')"
+            oninput="this.setCustomValidity('')"
+          >
+            <option hidden disabled selected={!guest.busSeats} value=""
+            ></option>
+            {
+              arrayFrom(guest.expectedAttendees).map((numAttendees) => (
+                <option
+                  selected={guest.busSeats === numAttendees}
+                  value={numAttendees}
+                >
+                  {numAttendees}
+                </option>
+              ))
+            }
+          </select>
+        </Field>
+      </fieldset>
+      <button
+        type="submit"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md w-full mt-2"
+      >
+        <span id="guest-submit">
+          {!guest.confirmedAttendees ? "Confirmar" : "Actualizar"}
+        </span>
+      </button>
+    </form>
+    <div id="confirmation-message"></div>
+  </div>
+</div>
