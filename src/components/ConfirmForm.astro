@@ -1,41 +1,25 @@
 ---
 import { stops } from "@domain/Guest";
 import type { Guest } from "@domain/Guest/model";
+import { arrayFrom } from "@utils";
 import Field from "./Field.astro";
+
 export interface Props {
 	guest: Guest;
 }
 
 const guest = Astro.props.guest;
-const arrayFrom = (n: number) => Array.from({ length: n }, (_, i) => i + 1);
 ---
 
 <div
-  x-data={`{guestWantsBus: ${guest.bus}}`}
-  class="flex flex-col justify-center items-center w-full"
->
-  <h2 class="text-center">
-    <div
-      :class="shown ? 'translate-x-0 opacity-1' : 'opacity-0 translate-x-[50%]'"
-      class="text-3xl font-hand mb-2 transition-all ease-in-out duration-700"
-    >
-      Invitacion para:
-    </div>
-    <div
-      :class="shown ? 'translate-x-0 opacity-1' : 'opacity-0 translate-x-[-50%]'"
-      class="text-4xl font-hand mb-4 transition-all ease-in-out duration-700"
-    >
-      {guest.name}
-    </div>
-  </h2>
-  <div
-    :class="shown ? 'opacity-1' : 'opacity-0'"
+    x-bind:class="shown ? 'opacity-1' : 'opacity-0'"
     class="bg-white p-6 shadow-md rounded-md w-full max-w-screen-md transition-all ease-in-out delay-100 duration-700"
   >
     <h3 class="text-xl mb-4 text-center w-full">Confirma tus datos</h3>
     <form
       class="text-left"
-      hx-patch={`/api/confirm/${guest.uuid}`}
+      x-data={`{guestWantsBus: ${guest.bus}}`}
+      hx-patch={`/${guest.uuid}/api/confirm`}
       hx-target="#confirmation-message"
     >
       <!-- Asistentes -->
@@ -155,5 +139,4 @@ const arrayFrom = (n: number) => Array.from({ length: n }, (_, i) => i + 1);
       </button>
     </form>
     <div id="confirmation-message"></div>
-  </div>
 </div>
