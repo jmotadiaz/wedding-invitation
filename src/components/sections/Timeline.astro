@@ -13,6 +13,8 @@ import Wedding from "../icons/Wedding.astro";
     position: relative;
     height: 100%;
     display: grid;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: 0;
     grid-template-areas:
       "wedding wedding timeline-1 empty-w empty-w"
       "empty-co empty-co timeline-2 cocktail cocktail"
@@ -57,26 +59,27 @@ import Wedding from "../icons/Wedding.astro";
     z-index: 2;
     top: 0;
     left: 50%;
-    width: 80px;
+    width: 70px;
     height: 100%;
     background-color: #fff;
     opacity: 0.9;
-    transform: translateX(-25%) scaleY(1);
+    transform: translateX(-50%) scaleY(1);
     transform-origin: bottom;
   }
   .hide {
     transform: translateX(-50%) scaleY(0);
   }
 </style>
-<div class="relative container mx-auto h-full py-5">
+<div class="relative container mx-auto h-full py-10">
   <div
     class="filter"
     :class="shown ? 'hide' : ''"
   ></div>
   <div class="timeline-container">
     <TimelineItem type="wedding" side="left" delay={0}>
+      <p class="text-sm">12:00 HRS</p>
       <p class="font-hand text-3xl">Ceremonia</p>
-      <div class="mx-auto w-[60px] h-[60px] lg:w-[100px] lg:h-[100px]">
+      <div class="mx-auto w-[80px] h-[80px] lg:w-[100px] lg:h-[100px]">
         <Wedding />
       </div>
     </TimelineItem>
@@ -87,8 +90,9 @@ import Wedding from "../icons/Wedding.astro";
       <div class="timeline-line top-[50%]"></div>
     </div>
     <TimelineItem type="cocktail" side="right" delay={500}>
+      <p class="text-sm">13:00 HRS</p>
       <p class="font-hand text-3xl">Cocktail</p>
-      <div class="mx-auto w-[60px] h-[60px] lg:w-[100px] lg:h-[100px]">
+      <div class="mx-auto w-[80px] h-[80px] lg:w-[100px] lg:h-[100px]">
         <Cocktail />
       </div>
     </TimelineItem>
@@ -100,8 +104,9 @@ import Wedding from "../icons/Wedding.astro";
       <div class="timeline-line top-[50%]"></div>
     </div>
     <TimelineItem type="celebration" side="left" delay={1000}>
+      <p class="text-sm">15:00 HRS</p>
       <p class="font-hand text-3xl">Celebracion</p>
-      <div class="mx-auto w-[60px] h-[60px] lg:w-[100px] lg:h-[100px]">
+      <div class="mx-auto w-[80px] h-[80px] lg:w-[100px] lg:h-[100px]">
         <Celebration />
       </div>
     </TimelineItem>
@@ -113,8 +118,9 @@ import Wedding from "../icons/Wedding.astro";
       <div class="timeline-line top-[50%]"></div>
     </div>
     <TimelineItem type="dancing" side="right" delay={1500}>
-      <p class="font-hand text-3xl">Bailar</p>
-      <div class="mx-auto w-[60px] h-[60px] lg:w-[100px] lg:h-[100px]">
+      <p class="text-sm">17:00 HRS</p>
+      <p class="font-hand text-3xl">A bailar</p>
+      <div class="mx-auto w-[80px] h-[80px] lg:w-[100px] lg:h-[100px]">
         <Dancing />
       </div>
     </TimelineItem>

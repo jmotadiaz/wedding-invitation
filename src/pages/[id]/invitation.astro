@@ -23,14 +23,14 @@ const id = Astro.params.id as string;
     <Section>
       <WhenAndWhere />
     </Section>
+    <Section extraClass="items-stretch">
+      <Timeline />
+    </Section>
     <Section extraClass="bg-slate-100">
       <ConfigForm id={id} />
     </Section>
     <Section>
       <Gifts />
-    </Section>
-    <Section extraClass="items-stretch">
-      <Timeline
     </Section>
   </Container>
 </Layout>
