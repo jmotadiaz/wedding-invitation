@@ -1,0 +1,40 @@
+---
+import { getStats } from "@domain/Guest";
+import type { Guest } from "@domain/Guest/model";
+
+export interface Props {
+	guests: Guest[];
+}
+
+const { guests } = Astro.props;
+const stats = getStats(guests);
+---
+
+<div id="stats" class="grid grid-cols-1 gap-4 py-5">
+  <div class="flex">
+    <h3 class="text-lg font-bold">Total de asistentes esperados:</h3>
+    <p class="text-lg ml-3">{stats.totalExpectedAttendees}</p>
+  </div>
+  <div class="flex">
+    <h3 class="text-lg font-bold">Total de confirmados:</h3>
+    <p class="text-lg ml-3">{stats.totalConfirmedAttendees}</p>
+  </div>
+  <div class="flex">
+    <h3 class="text-lg font-bold">Total asientos de bus:</h3>
+    <p class="text-lg ml-3">{stats.totalBusSeats}</p>
+  </div>
+  <!-- seats by stop -->
+  <div class="flex">
+    <h2 class="text-lg font-bold">Asientos por parada:</h2>
+    <div class="flex flex-col ml-3">
+      {
+        Object.entries(stats.seatsByStop).map(([stop, seats]) => (
+          <div class="flex">
+            <p class="text-lg">{stop}: </p>
+            <p class="text-lg ml-2">{seats}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>

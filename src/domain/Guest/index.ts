@@ -1,6 +1,6 @@
 import * as GuestRepository from "@repository/GuestRepository";
 import { nanoid } from "nanoid";
-import type { Guest } from "./model";
+import type { BusStop, Guest, Stats } from "./model";
 
 export const stops = ["Sevilla", "Los Palacios", "Trajano"];
 export enum ValidationError {
@@ -71,6 +71,36 @@ const validateGuest = (
 
   return errors;
 };
+
+export const getStats = (guests: Guest[]): Stats =>
+  guests.reduce(
+    (acc, { confirmedAttendees, expectedAttendees, busSeats, busStop }) => ({
+      totalConfirmedAttendees: acc.totalConfirmedAttendees + confirmedAttendees,
+      totalExpectedAttendees: acc.totalExpectedAttendees + expectedAttendees,
+      totalBusSeats: acc.totalBusSeats + (busSeats || 0),
+      seatsByStop: {
+        ...acc.seatsByStop,
+        ...(busStop && {
+          [busStop]: acc.seatsByStop[busStop as BusStop] + (busSeats || 0),
+        }),
+      },
+    }),
+    {
+      totalConfirmedAttendees: 0,
+      totalExpectedAttendees: 0,
+      totalBusSeats: 0,
+      seatsByStop: {
+        Sevilla: 0,
+        "Los Palacios": 0,
+        Trajano: 0,
+      },
+    }
+  );
+
+export const totalConfirmedAttendees = (guests: Guest[]): number =>
+  guests.reduce((acc, { confirmedAttendees }) => acc + confirmedAttendees, 0);
+export const totalExpectedAttendees = (guests: Guest[]): number =>
+  guests.reduce((acc, guest) => acc + guest.expectedAttendees, 0);
 
 export const confirmGuest = async (
   id: string,

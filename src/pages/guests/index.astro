@@ -2,12 +2,17 @@
 import GuestList from "@components/GuestList.astro";
 import Layout from "@components/Layout.astro";
 import { getGuests } from "@domain/Guest";
+import Stats from "../../components/Stats.astro";
+import Csv from "../../components/icons/Csv.astro";
 const guests = await getGuests();
 ---
 
 <Layout title="Guest List">
   <div class="container mx-auto py-10 px-5">
-    <h1 class="text-4xl lg:text-6xl mb-10">Lista de invitados</h1>
+    <div class="flex items-center mb-5">
+      <h1 class="text-4xl lg:text-6xl">Lista de invitados</h1>
+      <a target="_blank" class="ml-5" href="/guests/api/csv"><Csv size={40} /></a>
+    </div>
     <div id="guest-list">
       <GuestList guests={guests} />
     </div>
@@ -18,5 +23,11 @@ const guests = await getGuests();
         <button type="submit" class="bg-blue-500 text-white px-4 py-2">Add</button>
       </div>
     </form>
+    <div x-data="{expanded: false}" @click="expanded = !expanded" class="w-full rounded-xl p-5 shadow-sm shadow-gray-800 cursor-pointer">
+      <h2 class="text-lg font-bold">Estadisticas</h2>
+      <div x-show="expanded" x-collapse>
+        <Stats guests={guests} />
+      </div>
+    </div>
   </div>
 </Layout>

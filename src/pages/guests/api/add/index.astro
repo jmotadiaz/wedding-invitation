@@ -2,6 +2,7 @@
 import GuestList from "@components/GuestList.astro";
 import { addGuest, getGuests } from "@domain/Guest";
 import { createFormDataWrapper } from "@utils";
+import Stats from "../../../../components/Stats.astro";
 
 export const partial = true;
 
@@ -16,4 +17,8 @@ const guests = await getGuests();
 ---
 
 <GuestList guests={guests} />
+
+<div id="stats" hx-swap-oob="true">
+	<Stats guests={guests} />
+</div>
 
