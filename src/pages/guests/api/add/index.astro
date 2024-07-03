@@ -18,7 +18,7 @@ const guests = await getGuests();
 
 <GuestList guests={guests} />
 
-<div id="stats" hx-swap-oob="true">
+<div id="stats" hx-swap-oob="innerHTML">
 	<Stats guests={guests} />
 </div>
 

@@ -10,7 +10,7 @@ const { guests } = Astro.props;
 const stats = getStats(guests);
 ---
 
-<div id="stats" class="grid grid-cols-1 gap-4 py-5">
+<div class="grid grid-cols-1 gap-4 py-5">
   <div class="flex">
     <h3 class="text-lg font-bold">Total de asistentes esperados:</h3>
     <p class="text-lg ml-3">{stats.totalExpectedAttendees}</p>
