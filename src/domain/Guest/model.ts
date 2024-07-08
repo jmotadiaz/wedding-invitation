@@ -9,11 +9,9 @@ export interface Guest {
   allergies: string;
 }
 
-export type BusStop = "Sevilla" | "Los Palacios" | "Trajano";
-
 export interface Stats {
-  totalConfirmedAttendees: number;
-  totalExpectedAttendees: number;
+  totalConfirmedGuests: number;
+  totalCancelledAttendees: number;
   totalBusSeats: number;
-  seatsByStop: Record<BusStop, number>;
+  seatsByStop: Record<string, number>;
 }

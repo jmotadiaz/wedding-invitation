@@ -50,13 +50,12 @@ const guest = Astro.props.guest;
       <!-- Alergias -->
       <Field>
         <label for="allergies" class="font-bold">Alergias:</label>
-        <textarea
+        <input
           id="allergies"
           name="allergies"
-          rows="3"
           class="border rounded-md px-4 py-2 border-gray-300"
-          >{guest.allergies}</textarea
-        >
+          value={guest.allergies}
+          />
       </Field>
       <!-- Bus -->
       <Field>

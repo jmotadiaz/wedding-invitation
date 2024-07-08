@@ -1,6 +1,6 @@
 import * as GuestRepository from "@repository/GuestRepository";
 import { nanoid } from "nanoid";
-import type { BusStop, Guest, Stats } from "./model";
+import type { Guest, Stats } from "./model";
 
 export const stops = ["Sevilla", "Los Palacios", "Trajano"];
 export enum ValidationError {
@@ -72,28 +72,32 @@ const validateGuest = (
   return errors;
 };
 
+const isConfirmed = (guest: Guest): boolean => guest.confirmedAttendees > 0;
+
 export const getStats = (guests: Guest[]): Stats =>
-  guests.reduce(
-    (acc, { confirmedAttendees, expectedAttendees, busSeats, busStop }) => ({
-      totalConfirmedAttendees: acc.totalConfirmedAttendees + confirmedAttendees,
-      totalExpectedAttendees: acc.totalExpectedAttendees + expectedAttendees,
-      totalBusSeats: acc.totalBusSeats + (busSeats || 0),
+  guests.reduce<Stats>(
+    (acc, guest) => ({
+      totalConfirmedGuests:
+        acc.totalConfirmedGuests + (isConfirmed(guest) ? 1 : 0),
+      totalCancelledAttendees:
+        acc.totalCancelledAttendees +
+        (isConfirmed(guest)
+          ? 0
+          : guest.expectedAttendees - guest.confirmedAttendees),
+      totalBusSeats: acc.totalBusSeats + (guest.busSeats || 0),
       seatsByStop: {
         ...acc.seatsByStop,
-        ...(busStop && {
-          [busStop]: acc.seatsByStop[busStop as BusStop] + (busSeats || 0),
+        ...(guest.busStop && {
+          [guest.busStop]:
+            (acc.seatsByStop[guest.busStop] ?? 0) + (guest.busSeats || 0),
         }),
       },
     }),
     {
-      totalConfirmedAttendees: 0,
-      totalExpectedAttendees: 0,
+      totalConfirmedGuests: 0,
+      totalCancelledAttendees: 0,
       totalBusSeats: 0,
-      seatsByStop: {
-        Sevilla: 0,
-        "Los Palacios": 0,
-        Trajano: 0,
-      },
+      seatsByStop: {},
     }
   );
 
