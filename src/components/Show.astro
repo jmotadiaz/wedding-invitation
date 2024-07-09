@@ -1,0 +1,13 @@
+---
+export interface Props {
+	showClass: string;
+	className?: string;
+}
+const { showClass, className } = Astro.props;
+---
+<div
+  :class=`shown && '${showClass}'`
+  class=`${className}`
+>
+  <slot />
+</div>

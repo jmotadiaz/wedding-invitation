@@ -1,42 +1,53 @@
+---
+import Collapsible from "../Collapsible.astro";
+---
+
 <div
   :class="shown ? 'opacity-1' : 'opacity-0'"
-  class="overflow-hidden transition-all ease-in-out duration-[1500ms]"
+  class="w-full overflow-hidden transition-all ease-in-out duration-[1200ms]"
 >
   <div
     :class="shown ? 'translate-y-0' : 'translate-y-[100%]'"
-    class="flex flex-col justify-center items-center transition-all ease-out duration-700"
+    class="p-5 flex flex-col justify-center items-center transition-all ease-out duration-700"
   >
-  <h2 class="text-3xl font-hand mb-5">Te agradecemos</h2>
-  <p>ADORAMOS A TUS HIJOS,</p>
-  <p>PERO CREEMOS QUE NECESITAN</p>
-  <p>UNA NOCHE LIBRE.</p>
-  <p>SÓLO ADULTOS, POR FAVOR</p>
+    <h2 class="text-3xl font-hand mb-5">Te agradecemos</h2>
+    <div class="text-lg">
+      <p>Adoramos a tus hijos,</p>
+      <p>pero creemos que necesitan</p>
+      <p>una noche libre.</p>
+      <p>Sólo adultos, por favor</p>
+    </div>
+  </div>
 </div>
-</div>
-<div class="border-b-2 border-gray-200 w-2/3 lg:w-1/2 mx-auto my-10"></div>
+<div class="border-b-2 border-gray-200 w-2/3 lg:w-1/2 mx-auto my-5"></div>
 <div
   :class="shown ? 'opacity-1' : 'opacity-0'"
-  class="overflow-hidden transition-all ease-in-out duration-[1500ms]"
+  class="w-full overflow-hidden transition-all ease-in-out duration-[1200ms]"
 >
-<div
+  <div
     :class="shown ? 'translate-y-0' : 'translate-y-[-100%]'"
-    class="flex flex-col justify-center items-center transition-all ease-out duration-700"
+    class="p-5 flex flex-col justify-center items-center transition-all ease-out duration-700"
   >
-  <h2 class="text-3xl font-hand mb-5">Hospedaje</h2>
-  <div class="mb-5">
-    <p>Si viajas para poder asistir</p>
-    <p>a nuestra celebracion,</p>
-    <p>ademas de agradecertelo</p>
-    <p>de todo corazon,</p>
-    <p>te recomendamos este alojamiento:</p>
+    <h2 class="text-3xl font-hand mb-5">Hospedaje</h2>
+    <div class="mb-5">
+      <p>Si viajas para poder asistir</p>
+      <p>a nuestra celebracion,</p>
+      <p>ademas de agradecertelo</p>
+      <p>de todo corazon,</p>
+      <p>te recomendamos este alojamiento:</p>
+    </div>
+    <Collapsible>
+      <p class="text-2xl font-hand" slot="trigger">Detalles del hotel</p>
+      <div class="pt-3" slot="content">
+        <p>Hotel Encore</p>
+        <p>Telf. 614 442 9090</p>
+        <a
+          href="https://www.google.com/maps/place/Hacienda+los+Frailes+de+San+Alberto/@37.1979631,-5.9244053,15z/data=!4m2!3m1!1s0x0:0xddf4a405f884e20b?sa=X&ved=1t:2428&ictx=111"
+          class="font-sans text-blue-500 text-lg underline hover:text-blue-700 hover:cursor-pointer"
+        >
+          Ver Mapa
+        </a>
+      </div>
+    </Collapsible>
   </div>
-  <p>Hotel Encore</p>
-  <p>Telf. 614 442 9090</p>
-  <a
-    href="https://www.google.com/maps/place/Hacienda+los+Frailes+de+San+Alberto/@37.1979631,-5.9244053,15z/data=!4m2!3m1!1s0x0:0xddf4a405f884e20b?sa=X&ved=1t:2428&ictx=111"
-    class="font-sans text-blue-500 text-lg underline hover:text-blue-700 hover:cursor-pointer"
-  >
-    Ver Mapa
-  </a>
-</div>
 </div>
