@@ -5,7 +5,7 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				hand: ["'Dancing Script'", "cursive", ...defaultTheme.fontFamily.sans],
+				hand: ["'Kaushan Script'", "cursive", ...defaultTheme.fontFamily.sans],
 			},
 			animation: {
 				appear: "appear 0.5s ease-in-out",
