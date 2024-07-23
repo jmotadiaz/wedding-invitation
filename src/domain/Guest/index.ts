@@ -28,10 +28,10 @@ export const addGuest = async ({
     name,
     expectedAttendees,
     uuid: nanoid(),
-    confirmedAttendees: 0,
+    confirmedAttendees: null,
     bus: false,
     busStop: null,
-    busSeats: 0,
+    busSeats: null,
     allergies: "",
   });
 };
@@ -60,7 +60,7 @@ const validateGuest = (
       errors.push(ValidationError.BUS_SEATS_REQUIRED);
     }
 
-    if (guest.busSeats && guest.busSeats > guest.confirmedAttendees) {
+    if (guest.busSeats && guest.busSeats > (guest.confirmedAttendees ?? 0)) {
       errors.push(ValidationError.BUS_SEATS_OVER_CONFIRMED_ATTENDEES);
     }
 
@@ -72,7 +72,8 @@ const validateGuest = (
   return errors;
 };
 
-const isConfirmed = (guest: Guest): boolean => guest.confirmedAttendees > 0;
+const isConfirmed = (guest: Guest): boolean =>
+  (guest.confirmedAttendees ?? 0) > 0;
 
 export const getStats = (guests: Guest[]): Stats =>
   guests.reduce<Stats>(
@@ -83,7 +84,7 @@ export const getStats = (guests: Guest[]): Stats =>
         acc.totalCancelledAttendees +
         (isConfirmed(guest)
           ? 0
-          : guest.expectedAttendees - guest.confirmedAttendees),
+          : guest.expectedAttendees - (guest.confirmedAttendees ?? 0)),
       totalBusSeats: acc.totalBusSeats + (guest.busSeats || 0),
       seatsByStop: {
         ...acc.seatsByStop,
@@ -102,7 +103,11 @@ export const getStats = (guests: Guest[]): Stats =>
   );
 
 export const totalConfirmedAttendees = (guests: Guest[]): number =>
-  guests.reduce((acc, { confirmedAttendees }) => acc + confirmedAttendees, 0);
+  guests.reduce(
+    (acc, { confirmedAttendees }) => acc + (confirmedAttendees ?? 0),
+    0
+  );
+
 export const totalExpectedAttendees = (guests: Guest[]): number =>
   guests.reduce((acc, guest) => acc + guest.expectedAttendees, 0);
 

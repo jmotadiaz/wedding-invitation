@@ -9,8 +9,8 @@ export interface GuestTable {
   uuid: string;
   name: string;
   expected_attendees: number;
-  confirmed_attendees: number;
-  bus: boolean;
+  confirmed_attendees: number | null;
+  bus: boolean | null;
   allergies: string;
   bus_stop: string | null;
   bus_seats: number | null;
