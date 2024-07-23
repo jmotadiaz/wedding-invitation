@@ -57,10 +57,7 @@ const guest = Astro.props.guest;
       </select>
     </Field>
     <!-- Alergias -->
-    <fieldset
-      x-show="confirmed"
-      x-collapse
-    >
+    <div x-show="confirmed" x-collapse>
       <Field>
         <label for="allergies" class="font-bold">Alergias:</label>
         <input
@@ -87,60 +84,61 @@ const guest = Astro.props.guest;
           />
         </label>
       </Field>
-    </fieldset>
-    <!-- Parada -->
-    <fieldset
-      class="grid grid-cols-2 space-x-2"
-      x-show="guestWantsBus"
-      x-collapse
-    >
-      <Field>
-        <label for="busStop" class="font-bold">Parada:</label>
-        <select
-          id="busStop"
-          name="busStop"
-          class="border rounded-md px-4 py-2 border-gray-300 bg-white"
-          x-ref="busStop"
-          :required="guestWantsBus"
-          oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar una parada')"
-          oninput="this.setCustomValidity('')"
-        >
-          <option hidden disabled selected={!guest.busStop} value=""></option>
-          {
-            stops.map((busStop) => (
-              <option selected={guest.busStop === busStop} value={busStop}>
-                {busStop}
-              </option>
-            ))
-          }
-        </select>
-      </Field>
-      <!-- Asientos -->
-      <Field>
-        <label for="busSeats" class="font-bold">Asientos:</label>
-        <select
-          id="busSeats"
-          name="busSeats"
-          class="border rounded-md px-4 py-2 border-gray-300 bg-white"
-          x-ref="busSeats"
-          :required="guestWantsBus"
-          oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar el numero de asientos')"
-          oninput="this.setCustomValidity('')"
-        >
-          <option hidden disabled selected={!guest.busSeats} value=""></option>
-          {
-            arrayFrom(guest.expectedAttendees).map((numAttendees) => (
-              <option
-                selected={guest.busSeats === numAttendees}
-                value={numAttendees}
-              >
-                {numAttendees}
-              </option>
-            ))
-          }
-        </select>
-      </Field>
-    </fieldset>
+      <!-- Parada -->
+      <fieldset
+        class="grid grid-cols-2 space-x-2"
+        x-show="guestWantsBus"
+        x-collapse
+      >
+        <Field>
+          <label for="busStop" class="font-bold">Parada:</label>
+          <select
+            id="busStop"
+            name="busStop"
+            class="border rounded-md px-4 py-2 border-gray-300 bg-white"
+            x-ref="busStop"
+            :required="guestWantsBus"
+            oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar una parada')"
+            oninput="this.setCustomValidity('')"
+          >
+            <option hidden disabled selected={!guest.busStop} value=""></option>
+            {
+              stops.map((busStop) => (
+                <option selected={guest.busStop === busStop} value={busStop}>
+                  {busStop}
+                </option>
+              ))
+            }
+          </select>
+        </Field>
+        <!-- Asientos -->
+        <Field>
+          <label for="busSeats" class="font-bold">Asientos:</label>
+          <select
+            id="busSeats"
+            name="busSeats"
+            class="border rounded-md px-4 py-2 border-gray-300 bg-white"
+            x-ref="busSeats"
+            :required="guestWantsBus"
+            oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar el numero de asientos')"
+            oninput="this.setCustomValidity('')"
+          >
+            <option hidden disabled selected={!guest.busSeats} value=""
+            ></option>
+            {
+              arrayFrom(guest.expectedAttendees).map((numAttendees) => (
+                <option
+                  selected={guest.busSeats === numAttendees}
+                  value={numAttendees}
+                >
+                  {numAttendees}
+                </option>
+              ))
+            }
+          </select>
+        </Field>
+      </fieldset>
+    </div>
     <button
       type="submit"
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md w-full mt-2"
