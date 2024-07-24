@@ -1,7 +1,7 @@
 -- postgresql
 CREATE TABLE guest (
     id SERIAL PRIMARY KEY,
-    uuid VARCHAR(36) UNIQUE,
+    uuid VARCHAR(36) NOT NULL UNIQUE,
     name VARCHAR(255),
     expected_attendees INTEGER,
     confirmed_attendees INTEGER,
@@ -15,7 +15,7 @@ CREATE TABLE guest (
 -- sqlite
 CREATE TABLE guest (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    uuid TEXT UNIQUE,
+    uuid TEXT NOT NULL UNIQUE,
     name TEXT,
     expected_attendees INTEGER,
     confirmed_attendees INTEGER,

@@ -1,3 +1,5 @@
+import type { GuestSource } from "../../repository/GuestRepository";
+
 export interface Guest {
   uuid: string;
   name: string;
@@ -6,7 +8,21 @@ export interface Guest {
   bus: boolean | null;
   busStop: string | null;
   busSeats: number | null;
-  allergies: string;
+  allergies: string | null;
+}
+
+export interface GuestList {
+  map: <T>(cb: (value: Guest, index: number) => T) => T[];
+  reduce: <T>(
+    callbackfn: (
+      previousValue: T,
+      currentValue: Guest,
+      currentIndex: number,
+      list: GuestList
+    ) => T,
+    initialValue: T
+  ) => T;
+  toArray: () => Guest[];
 }
 
 export interface Stats {

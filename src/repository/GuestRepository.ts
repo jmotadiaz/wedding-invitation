@@ -1,36 +1,19 @@
 import type { Guest } from "@domain/Guest/model";
 import db from "./db";
+import type { GuestTable } from "./db";
+import type { Selectable } from "kysely";
 
-export function getGuests(): Promise<Guest[]> {
-  return db
-    .selectFrom("guest")
-    .select([
-      "uuid",
-      "name",
-      "expected_attendees as expectedAttendees",
-      "confirmed_attendees as confirmedAttendees",
-      "bus_stop as busStop",
-      "bus_seats as busSeats",
-      "bus",
-      "allergies",
-    ])
-    .execute();
+export type GuestSource = Selectable<GuestTable>;
+
+export function getGuests(): Promise<GuestSource[]> {
+  return db.selectFrom("guest").selectAll().execute();
 }
 
-export function getGuest(uuid: string): Promise<Guest | undefined> {
+export function getGuest(uuid: string): Promise<GuestSource | undefined> {
   return db
     .selectFrom("guest")
     .where("uuid", "=", uuid)
-    .select([
-      "uuid",
-      "name",
-      "expected_attendees as expectedAttendees",
-      "confirmed_attendees as confirmedAttendees",
-      "bus_stop as busStop",
-      "bus_seats as busSeats",
-      "bus",
-      "allergies",
-    ])
+    .selectAll()
     .executeTakeFirst();
 }
 

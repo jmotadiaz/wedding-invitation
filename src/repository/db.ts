@@ -8,10 +8,10 @@ export interface GuestTable {
   id: Generated<number>;
   uuid: string;
   name: string;
-  expected_attendees: number;
+  expected_attendees: number | null;
   confirmed_attendees: number | null;
   bus: boolean | null;
-  allergies: string;
+  allergies: string | null;
   bus_stop: string | null;
   bus_seats: number | null;
   modified_at?: ColumnType<Date, string | undefined, never>;
