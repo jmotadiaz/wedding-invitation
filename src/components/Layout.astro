@@ -20,7 +20,7 @@ const { title } = Astro.props;
 		<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=block"></GoogleFontsOptimizer>
 		<meta name="generator" content={Astro.generator} />
 		<ViewTransitions />
-		<script defer src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
+		<script is:inline defer src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
 		<script>
 			var processHtmx = function() {
 				window.htmx.process(document.body);

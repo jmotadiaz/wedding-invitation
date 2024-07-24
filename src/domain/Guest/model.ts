@@ -1,5 +1,3 @@
-import type { GuestSource } from "../../repository/GuestRepository";
-
 export interface Guest {
   uuid: string;
   name: string;

@@ -7,7 +7,7 @@
 		"start": "astro dev --host",
 		"build": "astro check && astro build",
 		"preview": "astro preview",
-		"pre-commit": "lint-staged",
+		"pre-commit": "astro check && lint-staged",
 		"astro": "astro",
 		"prepare": "husky"
 	},
