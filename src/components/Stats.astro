@@ -1,9 +1,9 @@
 ---
 import { getStats } from "@domain/Guest";
-import type { GuestList } from "@domain/Guest/model";
+import type { Guests } from "@domain/Guest/model";
 
 export interface Props {
-	guests: GuestList;
+	guests: Guests;
 }
 
 const { guests } = Astro.props;

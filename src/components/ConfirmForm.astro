@@ -42,7 +42,7 @@ const guest = Astro.props.guest;
           selected={guest.confirmedAttendees === null}
           value=""></option>
         <option selected={guest.confirmedAttendees === 0} value={0}>
-          No asistiré
+          No podré asistir
         </option>
         {
           arrayFrom(guest.expectedAttendees).map((numAttendees) => (

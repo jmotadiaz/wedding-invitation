@@ -1,4 +1,6 @@
-export interface Guest {
+import type { GuestSource } from "../../repository/GuestRepository";
+
+export class Guest {
   uuid: string;
   name: string;
   expectedAttendees: number;
@@ -8,20 +10,50 @@ export interface Guest {
   busStop: string | null;
   busSeats: number | null;
   allergies: string | null;
+
+  constructor(guestSource: GuestSource) {
+    this.uuid = guestSource.uuid;
+    this.name = guestSource.name ?? "";
+    this.expectedAttendees = guestSource.expected_attendees ?? 0;
+    this.confirmedAttendees = guestSource.confirmed_attendees;
+    this.accommodation = guestSource.accommodation ?? false;
+    this.bus = guestSource.bus ?? false;
+    this.busStop = guestSource.bus_stop;
+    this.busSeats = guestSource.bus_seats;
+    this.allergies = guestSource.allergies;
+  }
 }
 
-export interface GuestList {
-  map: <T>(cb: (value: Guest, index: number) => T) => T[];
-  reduce: <T>(
-    callbackfn: (
+export class Guests {
+  guests: GuestSource[];
+
+  constructor(guests: GuestSource[]) {
+    this.guests = guests;
+  }
+
+  map<T>(cb: (value: Guest, index: number) => T): T[] {
+    return this.guests.map((guestSource, index) =>
+      cb(new Guest(guestSource), index)
+    );
+  }
+
+  reduce<T>(
+    cb: (
       previousValue: T,
       currentValue: Guest,
       currentIndex: number,
-      list: GuestList
+      list: Guests
     ) => T,
-    initialValue: T
-  ) => T;
-  toArray: () => Guest[];
+    initial: T
+  ): T {
+    return this.guests.reduce(
+      (acc, guestSource, index) => cb(acc, new Guest(guestSource), index, this),
+      initial
+    );
+  }
+  toArray(): Guest[] {
+    return this.guests.map((guestSource) => new Guest(guestSource));
+  }
 }
 
 export interface Stats {
