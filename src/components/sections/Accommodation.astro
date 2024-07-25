@@ -1,7 +1,9 @@
 ---
+import { getGuest } from "@domain/Guest";
 import AccommodationCheckbox from "../AccommodationCheckbox.astro";
 
-const id = Astro.params.id ?? "";
+const id = Astro.params.id || "";
+const guest = await getGuest(id);
 ---
 
 <div class="relative -top-9">
@@ -40,7 +42,7 @@ const id = Astro.params.id ?? "";
         <p>te recomendamos un alojamiento</p>
         <p>con descuento especial para el evento</p>
       </div>
-      <AccommodationCheckbox id={id} />
+      {guest && <AccommodationCheckbox guest={guest} />}
     </div>
   </div>
 </div>

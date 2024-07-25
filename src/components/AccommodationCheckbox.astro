@@ -1,16 +1,15 @@
 ---
-import { getGuest } from "@domain/Guest";
+import type { Guest } from "@domain/Guest/model";
 
 export interface Props {
-	id: string;
+	guest: Guest;
 }
 
-const id = Astro.props.id;
-const guest = await getGuest(id);
+const guest = Astro.props.guest;
 ---
 <div id="accommodation-checkbox">
   <label for="accommodation" class="flex items-center font-hand text-lg">
-    <input id="accommodation" name="accommodation" type="checkbox" class="mr-2" checked={guest?.accommodation} hx-patch={`/${id}/api/accommodation`} hx-target="#accommodation-checkbox" hx-swap="outerHTML" />
+    <input id="accommodation" name="accommodation" type="checkbox" class="mr-2" checked={guest.accommodation} hx-patch={`/${guest.uuid}/api/accommodation`} hx-target="#accommodation-checkbox" hx-swap="outerHTML" />
     Deseo más información
   </label>
 </div>
