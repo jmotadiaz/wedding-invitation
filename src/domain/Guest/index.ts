@@ -2,7 +2,6 @@ import * as GuestRepository from "@repository/GuestRepository";
 import type { GuestSource } from "@repository/GuestRepository";
 import { nanoid } from "nanoid";
 import type { Guest, GuestList, Stats } from "./model";
-import Accommodation from "../../components/sections/Accommodation.astro";
 
 export const stops = ["Sevilla", "Los Palacios", "Trajano"];
 export enum ValidationError {
