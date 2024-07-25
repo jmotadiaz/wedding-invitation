@@ -10,6 +10,7 @@ export interface GuestTable {
   name: string;
   expected_attendees: number | null;
   confirmed_attendees: number | null;
+  accommodation: boolean | null;
   bus: boolean | null;
   allergies: string | null;
   bus_stop: string | null;

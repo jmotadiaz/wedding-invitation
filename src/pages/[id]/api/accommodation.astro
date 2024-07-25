@@ -1,0 +1,18 @@
+---
+
+import AccommodationCheckbox from "@components/AccommodationCheckbox.astro";
+import { updateAccommodation } from "@domain/Guest";
+import { createFormDataWrapper } from "@utils";
+
+export const partial = true;
+
+const id = Astro.params.id ?? "";
+
+if (Astro.request.method === "PATCH") {
+	const formData = createFormDataWrapper(await Astro.request.formData());
+
+	await updateAccommodation(id, formData.has("accommodation"));
+}
+---
+
+<AccommodationCheckbox id={id} />

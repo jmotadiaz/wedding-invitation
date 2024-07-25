@@ -69,12 +69,13 @@ const guest = Astro.props.guest;
       </Field>
       <!-- Bus -->
       <Field>
-        <label for="bus" class="font-bold"
-          >Quieres autobus?:
+        <label for="bus" class="font-bold flex items-center">
+          Quieres autobus?:
           <input
             id="bus"
             name="bus"
             type="checkbox"
+            class="ml-2"
             checked={guest.bus}
             x-on:change={`
               guestWantsBus = $event.target.checked;

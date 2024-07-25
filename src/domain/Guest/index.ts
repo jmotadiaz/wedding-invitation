@@ -2,6 +2,7 @@ import * as GuestRepository from "@repository/GuestRepository";
 import type { GuestSource } from "@repository/GuestRepository";
 import { nanoid } from "nanoid";
 import type { Guest, GuestList, Stats } from "./model";
+import Accommodation from "../../components/sections/Accommodation.astro";
 
 export const stops = ["Sevilla", "Los Palacios", "Trajano"];
 export enum ValidationError {
@@ -15,6 +16,8 @@ export enum ValidationError {
 
 const Guest = (guestSource: GuestSource): Guest => ({
   ...guestSource,
+  bus: guestSource.bus ?? false,
+  accommodation: guestSource.accommodation ?? false,
   name: guestSource.name ?? "",
   expectedAttendees: guestSource.expected_attendees ?? 0,
   confirmedAttendees: guestSource.confirmed_attendees,
@@ -55,6 +58,7 @@ export const addGuest = async ({
   return GuestRepository.addGuest({
     name,
     expectedAttendees,
+    accommodation: false,
     uuid: nanoid(),
     confirmedAttendees: null,
     bus: false,
@@ -166,4 +170,11 @@ export const confirmGuest = async (
   }
 
   return GuestRepository.updateGuest(id, parsedGuest);
+};
+
+export const updateAccommodation = async (
+  id: string,
+  accommodation: boolean
+) => {
+  return GuestRepository.updateGuest(id, { accommodation });
 };

@@ -3,7 +3,8 @@ export interface Guest {
   name: string;
   expectedAttendees: number;
   confirmedAttendees: number | null;
-  bus: boolean | null;
+  accommodation: boolean;
+  bus: boolean;
   busStop: string | null;
   busSeats: number | null;
   allergies: string | null;

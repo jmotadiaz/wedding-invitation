@@ -1,6 +1,9 @@
 ---
-import Collapsible from "../Collapsible.astro";
+import AccommodationCheckbox from "../AccommodationCheckbox.astro";
+
+const id = Astro.params.id ?? "";
 ---
+
 <div class="relative -top-9">
   <div
     :class="shown ? 'opacity-1' : 'opacity-0'"
@@ -34,21 +37,10 @@ import Collapsible from "../Collapsible.astro";
         <p>a nuestra celebracion,</p>
         <p>ademas de agradecertelo</p>
         <p>de todo corazon,</p>
-        <p>te recomendamos este alojamiento:</p>
+        <p>te recomendamos un alojamiento</p>
+        <p>con descuento especial para el evento</p>
       </div>
-      <Collapsible>
-        <p class="text-2xl font-hand" slot="trigger">Detalles del hotel</p>
-        <div class="pt-3" slot="content">
-          <p>Hotel Encore</p>
-          <p>Telf. 614 442 9090</p>
-          <a
-            href="https://www.google.com/maps/place/Hacienda+los+Frailes+de+San+Alberto/@37.1979631,-5.9244053,15z/data=!4m2!3m1!1s0x0:0xddf4a405f884e20b?sa=X&ved=1t:2428&ictx=111"
-            class="font-sans text-blue-500 text-lg underline hover:text-blue-700 hover:cursor-pointer"
-          >
-            Ver Mapa
-          </a>
-        </div>
-      </Collapsible>
+      <AccommodationCheckbox id={id} />
     </div>
   </div>
 </div>

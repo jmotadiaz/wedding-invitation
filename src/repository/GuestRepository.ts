@@ -38,13 +38,19 @@ export async function updateGuest(
   await db
     .updateTable("guest")
     .set({
-      name: guest.name,
-      expected_attendees: guest.expectedAttendees,
-      confirmed_attendees: guest.confirmedAttendees,
-      bus: guest.bus,
-      bus_stop: guest.busStop,
-      bus_seats: guest.busSeats,
-      allergies: guest.allergies,
+      ...(has(guest.name) && { name: guest.name }),
+      ...(has(guest.expectedAttendees) && {
+        expected_attendees: guest.expectedAttendees,
+      }),
+      ...(has(guest.confirmedAttendees) && {
+        confirmed_attendees: guest.confirmedAttendees,
+      }),
+      ...(has(guest.accommodation) && { accommodation: guest.accommodation }),
+      ...(has(guest.bus) && { bus: guest.bus }),
+      ...(has(guest.busStop) && { bus_stop: guest.busStop }),
+      ...(has(guest.busSeats) && { bus_seats: guest.busSeats }),
+      ...(has(guest.allergies) && { allergies: guest.allergies }),
+      ...(has(guest.accommodation) && { accommodation: guest.accommodation }),
     })
     .where("uuid", "=", uuid)
     .execute();
@@ -53,3 +59,6 @@ export async function updateGuest(
 export async function deleteGuest(uuid: string): Promise<void> {
   await db.deleteFrom("guest").where("uuid", "=", uuid).execute();
 }
+
+const has = <T>(value: T | null | undefined): value is T =>
+  value !== null && value !== undefined;
