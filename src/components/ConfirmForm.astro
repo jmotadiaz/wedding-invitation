@@ -98,7 +98,7 @@ const guest = Astro.props.guest;
             name="busStop"
             class="border rounded-md px-4 py-2 border-gray-300 bg-white"
             x-ref="busStop"
-            :required="guestWantsBus"
+            :required="confirmed && guestWantsBus"
             oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar una parada')"
             oninput="this.setCustomValidity('')"
           >
@@ -120,7 +120,7 @@ const guest = Astro.props.guest;
             name="busSeats"
             class="border rounded-md px-4 py-2 border-gray-300 bg-white"
             x-ref="busSeats"
-            :required="guestWantsBus"
+            :required="confirmed && guestWantsBus"
             oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar el numero de asientos')"
             oninput="this.setCustomValidity('')"
           >
@@ -145,7 +145,7 @@ const guest = Astro.props.guest;
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md w-full mt-2"
     >
       <span id="guest-submit">
-        {!guest.confirmedAttendees ? "Confirmar" : "Actualizar"}
+        {guest.hasAnswered() ? "Actualizar" : "Confirmar"}
       </span>
     </button>
   </form>

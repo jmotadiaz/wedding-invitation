@@ -22,37 +22,16 @@ export class Guest {
     this.busSeats = guestSource.bus_seats;
     this.allergies = guestSource.allergies;
   }
-}
-
-export class Guests {
-  guests: GuestSource[];
-
-  constructor(guests: GuestSource[]) {
-    this.guests = guests;
+  get confirmed(): boolean {
+    return this.hasAnswered() && this.confirmedAttendees > 0;
   }
 
-  map<T>(cb: (value: Guest, index: number) => T): T[] {
-    return this.guests.map((guestSource, index) =>
-      cb(new Guest(guestSource), index)
-    );
+  get declined(): boolean {
+    return this.confirmedAttendees === 0;
   }
 
-  reduce<T>(
-    cb: (
-      previousValue: T,
-      currentValue: Guest,
-      currentIndex: number,
-      list: Guests
-    ) => T,
-    initial: T
-  ): T {
-    return this.guests.reduce(
-      (acc, guestSource, index) => cb(acc, new Guest(guestSource), index, this),
-      initial
-    );
-  }
-  toArray(): Guest[] {
-    return this.guests.map((guestSource) => new Guest(guestSource));
+  hasAnswered(): this is { confirmedAttendees: number } {
+    return this.confirmedAttendees !== null;
   }
 }
 

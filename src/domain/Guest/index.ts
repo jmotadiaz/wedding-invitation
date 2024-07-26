@@ -1,6 +1,6 @@
 import * as GuestRepository from "@repository/GuestRepository";
 import { nanoid } from "nanoid";
-import { Guest, Guests, type Stats } from "./model";
+import { Guest, type Stats } from "./model";
 
 export const stops = ["Sevilla", "Los Palacios", "Trajano"];
 export enum ValidationError {
@@ -12,8 +12,10 @@ export enum ValidationError {
   GENERIC,
 }
 
-export const getGuests = async (): Promise<Guests> => {
-  return new Guests(await GuestRepository.getGuests());
+export const getGuests = async (): Promise<Guest[]> => {
+  return (await GuestRepository.getGuests()).map(
+    (guestSource) => new Guest(guestSource)
+  );
 };
 
 export const getGuest = async (id: string): Promise<Guest | undefined> => {
@@ -75,19 +77,16 @@ const validateGuest = (
   return errors;
 };
 
-const isConfirmed = (guest: Guest): boolean =>
-  (guest.confirmedAttendees ?? 0) > 0;
-
-export const getStats = (guests: Guests): Stats =>
+export const getStats = (guests: Guest[]): Stats =>
   guests.reduce<Stats>(
     (acc, guest) => ({
       totalConfirmedGuests:
-        acc.totalConfirmedGuests + (isConfirmed(guest) ? 1 : 0),
+        acc.totalConfirmedGuests + (guest.confirmed ? 1 : 0),
       totalCancelledAttendees:
         acc.totalCancelledAttendees +
-        (isConfirmed(guest)
-          ? 0
-          : guest.expectedAttendees - (guest.confirmedAttendees ?? 0)),
+        (guest.hasAnswered()
+          ? guest.expectedAttendees - (guest.confirmedAttendees ?? 0)
+          : 0),
       totalBusSeats: acc.totalBusSeats + (guest.busSeats || 0),
       seatsByStop: {
         ...acc.seatsByStop,
@@ -105,13 +104,13 @@ export const getStats = (guests: Guests): Stats =>
     }
   );
 
-export const totalConfirmedAttendees = (guests: Guests): number =>
+export const totalConfirmedAttendees = (guests: Guest[]): number =>
   guests.reduce(
     (acc, { confirmedAttendees }) => acc + (confirmedAttendees ?? 0),
     0
   );
 
-export const totalExpectedAttendees = (guests: Guests): number =>
+export const totalExpectedAttendees = (guests: Guest[]): number =>
   guests.reduce((acc, guest) => acc + guest.expectedAttendees, 0);
 
 export const confirmGuest = async (
@@ -127,6 +126,16 @@ export const confirmGuest = async (
     "allergies" | "confirmedAttendees" | "bus" | "busSeats" | "busStop"
   >
 ): Promise<void> => {
+  if (confirmedAttendees === 0) {
+    return GuestRepository.updateGuest(id, {
+      confirmedAttendees,
+      allergies: "",
+      bus: false,
+      busSeats: null,
+      busStop: null,
+    });
+  }
+
   const parsedGuest = {
     allergies,
     confirmedAttendees,
@@ -147,5 +156,9 @@ export const updateAccommodation = async (
   id: string,
   accommodation: boolean
 ) => {
-  return GuestRepository.updateGuest(id, { accommodation });
+  const guest = await getGuest(id);
+
+  if (!guest?.declined) {
+    return GuestRepository.updateGuest(id, { accommodation });
+  }
 };

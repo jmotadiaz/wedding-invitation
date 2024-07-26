@@ -3,7 +3,7 @@ import { getGuests } from "@domain/Guest";
 
 export async function GET() {
   const guests = await getGuests();
-  return new Response(json2csv(guests.toArray()), {
+  return new Response(json2csv(guests), {
     headers: {
       "Content-Type": "text/csv",
       "Content-Disposition": 'attachment; filename="guests.csv"',

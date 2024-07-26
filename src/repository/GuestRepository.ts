@@ -3,6 +3,8 @@ import db from "./db";
 import type { GuestTable } from "./db";
 import type { Selectable } from "kysely";
 
+type DbGuest = Omit<Guest, "confirmed" | "declined" | "hasAnswered">;
+
 export type GuestSource = Selectable<GuestTable>;
 
 export function getGuests(): Promise<GuestSource[]> {
@@ -17,7 +19,7 @@ export function getGuest(uuid: string): Promise<GuestSource | undefined> {
     .executeTakeFirst();
 }
 
-export async function addGuest(guest: Guest): Promise<void> {
+export async function addGuest(guest: DbGuest): Promise<void> {
   await db
     .insertInto("guest")
     .values({
@@ -33,24 +35,19 @@ export async function addGuest(guest: Guest): Promise<void> {
 
 export async function updateGuest(
   uuid: string,
-  guest: Partial<Guest>
+  guest: Partial<DbGuest>
 ): Promise<void> {
   await db
     .updateTable("guest")
     .set({
-      ...(has(guest.name) && { name: guest.name }),
-      ...(has(guest.expectedAttendees) && {
-        expected_attendees: guest.expectedAttendees,
-      }),
-      ...(has(guest.confirmedAttendees) && {
-        confirmed_attendees: guest.confirmedAttendees,
-      }),
-      ...(has(guest.accommodation) && { accommodation: guest.accommodation }),
-      ...(has(guest.bus) && { bus: guest.bus }),
-      ...(has(guest.busStop) && { bus_stop: guest.busStop }),
-      ...(has(guest.busSeats) && { bus_seats: guest.busSeats }),
-      ...(has(guest.allergies) && { allergies: guest.allergies }),
-      ...(has(guest.accommodation) && { accommodation: guest.accommodation }),
+      name: guest.name,
+      expected_attendees: guest.expectedAttendees,
+      confirmed_attendees: guest.confirmedAttendees,
+      accommodation: guest.accommodation,
+      bus: guest.bus,
+      bus_stop: guest.busStop,
+      bus_seats: guest.busSeats,
+      allergies: guest.allergies,
     })
     .where("uuid", "=", uuid)
     .execute();
@@ -59,6 +56,3 @@ export async function updateGuest(
 export async function deleteGuest(uuid: string): Promise<void> {
   await db.deleteFrom("guest").where("uuid", "=", uuid).execute();
 }
-
-const has = <T>(value: T | null | undefined): value is T =>
-  value !== null && value !== undefined;
