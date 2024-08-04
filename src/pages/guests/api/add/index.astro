@@ -10,6 +10,7 @@ if (Astro.request.method === "POST") {
 	const formData = createFormDataWrapper(await Astro.request.formData());
 	await addGuest({
 		name: formData.get("name"),
+		uuid: formData.get("publicId"),
 		expectedAttendees: Number.parseInt(formData.get("expectedAttendees")),
 	});
 }

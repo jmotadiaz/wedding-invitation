@@ -8,9 +8,9 @@ import invitationEnvelopImg from "../../assets/invitationEnvelop.webp";
 const id = Astro.params.id as string;
 ---
 
-<Layout title="Weding Invitation">
+<Layout title="Boda Rocío y Javi">
   <main class="h-screen flex flex-col justify-center items-center p-5 relative -top-9">
-    <a href=`/${id}/invitation`>
+    <a href=`/${id}/invitacion`>
       <picture>
         <source srcset=`${invitationEnvelopImgSM.src}` media="(max-width: 360px)" width=`${invitationEnvelopImgSM.width}` height=`${invitationEnvelopImgSM.height}` />
         <source srcset=`${invitationEnvelopImgMD.src}` media="(max-width: 720px)" width=`${invitationEnvelopImgMD.width}` height=`${invitationEnvelopImgMD.height}` />

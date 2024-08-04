@@ -12,6 +12,17 @@ export enum ValidationError {
   GENERIC,
 }
 
+function nameToUrl(name: string): string {
+  return name
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+y\s+/g, "-")
+    .replace(/[^\w\s-]/g, "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-");
+}
+
 export const getGuests = async (): Promise<Guest[]> => {
   return (await GuestRepository.getGuests()).map(
     (guestSource) => new Guest(guestSource)
@@ -27,12 +38,13 @@ export const getGuest = async (id: string): Promise<Guest | undefined> => {
 export const addGuest = async ({
   name,
   expectedAttendees,
-}: Pick<Guest, "name" | "expectedAttendees">): Promise<void> => {
+  uuid,
+}: Pick<Guest, "name" | "expectedAttendees" | "uuid">): Promise<void> => {
   return GuestRepository.addGuest({
     name,
     expectedAttendees,
     accommodation: false,
-    uuid: nanoid(),
+    uuid: nameToUrl(uuid),
     confirmedAttendees: null,
     bus: false,
     busStop: null,
