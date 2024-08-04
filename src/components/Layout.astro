@@ -14,7 +14,13 @@ const { title } = Astro.props;
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
+		<title>{title}</title>
 		<meta name="description" content="14 de Diciembre 2024" />
+		<meta property="og:title" content={title}>
+    <meta property="og:description" content="14 de Diciembre 2024">
+    <meta property="og:image" content="https://boda-rocioyjavi.vercel.app/portada.png">
+    <meta property="og:url" content="https://boda-rocioyjavi.vercel.app">
+    <meta property="og:type" content="website">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=block"></GoogleFontsOptimizer>
@@ -33,7 +39,6 @@ const { title } = Astro.props;
 			})
 		</script>
 		<SpeedInsights />
-		<title>{title}</title>
 	</head>
 	<body>
 		<slot />
