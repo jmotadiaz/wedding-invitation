@@ -1,5 +1,4 @@
 import * as GuestRepository from "@repository/GuestRepository";
-import { nanoid } from "nanoid";
 import { Guest } from "./model";
 
 export const stops = ["Sevilla", "Los Palacios", "Trajano"];
