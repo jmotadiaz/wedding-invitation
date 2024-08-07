@@ -4,7 +4,7 @@ import Collapsible from "../Collapsible.astro";
 
 const BANK_ACCOUNT = import.meta.env.BANK_ACCOUNT;
 ---
-<div class="relative -top-9">
+<div class="relative max-w-screen-md -top-9">
   <div
     :class="shown ? 'opacity-1' : 'opacity-0'"
     class="transition-all ease-in-out duration-1000"

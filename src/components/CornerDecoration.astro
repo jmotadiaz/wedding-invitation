@@ -1,5 +1,5 @@
 ---
-import CornerDecorarion from "./icons/CornerDecorarion.astro";
+import CornerDecorationIcon from "./icons/CornerDecoration.astro";
 
 export interface Props {
 	position: "top-left" | "top-right" | "bottom-left" | "bottom-right";
@@ -24,6 +24,6 @@ const transformClasses = {
 
 <div class=`absolute ${positionClasses[position]}`>
   <div class=`${transformClasses[position]} origin-center`>
-    <CornerDecorarion size={250} />
+    <CornerDecorationIcon size={250} />
   </div>
 </div>

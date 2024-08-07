@@ -6,7 +6,6 @@ export interface Props {
 }
 
 const { type, side, delay } = Astro.props;
-const transformInitial = side === "left" ? "-50%" : "50%";
 ---
 
 <style>
@@ -25,12 +24,27 @@ const transformInitial = side === "left" ? "-50%" : "50%";
   .dancing {
     grid-area: dancing;
   }
+  .left {
+    transform: translateX(-150%);
+  }
+  .right {
+    transform: translateX(150%);
+  }
 </style>
 
-<div
-  class=`transition-all ease-out duration-700 timeline-item ${type}`
-  :class=`shown ? 'translate-x-0 opacity-1' : 'opacity-0 translate-x-[${transformInitial}]'`
-  style=`transition-delay: ${delay}ms;`
-  >
-  <slot />
+<div class=`timeline-item ${type}`>
+  <div
+    class=`transition-all duration-700`
+    :class="shown ? 'opacity-1' : 'opacity-0'"
+    style=`transition-delay: ${delay + 150}ms;`
+    >
+    <slot />
+  </div>
+  <div
+    class=`transition-all ease-out duration-1000 mx-auto w-[90px] h-[90px] lg:w-[100px] lg:h-[100px]`
+    :class=`shown ? 'translate-x-0 opacity-1' : 'opacity-0 ${side}'`
+    style=`transition-delay: ${delay}ms;`
+    >
+    <slot name="icon" />
+  </div>
 </div>
