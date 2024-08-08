@@ -23,20 +23,16 @@ const { title } = Astro.props;
     <meta property="og:type" content="website">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=block"></GoogleFontsOptimizer>
 		<meta name="generator" content={Astro.generator} />
+		<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=block"></GoogleFontsOptimizer>
 		<ViewTransitions />
 		<script is:inline defer src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
 		<script>
 			var processHtmx = function() {
-				window.htmx.process(document.body);
+				window.htmx?.process(document.body);
 			}
-			window.addEventListener('load', function() {
-				processHtmx();
-			});
-			document.addEventListener('astro:after-swap', function() {
-				processHtmx();
-			})
+			window.addEventListener('load', processHtmx);
+			document.addEventListener('astro:after-swap', processHtmx);
 		</script>
 		<SpeedInsights />
 	</head>
