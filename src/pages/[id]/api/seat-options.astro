@@ -1,6 +1,8 @@
 ---
 import NumberOptions from "../../../components/NumberOptions.astro";
 
+export const partial = true;
+
 const confirmedAttendees = +(
 	Astro.url.searchParams.get("confirmedAttendees") || "0"
 );
