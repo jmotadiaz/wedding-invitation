@@ -1,0 +1,12 @@
+---
+import NumberOptions from "../../../components/NumberOptions.astro";
+
+const confirmedAttendees = +(
+	Astro.url.searchParams.get("confirmedAttendees") || "0"
+);
+---
+
+<NumberOptions
+  numOptions={confirmedAttendees}
+  selectedOption={null}
+/>

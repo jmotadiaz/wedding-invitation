@@ -1,8 +1,8 @@
 ---
 import { stops } from "@domain/Guest";
 import type { Guest } from "@domain/Guest/model";
-import { arrayFrom } from "@utils";
 import Field from "./Field.astro";
+import NumberOptions from "./NumberOptions.astro";
 
 export interface Props {
 	guest: Guest;
@@ -29,6 +29,9 @@ const guest = Astro.props.guest;
         id="confirmedAttendees"
         name="confirmedAttendees"
         class="border rounded-md px-4 py-2 border-gray-300 bg-white"
+        hx-get={`/${guest.uuid}/api/seat-options`}
+        hx-target="#busSeats"
+        hx-swap="innerHTML"
         required
         oninvalid="this.setCustomValidity('Debes seleccionar el numero de asistentes')"
         oninput="this.setCustomValidity('')"
@@ -44,16 +47,9 @@ const guest = Astro.props.guest;
         <option selected={guest.confirmedAttendees === 0} value={0}>
           No podré asistir
         </option>
-        {
-          arrayFrom(guest.expectedAttendees).map((numAttendees) => (
-            <option
-              selected={guest.confirmedAttendees === numAttendees}
-              value={numAttendees}
-            >
-              {numAttendees}
-            </option>
-          ))
-        }
+        <NumberOptions
+          numOptions={guest.expectedAttendees}
+          selectedOption={guest.confirmedAttendees} />
       </select>
     </Field>
     <!-- Alergias -->
@@ -124,18 +120,9 @@ const guest = Astro.props.guest;
             oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar el numero de asientos')"
             oninput="this.setCustomValidity('')"
           >
-            <option hidden disabled selected={!guest.busSeats} value=""
-            ></option>
-            {
-              arrayFrom(guest.expectedAttendees).map((numAttendees) => (
-                <option
-                  selected={guest.busSeats === numAttendees}
-                  value={numAttendees}
-                >
-                  {numAttendees}
-                </option>
-              ))
-            }
+            <NumberOptions
+              numOptions={guest.confirmedAttendees || guest.expectedAttendees}
+              selectedOption={guest.busSeats} />
           </select>
         </Field>
       </fieldset>

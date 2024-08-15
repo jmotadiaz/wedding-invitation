@@ -1,0 +1,22 @@
+---
+import { arrayFrom } from "@utils";
+
+export interface Props {
+	numOptions: number;
+	selectedOption: number | null;
+}
+
+const { numOptions, selectedOption } = Astro.props;
+---
+<option hidden disabled selected={selectedOption === null } value=""
+            ></option>
+{
+  arrayFrom(numOptions).map((option) => (
+    <option
+      selected={selectedOption === option}
+      value={option}
+    >
+      {option}
+    </option>
+  ))
+}
