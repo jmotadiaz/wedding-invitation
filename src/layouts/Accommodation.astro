@@ -1,6 +1,6 @@
 ---
+import AccommodationCheckbox from "@components/AccommodationCheckbox.astro";
 import { getGuest } from "@domain/Guest";
-import AccommodationCheckbox from "../AccommodationCheckbox.astro";
 
 const id = Astro.params.id || "";
 const guest = await getGuest(id);

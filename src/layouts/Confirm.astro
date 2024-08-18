@@ -1,7 +1,7 @@
 ---
+import ConfirmForm from "@components/ConfirmForm.astro";
+import ConfirmedGuestInfo from "@components/ConfirmedGuestInfo.astro";
 import { getGuest } from "@domain/Guest";
-import ConfirmForm from "../ConfirmForm.astro";
-import ConfirmedGuestInfo from "../ConfirmedGuestInfo.astro";
 export interface Props {
 	id: string;
 }
@@ -64,7 +64,7 @@ const guest = await getGuest(Astro.props.id);
         class="slide-it bg-white p-6 shadow-md rounded-md w-full max-w-screen-md transition-all ease-in-out delay-100 duration-700"
         id="confirm"
       >
-        {guest.confirmed ? (
+        {guest.hasAnswered() ? (
           <ConfirmedGuestInfo guest={guest} />
         ) : (
           <ConfirmForm guest={guest} />
