@@ -1,6 +1,7 @@
 ---
 
-import { confirmGuest, stops } from "@domain/Guest";
+import ConfirmedGuestInfo from "@components/ConfirmedGuestInfo.astro";
+import { type Guest, confirmGuest, getGuest, stops } from "@domain/Guest";
 import { ValidationError } from "@domain/Guest";
 import { createFormDataWrapper } from "@utils";
 
@@ -8,6 +9,7 @@ export const partial = true;
 
 const { id } = Astro.params as { id: string };
 let errors: ValidationError[] | null = null;
+let guest: Guest | undefined;
 
 if (Astro.request.method === "PATCH") {
 	const formData = createFormDataWrapper(await Astro.request.formData());
@@ -20,6 +22,7 @@ if (Astro.request.method === "PATCH") {
 			bus: formData.has("bus"),
 			busStop: formData.get("busStop"),
 		});
+		guest = await getGuest(id);
 	} catch (e) {
 		errors = Array.isArray(e)
 			? (e as ValidationError[])
@@ -51,7 +54,6 @@ const getErrorMessage = (error: ValidationError) => {
 		))}
 	</div>
 	:
-	<span id="guest-submit" hx-swap-oob="true">Actualizar</span>
-	<p class="text-green-500 animate-appear mt-4">Informacion Guardada</p>
+	guest && <ConfirmedGuestInfo guest={guest} />
 }
 

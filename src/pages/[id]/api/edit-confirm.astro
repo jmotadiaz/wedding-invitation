@@ -1,0 +1,10 @@
+---
+import ConfirmForm from "@components/ConfirmForm.astro";
+import { getGuest } from "@domain/Guest";
+
+export const partial = true;
+
+const guest = await getGuest(`${Astro.params.id}`);
+---
+
+{guest && <ConfirmForm guest={guest} />}

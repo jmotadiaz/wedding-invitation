@@ -3,6 +3,7 @@ import { stops } from "@domain/Guest";
 import type { Guest } from "@domain/Guest/model";
 import Field from "./Field.astro";
 import NumberOptions from "./NumberOptions.astro";
+import Spinner from "./icons/Spinner.astro";
 
 export interface Props {
 	guest: Guest;
@@ -11,130 +12,135 @@ export interface Props {
 const guest = Astro.props.guest;
 ---
 
-<div
-  x-bind:class="shown ? 'opacity-1' : 'opacity-0'"
-  class="bg-white p-6 shadow-md rounded-md w-full max-w-screen-md transition-all ease-in-out delay-100 duration-700"
+<h3 class="text-xl mb-4 text-center w-full">Confirma tus datos</h3>
+<form
+  class="text-left"
+  x-data={`{guestWantsBus: ${guest.bus}, confirmed: ${guest.confirmed}}`}
+  hx-patch={`/${guest.uuid}/api/confirm`}
+  hx-target="#confirm"
+  hx-swap="innerHTML transition:true"
 >
-  <h3 class="text-xl mb-4 text-center w-full">Confirma tus datos</h3>
-  <form
-    class="text-left"
-    x-data={`{guestWantsBus: ${guest.bus}, confirmed: ${guest.confirmed}}`}
-    hx-patch={`/${guest.uuid}/api/confirm`}
-    hx-target="#confirmation-message"
-  >
-    <!-- Asistentes -->
-    <Field>
-      <label for="confirmedAttendees" class="font-bold">Asistentes:</label>
-      <select
-        id="confirmedAttendees"
-        name="confirmedAttendees"
-        class="border rounded-md px-4 py-2 border-gray-300 bg-white"
-        hx-get={`/${guest.uuid}/api/seat-options`}
-        hx-target="#busSeats"
-        hx-swap="innerHTML"
-        required
-        oninvalid="this.setCustomValidity('Debes seleccionar el numero de asistentes')"
-        oninput="this.setCustomValidity('')"
-        x-on:change={`
+  <!-- Asistentes -->
+  <Field>
+    <label for="confirmedAttendees" class="font-bold">Asistentes:</label>
+    <select
+      id="confirmedAttendees"
+      name="confirmedAttendees"
+      class="border rounded-md px-4 py-2 border-gray-300 bg-white"
+      hx-get={`/${guest.uuid}/api/seat-options`}
+      hx-target="#busSeats"
+      hx-swap="innerHTML"
+      required
+      oninvalid="this.setCustomValidity('Debes seleccionar el numero de asistentes')"
+      oninput="this.setCustomValidity('')"
+      x-on:change={`
           confirmed = $event.target.value > 0;
         `}
+    >
+      <option
+        hidden
+        disabled
+        selected={guest.confirmedAttendees === null}
+        value=""></option>
+      <option selected={guest.confirmedAttendees === 0} value={0}>
+        No podré asistir
+      </option>
+      <NumberOptions
+        numOptions={guest.expectedAttendees}
+        selectedOption={guest.confirmedAttendees}
+      />
+    </select>
+  </Field>
+  <!-- Alergias -->
+  <div x-show="confirmed" x-collapse>
+    <Field>
+      <label for="allergies" class="font-bold"
+        >Alergias o/y condición alimentaria:</label
       >
-        <option
-          hidden
-          disabled
-          selected={guest.confirmedAttendees === null}
-          value=""></option>
-        <option selected={guest.confirmedAttendees === 0} value={0}>
-          No podré asistir
-        </option>
-        <NumberOptions
-          numOptions={guest.expectedAttendees}
-          selectedOption={guest.confirmedAttendees} />
-      </select>
+      <input
+        id="allergies"
+        name="allergies"
+        class="border rounded-md px-4 py-2 border-gray-300"
+        value={guest.allergies}
+      />
     </Field>
-    <!-- Alergias -->
-    <div x-show="confirmed" x-collapse>
-      <Field>
-        <label for="allergies" class="font-bold">Alergias o/y condición alimentaria:</label>
+    <!-- Bus -->
+    <Field>
+      <label for="bus" class="font-bold flex items-center">
+        ¿Te podría interesar traslado?:
         <input
-          id="allergies"
-          name="allergies"
-          class="border rounded-md px-4 py-2 border-gray-300"
-          value={guest.allergies}
-        />
-      </Field>
-      <!-- Bus -->
-      <Field>
-        <label for="bus" class="font-bold flex items-center">
-          ¿Te podría interesar traslado?:
-          <input
-            id="bus"
-            name="bus"
-            type="checkbox"
-            class="ml-2"
-            checked={guest.bus}
-            x-on:change={`
+          id="bus"
+          name="bus"
+          type="checkbox"
+          class="ml-2"
+          checked={guest.bus}
+          x-on:change={`
               guestWantsBus = $event.target.checked;
               $refs.busStop.setCustomValidity('');
               $refs.busSeats.setCustomValidity('');
             `}
-          />
-        </label>
-      </Field>
-      <!-- Parada -->
-      <fieldset
-        class="grid grid-cols-2 space-x-2"
-        x-show="guestWantsBus"
-        x-collapse
-      >
-        <Field>
-          <label for="busStop" class="font-bold">Parada:</label>
-          <select
-            id="busStop"
-            name="busStop"
-            class="border rounded-md px-4 py-2 border-gray-300 bg-white"
-            x-ref="busStop"
-            :required="confirmed && guestWantsBus"
-            oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar una parada')"
-            oninput="this.setCustomValidity('')"
-          >
-            <option hidden disabled selected={!guest.busStop} value=""></option>
-            {
-              stops.map((busStop) => (
-                <option selected={guest.busStop === busStop} value={busStop}>
-                  {busStop}
-                </option>
-              ))
-            }
-          </select>
-        </Field>
-        <!-- Asientos -->
-        <Field>
-          <label for="busSeats" class="font-bold">Asientos:</label>
-          <select
-            id="busSeats"
-            name="busSeats"
-            class="border rounded-md px-4 py-2 border-gray-300 bg-white"
-            x-ref="busSeats"
-            :required="confirmed && guestWantsBus"
-            oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar el numero de asientos')"
-            oninput="this.setCustomValidity('')"
-          >
-            <NumberOptions
-              numOptions={guest.confirmedAttendees || guest.expectedAttendees}
-              selectedOption={guest.busSeats} />
-          </select>
-        </Field>
-      </fieldset>
-    </div>
-    <button
-      type="submit"
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md w-full mt-2"
+        />
+      </label>
+    </Field>
+    <!-- Parada -->
+    <fieldset
+      class="grid grid-cols-2 space-x-2"
+      x-show="guestWantsBus"
+      x-collapse
     >
-      <span id="guest-submit">
-        {guest.hasAnswered() ? "Actualizar" : "Confirmar"}
-      </span>
-    </button>
-  </form>
-  <div id="confirmation-message"></div>
-</div>
+      <Field>
+        <label for="busStop" class="font-bold">Parada:</label>
+        <select
+          id="busStop"
+          name="busStop"
+          class="border rounded-md px-4 py-2 border-gray-300 bg-white"
+          x-ref="busStop"
+          :required="confirmed && guestWantsBus"
+          oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar una parada')"
+          oninput="this.setCustomValidity('')"
+        >
+          <option hidden disabled selected={!guest.busStop} value=""></option>
+          {
+            stops.map((busStop) => (
+              <option selected={guest.busStop === busStop} value={busStop}>
+                {busStop}
+              </option>
+            ))
+          }
+        </select>
+      </Field>
+      <!-- Asientos -->
+      <Field>
+        <label for="busSeats" class="font-bold">Asientos:</label>
+        <select
+          id="busSeats"
+          name="busSeats"
+          class="border rounded-md px-4 py-2 border-gray-300 bg-white"
+          x-ref="busSeats"
+          :required="confirmed && guestWantsBus"
+          oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar el numero de asientos')"
+          oninput="this.setCustomValidity('')"
+        >
+          <NumberOptions
+            numOptions={guest.confirmedAttendees || guest.expectedAttendees}
+            selectedOption={guest.busSeats}
+          />
+        </select>
+      </Field>
+    </fieldset>
+  </div>
+  <button
+    type="submit"
+    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md w-full mt-2"
+  >
+  <span class="htmx-base">
+    {guest.hasAnswered() ? "Actualizar" : "Confirmar"}
+  </span>
+  <div class="htmx-indicator">
+    <div class="flex justify-center">
+      <Spinner /> <span class="ml-2">Confirmando...</span>
+    </div>
+  </div>
+  </button>
+</form>
+<div id="confirmation-message"></div>
