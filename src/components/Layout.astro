@@ -25,6 +25,15 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=block"></GoogleFontsOptimizer>
+		<style is:global>
+			@font-face {
+				font-family: 'Bellandha';
+				src: url('/fonts/Bellandha.woff') format('woff');
+				font-weight: normal;
+				font-style: normal;
+				font-display: block;
+			}
+		</style>
 		<ViewTransitions />
 		<script is:inline defer src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
 		<script>

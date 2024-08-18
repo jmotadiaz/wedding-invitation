@@ -6,6 +6,7 @@ export default {
 		extend: {
 			fontFamily: {
 				hand: ["'Kaushan Script'", "cursive", ...defaultTheme.fontFamily.sans],
+				title: ["'Bellandha'", "cursive", ...defaultTheme.fontFamily.sans],
 			},
 			animation: {
 				appear: "appear 0.5s ease-in-out",

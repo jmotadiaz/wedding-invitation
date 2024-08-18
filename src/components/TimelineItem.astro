@@ -30,20 +30,26 @@ const { type, side, delay } = Astro.props;
   .right {
     transform: translateX(150%);
   }
+  .shown {
+    opacity: 1;
+  }
+  .hidden {
+    opacity: 0;
+  }
 </style>
 
 <div class=`timeline-item ${type}`>
   <div
-    class=`transition-all duration-700`
-    :class="shown ? 'opacity-1' : 'opacity-0'"
+    class=`transition-all duration-700 opacity-0`
     style=`transition-delay: ${delay + 150}ms;`
+    :style="shown && { opacity: 1 }"
     >
     <slot />
   </div>
   <div
-    class=`transition-all ease-out duration-1000 mx-auto w-[90px] h-[90px] lg:w-[100px] lg:h-[100px]`
-    :class=`shown ? 'translate-x-0 opacity-1' : 'opacity-0 ${side}'`
+    class=`transition-all ease-out duration-1000 opacity-0 ${side} mx-auto w-[90px] h-[90px] lg:w-[100px] lg:h-[100px]`
     style=`transition-delay: ${delay}ms;`
+    :style="shown && { opacity: 1, transform: 'translateX(0)' }"
     >
     <slot name="icon" />
   </div>
