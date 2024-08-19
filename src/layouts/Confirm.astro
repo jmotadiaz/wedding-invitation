@@ -9,42 +9,50 @@ export interface Props {
 const guest = await getGuest(Astro.props.id);
 ---
 
-<style>
+<style is:global>
   @keyframes fade-in {
-    from { opacity: 0; }
+    from {
+      opacity: 0;
+    }
   }
 
   @keyframes fade-out {
-    to { opacity: 0; }
+    to {
+      opacity: 0;
+    }
   }
 
   @keyframes slide-from-right {
-    from { transform: translateX(90px); }
+    from {
+      transform: translateX(10%);
+    }
   }
 
   @keyframes slide-to-left {
-    to { transform: translateX(-90px); }
+    to {
+      transform: translateX(-10%);
+    }
   }
 
-  .slide-it {
-    view-transition-name: slide-it;
+  #confirm {
+    view-transition-name: confirm;
   }
 
-  ::view-transition-old(slide-it) {
-    animation: 180ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
-    600ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+  ::view-transition-old(confirm) {
+    animation:
+      180ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+      600ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
   }
-  ::view-transition-new(slide-it) {
-    animation: 420ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
-    600ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+  ::view-transition-new(confirm) {
+    animation:
+      420ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+      600ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
   }
 </style>
 
 {
   guest && (
-    <div
-      class="flex flex-col justify-center items-center w-full relative -top-9"
-    >
+    <div class="flex flex-col justify-center items-center w-full relative -top-9">
       <h2 class="text-center">
         <span
           x-bind:class="shown ? 'translate-x-0 opacity-1' : 'opacity-0 translate-x-[50%]'"
@@ -61,14 +69,16 @@ const guest = await getGuest(Astro.props.id);
       </h2>
       <div
         x-bind:class="shown ? 'opacity-1' : 'opacity-0'"
-        class="slide-it bg-white p-6 shadow-md rounded-md w-full max-w-screen-md transition-all ease-in-out delay-100 duration-700"
-        id="confirm"
+        class="bg-white p-6 shadow-md rounded-md w-full max-w-screen-md transition-all ease-in-out delay-100 duration-700"
+
       >
-        {guest.hasAnswered() ? (
-          <ConfirmedGuestInfo guest={guest} />
-        ) : (
-          <ConfirmForm guest={guest} />
-        )}
+       <div class="slide-it" id="confirm">
+          {guest.hasAnswered() ? (
+            <ConfirmedGuestInfo guest={guest} />
+          ) : (
+            <ConfirmForm guest={guest} />
+          )}
+        </div>
       </div>
     </div>
   )

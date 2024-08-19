@@ -1,5 +1,6 @@
 ---
 import type { Guest } from "@domain/Guest";
+import ButtonContentWithLoading from "./ButtonContentWithLoading.astro";
 import ConfirmedGuest from "./ConfirmedGuest.astro";
 
 export interface Props {
@@ -37,5 +38,8 @@ const { guest } = Astro.props;
     hx-target="#confirm"
     hx-swap="innerHTML transition:true"
   >
-  Editar confirmación
+  <ButtonContentWithLoading>
+    Editar confirmación
+    <span slot="loading-content">Procesando...</span>
+  </ButtonContentWithLoading>
 </button>
