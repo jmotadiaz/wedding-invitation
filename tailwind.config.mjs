@@ -5,13 +5,13 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				hand: ["'Kaushan Script'", "cursive", ...defaultTheme.fontFamily.sans],
+				hand: ["'Moon Dance'", "cursive", ...defaultTheme.fontFamily.sans],
 				title: ["'Bellandha'", "cursive", ...defaultTheme.fontFamily.sans],
 			},
 			animation: {
 				appear: "appear 0.5s ease-in-out",
-				ltr: "ltr 0.7s ease-out",
-				rtl: "rtl 0.7s ease-out",
+				ltr: "ltr 1s ease-out",
+				rtl: "rtl 1s ease-out",
 			},
 			keyframes: {
 				appear: {

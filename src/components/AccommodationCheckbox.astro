@@ -8,8 +8,8 @@ export interface Props {
 const guest = Astro.props.guest;
 ---
 <div id="accommodation-checkbox">
-  <label for="accommodation" class="flex items-center font-hand text-lg">
+  <label for="accommodation" class="flex items-center font-hand text-2xl">
     <input id="accommodation" name="accommodation" type="checkbox" class="mr-2" checked={guest.accommodation} hx-patch={`/${guest.uuid}/api/accommodation`} hx-target="#accommodation-checkbox" hx-swap="outerHTML" />
-    Deseo más información
+    Quiero más información
   </label>
 </div>
