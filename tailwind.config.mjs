@@ -5,7 +5,7 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				hand: ["'Moon Dance'", "cursive", ...defaultTheme.fontFamily.sans],
+				hand: ["'Bellandha'", "cursive", ...defaultTheme.fontFamily.sans],
 				title: ["'Bellandha'", "cursive", ...defaultTheme.fontFamily.sans],
 			},
 			animation: {

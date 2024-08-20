@@ -10,9 +10,9 @@ const { guest } = Astro.props;
 
 <h3 class="text-xl mb-2 text-center w-full">Invitación confirmada.</h3>
 {
-  guest.confirmedAttendees === 1 ? (
+  guest.confirmedAttendees?.length === 1 ? (
     <p>Se confirmó 1 asistente.</p>
   ) : (
-    <p>Se confirmaron {guest.confirmedAttendees} asistentes.</p>
+    <p>Se confirmaron {guest.confirmedAttendees?.length} asistentes.</p>
   )
 }

@@ -1,9 +1,9 @@
 ---
+import ExpectedAttendee from "@components/ExpectedAttendee.astro";
 import GuestList from "@components/GuestList.astro";
 import Layout from "@components/Layout.astro";
+import Csv from "@components/icons/Csv.astro";
 import { getGuests } from "@domain/Guest";
-import Stats from "../../components/Stats.astro";
-import Csv from "../../components/icons/Csv.astro";
 const guests = await getGuests();
 ---
 
@@ -16,19 +16,12 @@ const guests = await getGuests();
     <div id="guest-list">
       <GuestList guests={guests} />
     </div>
-    <form class="mt-5" hx-post="/guests/api/add" hx-target="#guest-list" hx-on--after-request="this.reset()">
-      <div class="flex flex-col lg:flex-row lg:space-x-2 space-y-2 mb-4">
+    <form class="mt-5" hx-post="/guests/api/add" hx-target="#guest-list">
+      <div class="flex flex-col space-y-2 mb-4 sm:w-full lg:w-2/3">
         <input type="text" name="name" placeholder="Name" class="border  rounded-md px-4 py-2 w-full" required />
-        <input type="number" name="expectedAttendees" placeholder="Expected Attendees" class="border rounded-md px-4 py-2 w-full" required />
+        <ExpectedAttendee />
         <input type="text" name="publicId" placeholder="URL" class="border rounded-md px-4 py-2 w-full" required />
         <button type="submit" class="bg-blue-500 text-white px-4 py-2">Add</button>
       </div>
     </form>
-    <div x-data="{expanded: false}" @click="expanded = !expanded" class="w-full rounded-xl p-5 shadow-sm shadow-gray-800 cursor-pointer">
-      <h2 class="text-lg font-bold">Estadisticas</h2>
-      <div id="stats" x-show="expanded" x-collapse>
-        <Stats guests={guests} />
-      </div>
-    </div>
-  </div>
 </Layout>

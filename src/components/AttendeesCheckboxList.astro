@@ -1,0 +1,41 @@
+---
+import type { Guest } from "@domain/Guest";
+
+export interface Props {
+	guest: Guest;
+	declined?: boolean;
+}
+
+const guest = Astro.props.guest;
+const declined = Astro.props.declined ?? guest.declined;
+---
+
+<leyend class="font-bold col-span-2">Asistentes:</leyend>
+{
+  guest.expectedAttendees.map((att) => (
+    <label for={att} class={`flex items-center ${declined ? "opacity-50" : "cursor-pointer"}`}>
+      <input
+        id={att}
+        name={att}
+        type="checkbox"
+        class="attendee-checkbox mx-2"
+        disabled={declined}
+        checked={!declined && guest.confirmedAttendees?.includes(att)}
+      />
+      {att}
+    </label>
+  ))
+}
+<label for="declineInvitation" class="flex items-center cursor-pointer">
+  <input
+    id="declineInvitation"
+    name="declineInvitation"
+    type="checkbox"
+    class="attendee-checkbox mx-2"
+    hx-get=`/${guest.uuid}/api/attendees`
+    hx-target="closest fieldset"
+    hx-swap="innerHTML"
+    checked={declined}
+  />
+  No podremos asistir
+</label>

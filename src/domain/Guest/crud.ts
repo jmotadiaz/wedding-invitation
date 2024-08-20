@@ -60,10 +60,13 @@ const validateGuest = (
   guest: Pick<
     Guest,
     "allergies" | "confirmedAttendees" | "bus" | "busSeats" | "busStop"
-  >
+  >,
+  declineInvitation: boolean
 ): ValidationError[] => {
   const errors: ValidationError[] = [];
-  if (!guest.confirmedAttendees) {
+  console.log(guest.confirmedAttendees);
+
+  if (guest.confirmedAttendees?.length === 0 && !declineInvitation) {
     errors.push(ValidationError.CONFIRMATION_REQUIRED);
   }
 
@@ -76,7 +79,10 @@ const validateGuest = (
       errors.push(ValidationError.BUS_SEATS_REQUIRED);
     }
 
-    if (guest.busSeats && guest.busSeats > (guest.confirmedAttendees ?? 0)) {
+    if (
+      guest.busSeats &&
+      guest.busSeats > (guest.confirmedAttendees?.length ?? 0)
+    ) {
       errors.push(ValidationError.BUS_SEATS_OVER_CONFIRMED_ATTENDEES);
     }
 
@@ -91,17 +97,18 @@ const validateGuest = (
 export const confirmGuest = async (
   id: string,
   {
-    allergies,
     confirmedAttendees,
+    allergies,
     bus,
     busSeats,
     busStop,
+    declineInvitation,
   }: Pick<
     Guest,
-    "allergies" | "confirmedAttendees" | "bus" | "busSeats" | "busStop"
-  >
+    "confirmedAttendees" | "allergies" | "bus" | "busSeats" | "busStop"
+  > & { declineInvitation: boolean }
 ): Promise<void> => {
-  if (confirmedAttendees === 0) {
+  if (declineInvitation) {
     return GuestRepository.updateGuest(id, {
       confirmedAttendees,
       allergies: "",
@@ -119,7 +126,7 @@ export const confirmGuest = async (
     busStop: bus ? busStop : null,
   };
 
-  const errors = validateGuest(parsedGuest);
+  const errors = validateGuest(parsedGuest, declineInvitation);
   if (errors.length) {
     return Promise.reject(errors);
   }

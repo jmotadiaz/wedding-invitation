@@ -8,8 +8,8 @@ export interface GuestTable {
   id: Generated<number>;
   uuid: string;
   name: string;
-  expected_attendees: number | null;
-  confirmed_attendees: number | null;
+  expected_attendees: string[];
+  confirmed_attendees: string[] | null;
   accommodation: boolean | null;
   bus: boolean | null;
   allergies: string | null;

@@ -26,8 +26,8 @@ const guests = Astro.props.guests;
         {guests.map(guest => (
           <tr>
             <td class="border px-4 py-2">{guest.name}</td>
-            <td class="border px-4 py-2">{guest.expectedAttendees}</td>
-            <td class="border px-4 py-2">{guest.confirmedAttendees}</td>
+            <td class="border px-4 py-2">{guest.expectedAttendees.map((att) => <div>{att}</div>)}</td>
+            <td class="border px-4 py-2">{guest.confirmedAttendees?.length}</td>
             <td class="border px-4 py-2">{guest.allergies}</td>
             <td class="border px-4 py-2">{guest.accommodation ? "SI" : "NO"}</td>
             <td class="border px-4 py-2">{guest.bus ? "SI" : "NO"}</td>

@@ -10,7 +10,7 @@ import Wedding from "@components/icons/Wedding.astro";
 <style>
   .canvas {
     position: relative;
-    height: 80%;
+    height: 75%;
   }
   .timeline-container {
     z-index: 1;
@@ -74,7 +74,8 @@ import Wedding from "@components/icons/Wedding.astro";
     transform: translateX(-50%) scaleY(0);
   }
 </style>
-<div class="w-full max-w-screen-md mx-auto canvas -top-9">
+<h2 class="relative text-lg mb-5">Te compartimos los detalles de la celebración.</h2>
+<div class="w-full max-w-screen-md mx-auto canvas -top-2">
   <div
     class="filter"
     :class="shown ? 'hide' : ''"

@@ -1,23 +1,26 @@
 ---
 
 import ConfirmedGuestInfo from "@components/ConfirmedGuestInfo.astro";
-import { type Guest, confirmGuest, getGuest, stops } from "@domain/Guest";
+import { confirmGuest, getGuest, stops } from "@domain/Guest";
 import { ValidationError } from "@domain/Guest";
 import { createFormDataWrapper } from "@utils";
+import ConfirmForm from "../../../components/ConfirmForm.astro";
 
 export const partial = true;
 
 const { id } = Astro.params as { id: string };
 let errors: ValidationError[] | null = null;
-let guest: Guest | undefined;
+let guest = await getGuest(id);
 
-if (Astro.request.method === "PATCH") {
+if (Astro.request.method === "PATCH" && guest) {
 	const formData = createFormDataWrapper(await Astro.request.formData());
-
 	try {
 		await confirmGuest(id, {
+			declineInvitation: formData.has("declineInvitation"),
+			confirmedAttendees: guest.expectedAttendees.filter((att) =>
+				formData.has(att),
+			),
 			allergies: formData.get("allergies"),
-			confirmedAttendees: Number.parseInt(formData.get("confirmedAttendees")),
 			busSeats: Number.parseInt(formData.get("busSeats")),
 			bus: formData.has("bus"),
 			busStop: formData.get("busStop"),
@@ -47,7 +50,8 @@ const getErrorMessage = (error: ValidationError) => {
 	}
 };
 ---
-{errors ?
+{errors && guest ?
+	<ConfirmForm guest={guest} />
 	<div>
 		{errors.map((error) => (
 			<p class="text-red-500 animate-appear mt-5">{getErrorMessage(error)}</p>

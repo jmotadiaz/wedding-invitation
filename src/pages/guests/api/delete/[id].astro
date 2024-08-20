@@ -1,7 +1,6 @@
 ---
 
 import GuestList from "@components/GuestList.astro";
-import Stats from "@components/Stats.astro";
 import { deleteGuest, getGuests } from "@domain/Guest";
 
 export const partial = true;
@@ -15,8 +14,4 @@ const guests = await getGuests();
 ---
 
 <GuestList guests={guests} />
-
-<div id="stats" hx-swap-oob="innerHTML">
-	<Stats guests={guests} />
-</div>
 

@@ -3,8 +3,8 @@ import type { GuestSource } from "../../repository/GuestRepository";
 export class Guest {
   uuid: string;
   name: string;
-  expectedAttendees: number;
-  confirmedAttendees: number | null;
+  expectedAttendees: string[];
+  confirmedAttendees: string[] | null;
   accommodation: boolean;
   bus: boolean;
   busStop: string | null;
@@ -14,7 +14,7 @@ export class Guest {
   constructor(guestSource: GuestSource) {
     this.uuid = guestSource.uuid;
     this.name = guestSource.name ?? "";
-    this.expectedAttendees = guestSource.expected_attendees ?? 0;
+    this.expectedAttendees = guestSource.expected_attendees;
     this.confirmedAttendees = guestSource.confirmed_attendees;
     this.accommodation = guestSource.accommodation ?? false;
     this.bus = guestSource.bus ?? false;
@@ -23,11 +23,11 @@ export class Guest {
     this.allergies = guestSource.allergies;
   }
   get confirmed(): boolean {
-    return this.hasAnswered() && this.confirmedAttendees > 0;
+    return this.hasAnswered() && this.confirmedAttendees.length > 0;
   }
 
   get declined(): boolean {
-    return this.confirmedAttendees === 0;
+    return this.confirmedAttendees?.length === 0;
   }
 
   hasAnswered(): this is { confirmedAttendees: number } {

@@ -1,9 +1,8 @@
 ---
-import { stops } from "@domain/Guest";
 import type { Guest } from "@domain/Guest/model";
+import AttendeesCheckboxList from "./AttendeesCheckboxList.astro";
 import ButtonContentWithLoading from "./ButtonContentWithLoading.astro";
 import Field from "./Field.astro";
-import NumberOptions from "./NumberOptions.astro";
 
 export interface Props {
 	guest: Guest;
@@ -12,47 +11,16 @@ export interface Props {
 const guest = Astro.props.guest;
 ---
 
-<h3 class="text-xl mb-4 text-center w-full">Confirma tus datos</h3>
 <form
   class="text-left"
-  x-data={`{guestWantsBus: ${guest.bus}, confirmed: ${guest.confirmed}}`}
   hx-patch={`/${guest.uuid}/api/confirm`}
   hx-target="#confirm"
   hx-swap="innerHTML transition:true"
 >
-  <!-- Asistentes -->
-  <Field>
-    <label for="confirmedAttendees" class="font-bold">Asistentes:</label>
-    <select
-      id="confirmedAttendees"
-      name="confirmedAttendees"
-      class="border rounded-md px-4 py-2 border-gray-300 bg-white"
-      hx-get={`/${guest.uuid}/api/seat-options`}
-      hx-target="#busSeats"
-      hx-swap="innerHTML"
-      required
-      oninvalid="this.setCustomValidity('Debes seleccionar el numero de asistentes')"
-      oninput="this.setCustomValidity('')"
-      x-on:change={`
-          confirmed = $event.target.value > 0;
-        `}
-    >
-      <option
-        hidden
-        disabled
-        selected={guest.confirmedAttendees === null}
-        value=""></option>
-      <option selected={guest.confirmedAttendees === 0} value={0}>
-        No podré asistir
-      </option>
-      <NumberOptions
-        numOptions={guest.expectedAttendees}
-        selectedOption={guest.confirmedAttendees}
-      />
-    </select>
-  </Field>
-  <!-- Alergias -->
-  <div x-show="confirmed" x-collapse>
+  <fieldset class="grid grid-cols-2 space-y-2 py-2">
+    <AttendeesCheckboxList guest={guest} />
+  </fieldset>
+  <div>
     <Field>
       <label for="allergies" class="font-bold"
         >Alergias o/y condición alimentaria:</label
@@ -64,79 +32,14 @@ const guest = Astro.props.guest;
         value={guest.allergies}
       />
     </Field>
-    <!-- Bus -->
-    <Field>
-      <label for="bus" class="font-bold flex items-center">
-        ¿Te podría interesar traslado?:
-        <input
-          id="bus"
-          name="bus"
-          type="checkbox"
-          class="ml-2"
-          checked={guest.bus}
-          x-on:change={`
-              guestWantsBus = $event.target.checked;
-              $refs.busStop.setCustomValidity('');
-              $refs.busSeats.setCustomValidity('');
-            `}
-        />
-      </label>
-    </Field>
-    <!-- Parada -->
-    <fieldset
-      class="grid grid-cols-2 space-x-2"
-      x-show="guestWantsBus"
-      x-collapse
-    >
-      <Field>
-        <label for="busStop" class="font-bold">Parada:</label>
-        <select
-          id="busStop"
-          name="busStop"
-          class="border rounded-md px-4 py-2 border-gray-300 bg-white"
-          x-ref="busStop"
-          :required="confirmed && guestWantsBus"
-          oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar una parada')"
-          oninput="this.setCustomValidity('')"
-        >
-          <option hidden disabled selected={!guest.busStop} value=""></option>
-          {
-            stops.map((busStop) => (
-              <option selected={guest.busStop === busStop} value={busStop}>
-                {busStop}
-              </option>
-            ))
-          }
-        </select>
-      </Field>
-      <!-- Asientos -->
-      <Field>
-        <label for="busSeats" class="font-bold">Asientos:</label>
-        <select
-          id="busSeats"
-          name="busSeats"
-          class="border rounded-md px-4 py-2 border-gray-300 bg-white"
-          x-ref="busSeats"
-          :required="confirmed && guestWantsBus"
-          oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar el numero de asientos')"
-          oninput="this.setCustomValidity('')"
-        >
-          <NumberOptions
-            numOptions={guest.confirmedAttendees || guest.expectedAttendees}
-            selectedOption={guest.busSeats}
-          />
-        </select>
-      </Field>
-    </fieldset>
   </div>
   <button
     type="submit"
     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md w-full mt-2"
   >
-  <ButtonContentWithLoading>
-    {guest.hasAnswered() ? "Actualizar" : "Confirmar"}
-    <span slot="loading-content">Confirmando...</span>
-  </ButtonContentWithLoading>
+    <ButtonContentWithLoading>
+      {guest.hasAnswered() ? "Actualizar" : "Confirmar"}
+      <span slot="loading-content">Confirmando...</span>
+    </ButtonContentWithLoading>
   </button>
 </form>
-<div id="confirmation-message"></div>
