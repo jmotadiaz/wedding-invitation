@@ -9,7 +9,10 @@ const guest = Astro.props.guest;
 const declined = guest.declined;
 ---
 
-<fieldset class="grid grid-cols-2 space-y-2 py-2" x-data=`{ enable: ${!declined} }`>
+<fieldset
+  class="grid grid-cols-2 space-y-2 py-2"
+  x-data=`{ enable: ${!declined} }`
+>
   <leyend class="font-bold col-span-2">Asistentes:</leyend>
   {
     guest.expectedAttendees.map((att) => (
@@ -21,15 +24,15 @@ const declined = guest.declined;
           class="attendee-checkbox mx-2"
           disabled={declined}
           checked={!declined && guest.confirmedAttendees?.includes(att)}
-          @decline.window={`
-            $event.detail ? $el.setAttribute('disabled','disabled') : $el.removeAttribute("disabled");
-            $el.closest("label").classList.toggle('opacity-50', $event.detail);
-            $el.checked = false;
-          `}
           hx-get={`/${guest.uuid}/api/validate-attendees`}
           hx-include=".attendee-checkbox"
           hx-target="#confirm-submit"
           hx-swap="innerHTML"
+          @decline-changed.window={`
+            $event.detail.declined ? $el.setAttribute('disabled','disabled') : $el.removeAttribute("disabled");
+            $el.closest("label").classList.toggle('opacity-50', $event.detail.declined);
+            $el.checked = false;
+          `}
         />
         {att}
       </label>
@@ -42,7 +45,7 @@ const declined = guest.declined;
       type="checkbox"
       class="attendee-checkbox mx-2"
       checked={declined}
-      x-on:change="$dispatch('decline', $el.checked)"
+      x-on:change="$dispatch('decline-changed', {declined: $el.checked})"
       hx-get={`/${guest.uuid}/api/validate-attendees`}
       hx-include=".attendee-checkbox"
       hx-target="#confirm-submit"
@@ -51,4 +54,3 @@ const declined = guest.declined;
     No podremos asistir
   </label>
 </fieldset>
-
