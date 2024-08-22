@@ -3,39 +3,52 @@ import type { Guest } from "@domain/Guest";
 
 export interface Props {
 	guest: Guest;
-	declined?: boolean;
 }
 
 const guest = Astro.props.guest;
-const declined = Astro.props.declined ?? guest.declined;
+const declined = guest.declined;
 ---
 
-<leyend class="font-bold col-span-2">Asistentes:</leyend>
-{
-  guest.expectedAttendees.map((att) => (
-    <label for={att} class={`flex items-center ${declined ? "opacity-50" : "cursor-pointer"}`}>
-      <input
-        id={att}
-        name={att}
-        type="checkbox"
-        class="attendee-checkbox mx-2"
-        disabled={declined}
-        checked={!declined && guest.confirmedAttendees?.includes(att)}
-      />
-      {att}
-    </label>
-  ))
-}
-<label for="declineInvitation" class="flex items-center cursor-pointer">
-  <input
-    id="declineInvitation"
-    name="declineInvitation"
-    type="checkbox"
-    class="attendee-checkbox mx-2"
-    hx-get=`/${guest.uuid}/api/attendees`
-    hx-target="closest fieldset"
-    hx-swap="innerHTML"
-    checked={declined}
-  />
-  No podremos asistir
-</label>
+<fieldset class="grid grid-cols-2 space-y-2 py-2" x-data=`{ enable: ${!declined} }`>
+  <leyend class="font-bold col-span-2">Asistentes:</leyend>
+  {
+    guest.expectedAttendees.map((att) => (
+      <label for={att} class={`flex items-center`}>
+        <input
+          id={att}
+          name={att}
+          type="checkbox"
+          class="attendee-checkbox mx-2"
+          disabled={declined}
+          checked={!declined && guest.confirmedAttendees?.includes(att)}
+          @decline.window={`
+            $event.detail ? $el.setAttribute('disabled','disabled') : $el.removeAttribute("disabled");
+            $el.closest("label").classList.toggle('opacity-50', $event.detail);
+            $el.checked = false;
+          `}
+          hx-get={`/${guest.uuid}/api/validate-attendees`}
+          hx-include=".attendee-checkbox"
+          hx-target="#confirm-submit"
+          hx-swap="innerHTML"
+        />
+        {att}
+      </label>
+    ))
+  }
+  <label for="declineInvitation" class="flex items-center cursor-pointer">
+    <input
+      id="declineInvitation"
+      name="declineInvitation"
+      type="checkbox"
+      class="attendee-checkbox mx-2"
+      checked={declined}
+      x-on:change="$dispatch('decline', $el.checked)"
+      hx-get={`/${guest.uuid}/api/validate-attendees`}
+      hx-include=".attendee-checkbox"
+      hx-target="#confirm-submit"
+      hx-swap="innerHTML"
+    />
+    No podremos asistir
+  </label>
+</fieldset>
+

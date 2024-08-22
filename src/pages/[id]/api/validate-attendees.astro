@@ -1,0 +1,27 @@
+---
+import ActiveConfirmBtn from "@components/ActiveConfirmBtn.astro";
+import DisabledConfirmBtn from "@components/DisabledConfirmBtn.astro";
+import { getGuest } from "@domain/Guest";
+
+export const partial = true;
+
+const guest = await getGuest(`${Astro.params.id}`);
+
+if (!guest) {
+	throw new Error("Guest not found");
+}
+
+const answered =
+	Boolean(Astro.url.searchParams.get("declineInvitation")) ||
+	guest.expectedAttendees.filter((att) =>
+		Boolean(Astro.url.searchParams.get(att)),
+	).length > 0;
+---
+
+{
+  answered ? (
+    <ActiveConfirmBtn guest={guest} />
+  ) : (
+    <DisabledConfirmBtn guest={guest} />
+  )
+}

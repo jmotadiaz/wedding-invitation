@@ -1,7 +1,9 @@
 ---
 import type { Guest } from "@domain/Guest/model";
+import ActiveConfirmBtn from "./ActiveConfirmBtn.astro";
 import AttendeesCheckboxList from "./AttendeesCheckboxList.astro";
 import ButtonContentWithLoading from "./ButtonContentWithLoading.astro";
+import DisabledConfirmBtn from "./DisabledConfirmBtn.astro";
 import Field from "./Field.astro";
 
 export interface Props {
@@ -17,9 +19,7 @@ const guest = Astro.props.guest;
   hx-target="#confirm"
   hx-swap="innerHTML transition:true"
 >
-  <fieldset class="grid grid-cols-2 space-y-2 py-2">
-    <AttendeesCheckboxList guest={guest} />
-  </fieldset>
+  <AttendeesCheckboxList guest={guest} />
   <div>
     <Field>
       <label for="allergies" class="font-bold"
@@ -33,13 +33,13 @@ const guest = Astro.props.guest;
       />
     </Field>
   </div>
-  <button
-    type="submit"
-    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md w-full mt-2"
-  >
-    <ButtonContentWithLoading>
-      {guest.hasAnswered() ? "Actualizar" : "Confirmar"}
-      <span slot="loading-content">Confirmando...</span>
-    </ButtonContentWithLoading>
-  </button>
+  <div id="confirm-submit" class="mt-2">
+    {
+      guest.hasAnswered() ? (
+        <ActiveConfirmBtn guest={guest} />
+      ) : (
+        <DisabledConfirmBtn guest={guest} />
+      )
+    }
+  </div>
 </form>
