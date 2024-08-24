@@ -9,12 +9,13 @@ if (Astro.request.method === "POST") {
 	const formData = createFormDataWrapper(await Astro.request.formData());
 	const user = formData.get("user");
 	const password = formData.get("password");
+	console.log(user, password);
 
 	try {
 		const token = await login(user, password);
 		Astro.cookies.set("Authorization", token, {
 			httpOnly: true,
-			secure: true,
+			secure: import.meta.env.PROD,
 			sameSite: "strict",
 		});
 		return Astro.redirect("/guests");
