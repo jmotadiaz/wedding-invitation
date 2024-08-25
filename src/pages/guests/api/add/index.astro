@@ -4,7 +4,6 @@ import { addGuest, getGuests } from "@domain/Guest";
 import { createFormDataWrapper } from "@utils";
 
 export const partial = true;
-let expectedAttendees: string[] = [];
 if (Astro.request.method === "POST") {
 	const formData = createFormDataWrapper(await Astro.request.formData());
 	await addGuest({
@@ -12,7 +11,6 @@ if (Astro.request.method === "POST") {
 		uuid: formData.get("publicId"),
 		expectedAttendees: formData.getAll("expectedAttendees[]"),
 	});
-	expectedAttendees = formData.getAll("expectedAttendees[]");
 }
 const guests = await getGuests();
 ---
