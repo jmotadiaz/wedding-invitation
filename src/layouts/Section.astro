@@ -19,7 +19,7 @@ const specialScroll = "snap-center snap-always";
   x-data="{ shown: false }"
   x-intersect.threshold.50.once="shown = true"
   class=`
-    max-w-screen-md min-h-screen lg:px-20 px-5 mx-4 lg:mx-auto shadow-2xl overflow-x-hidden
+    max-w-screen-md min-h-screen lg:px-20 px-5 mx-4 md:mx-auto shadow-2xl overflow-x-hidden
     flex flex-col justify-center items-center text-center
     ${specialScroll}
     ${extraClass ?? ""}
