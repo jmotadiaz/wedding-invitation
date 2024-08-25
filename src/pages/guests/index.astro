@@ -1,9 +1,9 @@
 ---
 import ExpectedAttendee from "@components/ExpectedAttendee.astro";
 import GuestList from "@components/GuestList.astro";
-import Layout from "@components/Layout.astro";
 import Csv from "@components/icons/Csv.astro";
 import { getGuests } from "@domain/Guest";
+import Layout from "@layouts/Layout.astro";
 const guests = await getGuests();
 ---
 

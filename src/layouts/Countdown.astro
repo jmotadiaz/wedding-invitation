@@ -2,16 +2,20 @@
 import Timer from "@components/Timer.astro";
 ---
 <div class="relative -top-9">
-  <p class="text-lg font-sans mt-[-15%]">A veces lo que empieza como una</p>
-  <p class="text-lg font-sans">locura se convierte en lo mejor de</p>
-  <p class="text-lg font-sans mb-20">tu vida</p>
+  <p class="text-lg  mt-[-15%]">A veces lo que empieza como una</p>
+  <p class="text-lg ">locura se convierte en lo mejor de</p>
+  <p class="text-lg  mb-20">tu vida</p>
   <p
-    class="text-6xl font-hand animate-ttp mb-10 transition-all ease-in-out duration-700"
+    class="text-6xl font-hand animate-ttp mb-7 transition-all ease-in-out duration-700"
     :class="shown ? 'translate-0 opacity-1' : 'opacity-0 translate-y-[-50px]'"
   >
     Faltan
   </p>
   <Timer />
+  <p
+    class="text-lg mt-7 transition-all ease-in-out duration-700"
+    :class="shown ? 'translate-0 opacity-1' : 'opacity-0 translate-y-[50px]'"
+  >para nuestra boda</p>
 </div>
 
 

@@ -74,8 +74,8 @@ import Wedding from "@components/icons/Wedding.astro";
     transform: translateX(-50%) scaleY(0);
   }
 </style>
-<h2 class="relative text-lg mb-5">Te compartimos los detalles de la celebración.</h2>
-<div class="w-full max-w-screen-md mx-auto canvas -top-2">
+<h2 class="relative text-lg mb-5 -top-3">Te compartimos los detalles de la celebración.</h2>
+<div class="w-full max-w-screen-md mx-auto canvas -top-6">
   <div
     class="filter"
     :class="shown ? 'hide' : ''"
@@ -83,7 +83,7 @@ import Wedding from "@components/icons/Wedding.astro";
   <div class="timeline-container">
     <TimelineItem type="wedding" side="left" delay={0}>
       <p class="text-sm">12:00 HRS</p>
-      <p class="font-hand text-4xl">Ceremonia</p>
+      <p class="font-hand text-5xl">Ceremonia</p>
       <div slot="icon">
         <Wedding />
       </div>
@@ -96,7 +96,7 @@ import Wedding from "@components/icons/Wedding.astro";
     </div>
     <TimelineItem type="cocktail" side="right" delay={400}>
       <p class="text-sm">13:00 HRS</p>
-      <p class="font-hand text-4xl">Aperitivos</p>
+      <p class="font-hand text-5xl">Aperitivos</p>
       <div slot="icon">
         <Cocktail />
       </div>
@@ -110,7 +110,7 @@ import Wedding from "@components/icons/Wedding.astro";
     </div>
     <TimelineItem type="celebration" side="left" delay={800}>
       <p class="text-sm">15:00 HRS</p>
-      <p class="font-hand text-4xl">Banquete</p>
+      <p class="font-hand text-5xl">Banquete</p>
       <div slot="icon">
         <Celebration />
       </div>
@@ -124,7 +124,7 @@ import Wedding from "@components/icons/Wedding.astro";
     </div>
     <TimelineItem type="dancing" side="right" delay={1200}>
       <p class="text-sm">17:00 HRS</p>
-      <p class="font-hand text-4xl">Fiesta</p>
+      <p class="font-hand text-5xl">Fiesta</p>
       <div slot="icon">
         <Dancing />
       </div>

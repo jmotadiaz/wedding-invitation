@@ -47,7 +47,7 @@ const { type, side, delay } = Astro.props;
     <slot />
   </div>
   <div
-    class=`transition-all ease-out duration-1000 opacity-0 ${side} mx-auto w-[90px] h-[90px] lg:w-[100px] lg:h-[100px]`
+    class=`transition-all ease-out duration-1000 opacity-0 ${side} mx-auto w-[80px] h-[80px] lg:w-[100px] lg:h-[100px]`
     style=`transition-delay: ${delay}ms;`
     :style="shown && { opacity: 1, transform: 'translateX(0)' }"
     >

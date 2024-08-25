@@ -1,7 +1,7 @@
 ---
 import { login } from "@domain/Admin";
 import { createFormDataWrapper } from "@utils";
-import Layout from "../components/Layout.astro";
+import Layout from "../layouts/Layout.astro";
 
 let loginError = false;
 
@@ -9,7 +9,6 @@ if (Astro.request.method === "POST") {
 	const formData = createFormDataWrapper(await Astro.request.formData());
 	const user = formData.get("user");
 	const password = formData.get("password");
-	console.log(user, password);
 
 	try {
 		const token = await login(user, password);

@@ -13,7 +13,6 @@ if (Astro.request.method === "POST") {
 		expectedAttendees: formData.getAll("expectedAttendees[]"),
 	});
 	expectedAttendees = formData.getAll("expectedAttendees[]");
-	console.log(expectedAttendees);
 }
 const guests = await getGuests();
 ---

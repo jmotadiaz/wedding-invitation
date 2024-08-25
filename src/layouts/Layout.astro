@@ -2,6 +2,8 @@
 import { ViewTransitions } from "astro:transitions";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
+import BellandhaFont from "./fonts/Bellandha.astro";
+import HighSpiritedFont from "./fonts/HighSpirited.astro";
 
 interface Props {
 	title: string;
@@ -27,18 +29,12 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Moon+Dance&display=block" />
+    <GoogleFontsOptimizer
+      url="https://fonts.googleapis.com/css2?family=Moon+Dance&display=block"
+    />
+    <BellandhaFont />
+    <HighSpiritedFont />
     <style is:global>
-      @font-face {
-        font-family: "Bellandha";
-        src:
-          url("/fonts/Bellandha.woff2") format("woff2"),
-          url("/fonts/Bellandha.woff") format("woff"),
-          url("/fonts/Bellandha.ttf") format("truetype");
-        font-weight: normal;
-        font-style: normal;
-        font-display: block;
-      }
       .htmx-request .htmx-base {
         display: none;
       }

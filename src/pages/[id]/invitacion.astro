@@ -1,12 +1,12 @@
 ---
 import Container from "@components/Container.astro";
-import Layout from "@components/Layout.astro";
-import Section from "@components/Section.astro";
 import Accommodation from "@layouts/Accommodation.astro";
 import ConfigForm from "@layouts/Confirm.astro";
 import Countdown from "@layouts/Countdown.astro";
 import Gifts from "@layouts/Gifts.astro";
 import HeroBannerSection from "@layouts/HeroBanner.astro";
+import Layout from "@layouts/Layout.astro";
+import Section from "@layouts/Section.astro";
 import Timeline from "@layouts/Timeline.astro";
 import WhenAndWhere from "@layouts/WhenAndWhere.astro";
 
@@ -18,22 +18,22 @@ const id = Astro.params.id as string;
     <Section extraClass="items-stretch max-w-screen-md mx-auto">
       <HeroBannerSection />
     </Section>
-    <Section extraClass="bg-slate-50">
+    <Section>
       <Countdown />
     </Section>
-    <Section>
+    <Section hidePaper>
       <WhenAndWhere />
     </Section>
-    <Section extraClass="items-stretch">
+    <Section extraClass="items-stretch" hidePaper>
       <Timeline />
     </Section>
-    <Section extraClass="bg-slate-50">
+    <Section>
       <ConfigForm id={id} />
     </Section>
     <Section>
       <Gifts />
     </Section>
-    <Section extraClass="bg-slate-50">
+    <Section>
       <Accommodation />
     </Section>
   </Container>

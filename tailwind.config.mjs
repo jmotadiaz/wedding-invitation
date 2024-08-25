@@ -5,8 +5,8 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				hand: ["'Bellandha'", "cursive", ...defaultTheme.fontFamily.sans],
-				title: ["'Bellandha'", "cursive", ...defaultTheme.fontFamily.sans],
+				hand: ["'High Spirited'", "cursive", ...defaultTheme.fontFamily.sans],
+				title: ["'High Spirited'", "cursive", ...defaultTheme.fontFamily.sans],
 			},
 			animation: {
 				appear: "appear 0.5s ease-in-out",

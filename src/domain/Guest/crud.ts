@@ -64,7 +64,6 @@ const validateGuest = (
   declineInvitation: boolean
 ): ValidationError[] => {
   const errors: ValidationError[] = [];
-  console.log(guest.confirmedAttendees);
 
   if (guest.confirmedAttendees?.length === 0 && !declineInvitation) {
     errors.push(ValidationError.CONFIRMATION_REQUIRED);
