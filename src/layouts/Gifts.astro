@@ -35,14 +35,14 @@ const PHONE_NUMBER = import.meta.env.PHONE_NUMBER;
       </h2>
       <p class="mb-8">Si quieres tener un detalle con nosotros</p>
       <Collapsible>
-        <p class="text-3xl font-hand leading-none" slot="trigger">Número de cuenta</p>
+        <p slot="trigger">Número de cuenta</p>
         <div class="font-light pt-5" slot="content">
             {BANK_ACCOUNT}
         </div>
       </Collapsible>
       <div class="border-b-2 border-gray-200 w-1/3 mx-auto my-5"></div>
       <Collapsible>
-        <p class="text-3xl font-hand leading-none" slot="trigger">Bizum</p>
+        <p slot="trigger">Bizum</p>
         <div class="font-light pt-5" slot="content">
             {PHONE_NUMBER}
         </div>
