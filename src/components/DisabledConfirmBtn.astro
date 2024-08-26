@@ -1,5 +1,6 @@
 ---
 import type { Guest } from "@domain/Guest";
+import Button from "./Button.astro";
 
 export interface Props {
 	guest: Guest;
@@ -8,10 +9,9 @@ export interface Props {
 const guest = Astro.props.guest;
 ---
 
-<button
+<Button
   type="submit"
-  class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md w-full opacity-50 cursor-not-allowed"
   disabled
 >
   {guest.hasAnswered() ? "Actualizar" : "Confirmar"}
-</button>
+</Button>

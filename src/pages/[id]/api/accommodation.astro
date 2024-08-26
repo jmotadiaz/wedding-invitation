@@ -1,20 +1,19 @@
 ---
 
-import AccommodationCheckbox from "@components/AccommodationCheckbox.astro";
+import WantAccommodationInfo from "@components/WantAccommodationInfo.astro";
 import { getGuest, updateAccommodation } from "@domain/Guest";
 import { createFormDataWrapper } from "@utils";
+import AccommodationFutureInfo from "../../../components/AccommodationFutureInfo.astro";
 
 export const partial = true;
 
 const id = Astro.params.id ?? "";
 
 if (Astro.request.method === "PATCH") {
-	const formData = createFormDataWrapper(await Astro.request.formData());
-
-	await updateAccommodation(id, formData.has("accommodation"));
+	await updateAccommodation(id, true);
 }
 
 const guest = await getGuest(id);
 ---
 
-{guest && <AccommodationCheckbox guest={guest} />}
+{guest && <AccommodationFutureInfo />}

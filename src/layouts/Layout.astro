@@ -33,6 +33,34 @@ const { title } = Astro.props;
     <BellandhaFont />
     <!-- <HighSpiritedFont /> -->
     <style is:global>
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+        }
+      }
+
+      @keyframes fade-out {
+        to {
+          opacity: 0;
+        }
+      }
+
+      @keyframes slide-from-bottom {
+        from {
+          transform: translateY(50px);
+        }
+      }
+      .slide {
+        view-transition-name: slide;
+      }
+      ::view-transition-old(slide) {
+        animation: 180ms cubic-bezier(0.4, 0, 1, 1) both fade-out;
+      }
+      ::view-transition-new(slide) {
+        animation:
+          500ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+          600ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-bottom;
+      }
       .htmx-request .htmx-base {
         display: none;
       }

@@ -1,0 +1,54 @@
+---
+import type { Guest } from "@domain/Guest/model";
+import ButtonContentWithLoading from "./ButtonContentWithLoading.astro";
+
+export interface Props {
+	guest: Guest;
+}
+
+const guest = Astro.props.guest;
+---
+
+<style is:global>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes slide-from-bottom {
+    from {
+      transform: translateY(50px);
+    }
+  }
+
+  .slide {
+    view-transition-name: slide;
+  }
+
+  ::view-transition-old(slide) {
+    animation: 180ms cubic-bezier(0.4, 0, 1, 1) both fade-out;
+  }
+  ::view-transition-new(slide) {
+    animation:
+      500ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+      600ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-bottom;
+  }
+</style>
+
+<div class="slide">
+  <ButtonContentWithLoading
+    theme="neutral"
+    hx-patch={`/${guest.uuid}/api/accommodation`}
+    hx-target="closest .slide"
+    hx-swap="innerHTML transition:true"
+  >
+    Quiero más información
+  </ButtonContentWithLoading>
+</div>

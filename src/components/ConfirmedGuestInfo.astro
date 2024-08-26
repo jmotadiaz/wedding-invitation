@@ -32,15 +32,14 @@ const { guest } = Astro.props;
     <p class="text-sm">{guest.allergies}</p>
 }
 
-<button
+<div class="mt-2">
+  <ButtonContentWithLoading
     type="submit"
-    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md w-full mt-5"
     hx-get={`/${guest.uuid}/api/edit-confirm`}
     hx-target="#confirm"
     hx-swap="innerHTML transition:true"
   >
-  <ButtonContentWithLoading>
     Editar confirmación
     <span slot="loading-content">Procesando...</span>
   </ButtonContentWithLoading>
-</button>
+</div>

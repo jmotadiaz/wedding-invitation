@@ -1,12 +1,23 @@
 ---
+import type { Props as ButtonProps } from "./Button.astro";
+import Button from "./Button.astro";
 import Spinner from "./icons/Spinner.astro";
+
+export interface Props extends Omit<ButtonProps, "slot"> {}
+
+const { ...buttonProps } = Astro.props;
 ---
 
-<span class="htmx-base">
-  <slot />
-</span>
-<div class="htmx-indicator">
-  <div class="flex justify-center">
-    <span class="mr-2"><Spinner /></span> <slot name="loading-content" />
+<Button
+  {...buttonProps}
+>
+  <span class="htmx-base">
+    <slot />
+  </span>
+  <div class="htmx-indicator">
+    <div class="flex justify-center">
+      <span class="mr-2"><Spinner /></span>
+      <slot name="loading-content" />
+    </div>
   </div>
-</div>
+</Button>
