@@ -5,7 +5,7 @@ export interface Props extends HTMLAttributes<"button"> {
 	theme?: "primary" | "neutral";
 }
 
-const { theme = "primary", disabled, ...buttonProps } = Astro.props;
+const { theme = "neutral", disabled, ...buttonProps } = Astro.props;
 
 const skin =
 	theme === "primary"

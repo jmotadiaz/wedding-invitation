@@ -16,12 +16,12 @@ const declined = guest.declined;
   <leyend class="font-bold col-span-2">Asistentes:</leyend>
   {
     guest.expectedAttendees.map((att) => (
-      <label for={att} class="flex items-cente">
+      <label for={att} class={`flex items-cente ${declined ? 'opacity-40' : ''}`}>
         <input
           id={att}
           name={att}
           type="checkbox"
-          class="attendee-checkbox mx-2"
+          class="attendee-checkbox mx-2 accent-slate-500"
           disabled={declined}
           checked={!declined && guest.confirmedAttendees?.includes(att)}
           hx-get={`/${guest.uuid}/api/validate-attendees`}
@@ -30,7 +30,7 @@ const declined = guest.declined;
           hx-swap="innerHTML"
           @decline-changed.window={`
             $event.detail.declined ? $el.setAttribute('disabled','disabled') : $el.removeAttribute("disabled");
-            $el.closest("label").classList.toggle('opacity-50', $event.detail.declined);
+            $el.closest("label").classList.toggle('opacity-40', $event.detail.declined);
             $el.checked = false;
           `}
         />
@@ -43,7 +43,7 @@ const declined = guest.declined;
       id="declineInvitation"
       name="declineInvitation"
       type="checkbox"
-      class="attendee-checkbox mx-2"
+      class="attendee-checkbox mx-2 accent-slate-500"
       checked={declined}
       x-on:change="$dispatch('decline-changed', {declined: $el.checked})"
       hx-get={`/${guest.uuid}/api/validate-attendees`}

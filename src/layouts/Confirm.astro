@@ -45,7 +45,10 @@ const guest = await getGuest(Astro.props.id);
 {
   guest && (
     <div class="flex flex-col justify-center items-center w-full relative -top-9">
-      <h2 class="mb-4">
+      <h2
+        class="mb-4 transition-all duration-700"
+        :class="shown ? 'opacity-1' : 'opacity-0'"
+      >
         <>
           <span class="block mb-1">
             Nos complace invitarte
