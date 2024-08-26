@@ -14,27 +14,25 @@ const id = Astro.params.id as string;
 ---
 
 <Layout title="Boda Rocío y Javi">
-  <Container>
-    <Section extraClass="items-stretch">
-      <HeroBannerSection />
-    </Section>
-    <Section>
-      <Countdown />
-    </Section>
-    <Section>
-      <WhenAndWhere />
-    </Section>
-    <Section extraClass="items-stretch">
-      <Timeline />
-    </Section>
-    <Section>
-      <ConfigForm id={id} />
-    </Section>
-    <Section>
-      <Gifts />
-    </Section>
-    <Section>
-      <Accommodation />
-    </Section>
-  </Container>
+  <Section extraClass="items-stretch">
+    <HeroBannerSection />
+  </Section>
+  <Section>
+    <Countdown />
+  </Section>
+  <Section>
+    <WhenAndWhere />
+  </Section>
+  <Section extraClass="items-stretch">
+    <Timeline />
+  </Section>
+  <Section>
+    <ConfigForm id={id} />
+  </Section>
+  <Section>
+    <Gifts />
+  </Section>
+  <Section>
+    <Accommodation />
+  </Section>
 </Layout>

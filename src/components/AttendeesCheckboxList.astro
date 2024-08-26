@@ -10,13 +10,13 @@ const declined = guest.declined;
 ---
 
 <fieldset
-  class="grid grid-cols-2 space-y-2 py-2"
+  class="grid grid-cols-1 space-y-2 py-2"
   x-data=`{ enable: ${!declined} }`
 >
-  <leyend class="font-bold col-span-2">Asistentes:</leyend>
+  <leyend class="font-bold">Asistentes:</leyend>
   {
     guest.expectedAttendees.map((att) => (
-      <label for={att} class={`flex items-cente ${declined ? 'opacity-40' : ''}`}>
+      <label for={att} class={`flex items-center ${declined ? 'opacity-40' : ''}`}>
         <input
           id={att}
           name={att}

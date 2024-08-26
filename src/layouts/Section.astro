@@ -16,12 +16,11 @@ const specialScroll = "snap-center snap-always";
 
 <section
   x-data="{ shown: false }"
-  x-intersect.threshold.75.once="shown = true"
+  x-intersect.threshold.50.once="shown = true"
   class=`
     max-w-screen-md min-h-screen md:px-20 px-5 mx-4 md:mx-auto shadow-2xl overflow-x-hidden
     flex flex-col justify-center items-center text-center
     relative
-    ${specialScroll}
     ${extraClass ?? ""}
   `
 >
