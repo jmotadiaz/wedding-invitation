@@ -4,7 +4,7 @@ interface Props {
 }
 
 const { extraClass } = Astro.props;
-const specialScroll = "sm:max-lg:snap-center sm:max-lg:snap-always";
+const specialScroll = "snap-center snap-always";
 ---
 
 <style>
@@ -20,6 +20,7 @@ const specialScroll = "sm:max-lg:snap-center sm:max-lg:snap-always";
   class=`
     max-w-screen-md min-h-screen md:px-20 px-5 mx-4 md:mx-auto shadow-2xl overflow-x-hidden
     flex flex-col justify-center items-center text-center
+    relative
     ${specialScroll}
     ${extraClass ?? ""}
   `
