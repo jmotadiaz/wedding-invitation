@@ -1,7 +1,8 @@
 ---
 
+import AccommodationFutureInfo from "@components/AccommodationFutureInfo.astro";
+import WantAccommodationInfo from "@components/WantAccommodationInfo.astro";
 import { getGuest, updateAccommodation } from "@domain/Guest";
-import AccommodationFutureInfo from "../../../components/AccommodationFutureInfo.astro";
 
 export const partial = true;
 
@@ -14,4 +15,4 @@ if (Astro.request.method === "PATCH") {
 const guest = await getGuest(id);
 ---
 
-{guest && <AccommodationFutureInfo />}
+{!!guest?.accommodation ? <AccommodationFutureInfo /> : guest && <WantAccommodationInfo guest={guest} />}
