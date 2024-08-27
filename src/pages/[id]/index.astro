@@ -9,7 +9,7 @@ const id = Astro.params.id as string;
 ---
 
 <Layout title="Boda Rocío y Javi">
-  <main class="h-screen flex flex-col justify-center items-center p-5 relative -top-9">
+  <main class="h-screen flex flex-col justify-center items-center p-5 relative">
     <a href=`/${id}/invitacion`>
       <picture>
         <source srcset=`${invitationEnvelopImgSM.src}` media="(max-width: 360px)" width=`${invitationEnvelopImgSM.width}` height=`${invitationEnvelopImgSM.height}` />
