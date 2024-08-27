@@ -1,9 +1,10 @@
 ---
-interface Props {
-	extraClass?: string;
-}
+import type { HTMLAttributes } from "astro/types";
+import Intersect from "../components/Intersect.astro";
 
-const { extraClass } = Astro.props;
+interface Props extends HTMLAttributes<"section"> {}
+
+const { class: extraClass } = Astro.props;
 ---
 
 <style>
@@ -13,11 +14,10 @@ const { extraClass } = Astro.props;
   }
 </style>
 
-<section
-  x-data="{ shown: false }"
-  x-intersect.threshold.50.once="shown = true"
+<Intersect
+  htmlTag="section"
   class=`
-    max-w-screen-md md:mx-auto shadow-2xl overflow-x-hidden
+    max-w-screen-md md:mx-auto mx-4 shadow-2xl overflow-x-hidden
     border border-1 border-gray-100
     flex flex-col justify-center items-center text-center
     relative
@@ -25,4 +25,4 @@ const { extraClass } = Astro.props;
   `
 >
   <slot />
-</section>
+</Intersect>

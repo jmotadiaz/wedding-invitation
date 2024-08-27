@@ -1,6 +1,7 @@
 ---
 import Timer from "@components/Timer.astro";
 import Almunia from "../assets/almunia.webp";
+import Intersect from "../components/Intersect.astro";
 ---
 <style>
   .text-white {
@@ -8,29 +9,32 @@ import Almunia from "../assets/almunia.webp";
   }
 </style>
 <div class="relative bg-black w-full">
-  <img src={Almunia.src} class="max-h-screen min-w-full opacity-80">
+  <img src={Almunia.src} class="max-h-screen min-w-full opacity-70">
   <div class="absolute z-10 top-0 left-0 h-full w-full flex items-stretch justify-center">
     <div class="flex flex-col items-center text-center justify-around text-white">
-      <div class="duration-700 text-xl" :class="shown ? 'opacity-1' : 'opacity-0'">
-        <p>A veces lo que empieza como una</p>
-        <p>locura se convierte en lo mejor de</p>
+      <div class="duration-700 text-lg" :class="shown ? 'opacity-1' : 'opacity-0'">
+        <p>A veces lo que empieza</p>
+        <p>como una locura</p>
+        <p>se convierte en lo mejor de</p>
         <p>tu vida</p>
       </div>
-      <div>
-        <p
-          class="text-6xl font-hand animate-ttp mb-7 transition-all ease-in-out duration-700"
-          :class="shown ? 'translate-0 opacity-1' : 'opacity-0 translate-y-[-50px]'"
-        >
-          Faltan
-        </p>
-        <Timer />
-        <p
-          class="text-lg mt-7 transition-all ease-in-out duration-700"
-          :class="shown ? 'translate-0 opacity-1' : 'opacity-0 translate-y-[50px]'"
-        >
-          para nuestra boda
-        </p>
-      </div>
+      <Intersect tresHold={75}>
+        <h2>
+          <p
+            class="text-6xl font-hand animate-ttp mb-7 transition-all ease-in-out duration-700"
+            :class="shown ? 'translate-0 opacity-1' : 'opacity-0 translate-y-[-50px]'"
+          >
+            Faltan
+          </p>
+          <Timer />
+          <p
+            class="text-lg mt-7 transition-all ease-in-out duration-700"
+            :class="shown ? 'translate-0 opacity-1' : 'opacity-0 translate-y-[50px]'"
+          >
+            para nuestra boda
+          </p>
+        </h2>
+      </Intersect>
     </div>
 
   </div>
