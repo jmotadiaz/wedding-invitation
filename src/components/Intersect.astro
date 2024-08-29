@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes, HTMLTag } from "astro/types";
+
+export interface Props extends HTMLAttributes<"div"> {
+	tresHold?: number;
+	htmlTag?: HTMLTag;
+}
+
+const { tresHold = 50, htmlTag: Tag = "div", ...divProps } = Astro.props;
+
+const intersectProps = {
+	"x-data": "{ shown: false }",
+	[`x-intersect.threshold.${tresHold}.once`]: "shown = true",
+	// biome-ignore lint/suspicious/noExplicitAny: any is used to allow alpinejs keys
+} as any;
+---
+
+<Tag {...intersectProps} {...divProps}>
+  <slot />
+</Tag>

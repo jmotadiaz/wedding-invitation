@@ -1,33 +1,37 @@
 ---
-import CornerDecoration from "@components/CornerDecoration.astro";
+import Florecitas from "../assets/florecitas.png";
 ---
 
-<div class="relative flex flex-col justify-center items-center">
-  <CornerDecoration position="top-left" />
-  <CornerDecoration position="top-right" />
-  <h1 class="text-lg mb-3 mt-[-15%] ">NOS CASAMOS</h1>
-  <p
-    class="text-9xl pt-5 self-stretch text-center font-title animate-ltr">Rocío</p>
-  <p class="text-6xl self-stretch text-center font-title">y</p>
-  <p class="text-9xl self-stretch text-center font-title animate-rtl">Javier</p>
-  <p class="text-lg mt-12 ">14 DE DICIEMBRE 2024</p>
-  <div class="animate-bounce w-10 h-10 mt-8">
-    <svg
-      data-slot="icon"
-      fill="none"
-      stroke-width="1.5"
-      stroke="#000"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"></path>
-    </svg>
+<div class="relative bg-black w-full overflow-x-hidden">
+  <img src={Florecitas.src} width={Florecitas.width} class="absolute z-0 top-0 left-0 h-full max-w-none w-auto min-w-full opacity-40" />
+  <div
+    class="relative z-1 py-10 flex flex-col justify-center items-center text-white"
+  >
+    <h1 class="text-lg mb-3 mt-[10%]">NOS CASAMOS</h1>
+    <p class="text-9xl pt-5 self-stretch text-center font-title animate-ltr">
+      Rocío
+    </p>
+    <p class="text-6xl self-stretch text-center font-title">y</p>
+    <p class="text-9xl self-stretch text-center font-title animate-rtl">
+      Javier
+    </p>
+    <p class="text-lg mt-12">14 DE DICIEMBRE 2024</p>
+    <p class="mt-20">Desliza hacia abajo</p>
+    <div class="animate-bounce w-10 h-10 mt-8">
+      <svg
+        data-slot="icon"
+        fill="none"
+        stroke-width="1.5"
+        stroke="#fff"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"></path>
+      </svg>
+    </div>
   </div>
-  <p class="mt-2 mb-12">Desliza hacia abajo</p>
-  <CornerDecoration position="bottom-left" />
-  <CornerDecoration position="bottom-right" />
 </div>

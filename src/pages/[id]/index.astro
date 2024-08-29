@@ -4,12 +4,14 @@ import invitationEnvelopImgLG from "../../assets/invitationEnvelop-lg.webp";
 import invitationEnvelopImgMD from "../../assets/invitationEnvelop-md.webp";
 import invitationEnvelopImgSM from "../../assets/invitationEnvelop-sm.webp";
 import invitationEnvelopImg from "../../assets/invitationEnvelop.webp";
+import Almunia from "../assets/almunia.webp";
+import Florecitas from "../assets/florecitas.png";
 
 const id = Astro.params.id as string;
 ---
 
 <Layout title="Boda Rocío y Javi">
-  <main class="h-screen flex flex-col justify-center items-center p-5 relative -top-9">
+  <main class="h-screen flex flex-col justify-center items-center p-5 relative">
     <a href=`/${id}/invitacion`>
       <picture>
         <source srcset=`${invitationEnvelopImgSM.src}` media="(max-width: 360px)" width=`${invitationEnvelopImgSM.width}` height=`${invitationEnvelopImgSM.height}` />
@@ -19,4 +21,6 @@ const id = Astro.params.id as string;
       </picture>
     </a>
   </main>
+  <link rel="prefetch" href={Florecitas.src} as="image" />
+  <link rel="prefetch" href={Almunia.src} as="image" />
 </Layout>

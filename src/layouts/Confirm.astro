@@ -44,7 +44,7 @@ const guest = await getGuest(Astro.props.id);
 
 {
   guest && (
-    <div class="flex flex-col justify-center items-center w-full relative -top-5">
+    <div class="flex flex-col justify-center items-center w-full relative my-20">
       <h2
         class="mb-2 transition-all duration-700"
         :class="shown ? 'opacity-1' : 'opacity-0'"
@@ -74,7 +74,7 @@ const guest = await getGuest(Astro.props.id);
       </h3>
       <div
         x-bind:class="shown ? 'opacity-1' : 'opacity-0'"
-        class="bg-white p-6 shadow-md rounded-md w-full max-w-screen-md transition-all ease-in-out delay-100 duration-700"
+        class="bg-white p-6 shadow-md rounded-md w-full max-w-screen-sm mx-10 transition-all ease-in-out delay-100 duration-700"
       >
         <div id="confirm">
           {guest.hasAnswered() ? (

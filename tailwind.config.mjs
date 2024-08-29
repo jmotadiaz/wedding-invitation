@@ -7,7 +7,7 @@ export default {
 			fontFamily: {
 				hand: ["'Bellandha'", "cursive", ...defaultTheme.fontFamily.sans],
 				title: ["'Bellandha'", "cursive", ...defaultTheme.fontFamily.sans],
-				sans: ["'Aaargh'", ...defaultTheme.fontFamily.sans],
+				sans: ["'Callingstone'", ...defaultTheme.fontFamily.sans],
 			},
 			animation: {
 				appear: "appear 0.5s ease-in-out",

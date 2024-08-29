@@ -76,17 +76,17 @@ import Wedding from "@components/icons/Wedding.astro";
   }
 </style>
 <h2
-  class="relative text-lg mb-6 -top-3 transition-all duration-700"
+  class="relative text-lg mt-20 mb-10 transition-all duration-700"
   :class="shown ? 'opacity-1' : 'opacity-0'"
 >Te compartimos los detalles de la celebración.</h2>
-<div class="w-full max-w-screen-md mx-auto canvas -top-6">
+<div class="w-full max-w-screen-md mx-auto canvas pb-20">
   <div
     class="filter"
     :class="shown ? 'hide' : ''"
   ></div>
   <div class="timeline-container">
     <TimelineItem type="wedding" side="left" delay={0}>
-      <p class="text-sm">12:00 HRS</p>
+      <p class="text-sm mb-1">12:00 HRS</p>
       <p class="font-hand text-5xl">Ceremonia</p>
       <div slot="icon">
         <Wedding />
@@ -99,7 +99,7 @@ import Wedding from "@components/icons/Wedding.astro";
       <div class="timeline-line top-[50%]"></div>
     </div>
     <TimelineItem type="cocktail" side="right" delay={400}>
-      <p class="text-sm">13:00 HRS</p>
+      <p class="text-sm mb-1">13:00 HRS</p>
       <p class="font-hand text-5xl">Aperitivos</p>
       <div slot="icon">
         <Cocktail />
@@ -113,7 +113,7 @@ import Wedding from "@components/icons/Wedding.astro";
       <div class="timeline-line top-[50%]"></div>
     </div>
     <TimelineItem type="celebration" side="left" delay={800}>
-      <p class="text-sm">15:00 HRS</p>
+      <p class="text-sm mb-1">15:00 HRS</p>
       <p class="font-hand text-5xl">Banquete</p>
       <div slot="icon">
         <Celebration />
@@ -127,7 +127,7 @@ import Wedding from "@components/icons/Wedding.astro";
       <div class="timeline-line top-[50%]"></div>
     </div>
     <TimelineItem type="dancing" side="right" delay={1200}>
-      <p class="text-sm">17:00 HRS</p>
+      <p class="text-sm mb-1">17:00 HRS</p>
       <p class="font-hand text-5xl">Fiesta</p>
       <div slot="icon">
         <Dancing />
