@@ -1,37 +1,60 @@
 ---
+import Divider from "@components/Divider.astro";
 import Accommodation from "@layouts/Accommodation.astro";
 import ConfigForm from "@layouts/Confirm.astro";
 import Countdown from "@layouts/Countdown.astro";
+import DressCode from "@layouts/DressCode.astro";
 import Gifts from "@layouts/Gifts.astro";
 import HeroBannerSection from "@layouts/HeroBanner.astro";
 import Layout from "@layouts/Layout.astro";
+import NoChildren from "@layouts/NoChildren.astro";
 import Section from "@layouts/Section.astro";
 import Timeline from "@layouts/Timeline.astro";
 import WhenAndWhere from "@layouts/WhenAndWhere.astro";
+import Figuera from "../../assets/figuera.png";
 
 const id = Astro.params.id as string;
 ---
 
+<style>
+  main {
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.10' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+  }
+</style>
+
 <Layout title="Boda Rocío y Javi">
-  <Section class="items-stretch">
-    <HeroBannerSection />
-  </Section>
-  <Section>
-    <Countdown />
-  </Section>
-  <Section>
-    <WhenAndWhere />
-  </Section>
-  <Section class="items-stretch">
-    <Timeline />
-  </Section>
-  <Section>
-    <ConfigForm id={id} />
-  </Section>
-  <Section>
-    <Gifts />
-  </Section>
-  <Section>
-    <Accommodation />
-  </Section>
+  <main class="max-w-screen-md mx-auto">
+    <Section class="items-stretch">
+      <HeroBannerSection />
+    </Section>
+    <Section>
+      <Countdown />
+    </Section>
+    <Section>
+      <WhenAndWhere />
+    </Section>
+    <Section class="items-stretch">
+      <Timeline />
+    </Section>
+    <Section>
+      <ConfigForm id={id} />
+    </Section>
+    <Section>
+      <DressCode />
+    </Section>
+    <Divider />
+    <Section>
+      <NoChildren />
+    </Section>
+    <Divider /> ` `
+    <Section>
+      <Accommodation />
+    </Section>
+    <Divider />
+    <Section class="my-10">
+      <Gifts />
+    </Section>
+    <img src={Figuera.src} class="w-full">
+  </main>
 </Layout>

@@ -1,52 +1,34 @@
 ---
-import BlackTieAttiers from "@components/BlackTieAttiers.astro";
 import Collapsible from "@components/Collapsible.astro";
 
 const BANK_ACCOUNT = import.meta.env.BANK_ACCOUNT;
 const PHONE_NUMBER = import.meta.env.PHONE_NUMBER;
 ---
-<div class="relative max-w-screen-md my-20">
+
+<div
+  :class="shown ? 'opacity-1' : 'opacity-0'"
+  class="transition-all ease-in-out duration-1000 my-10"
+>
   <div
-    :class="shown ? 'opacity-1' : 'opacity-0'"
-    class="transition-all ease-in-out duration-1000"
+    :class="shown ? 'translate-y-0' : 'translate-y-[20%]'"
+    class="px-5 transition-all ease-in-out duration-700"
   >
-    <div
-      :class="shown ? 'translate-y-0' : 'translate-y-[-20%]'"
-      class="flex flex-col justify-center items-center transition-all ease-in-out duration-700"
-    >
-      <h2 class="text-5xl font-hand">
-        Codigo de vestimenta
-      </h2>
-      <p class="text-xl mb-5">Formal</p>
-      <div class="w-1/2"><BlackTieAttiers/></div>
-    </div>
-  </div>
-  <div class="border-b-2 border-gray-200 w-2/3 lg:w-1/2 mx-auto my-10"></div>
-  <div
-    :class="shown ? 'opacity-1' : 'opacity-0'"
-    class="transition-all ease-in-out duration-1000"
-  >
-    <div
-      :class="shown ? 'translate-y-0' : 'translate-y-[20%]'"
-      class="px-5 transition-all ease-in-out duration-700"
-    >
-      <h2 class="text-5xl font-hand mb-5">
-        Regalo
-      </h2>
-      <p class="mb-8">Si quieres tener un detalle con nosotros</p>
-      <Collapsible>
-        <p slot="trigger">Número de cuenta</p>
-        <div class="font-light pt-5" slot="content">
-            {BANK_ACCOUNT}
-        </div>
-      </Collapsible>
-      <div class="border-b-2 border-gray-200 w-1/3 mx-auto my-5"></div>
-      <Collapsible>
-        <p slot="trigger">Bizum</p>
-        <div class="font-light pt-5" slot="content">
-            {PHONE_NUMBER}
-        </div>
-      </Collapsible>
-    </div>
+    <h2 class="text-5xl font-hand mb-5">
+      Regalo
+    </h2>
+    <p class="mb-8">Si quieres tener un detalle con nosotros</p>
+    <Collapsible>
+      <p slot="trigger">Número de cuenta</p>
+      <div class="font-light pt-5" slot="content">
+          {BANK_ACCOUNT}
+      </div>
+    </Collapsible>
+    <div class="border-b-2 border-gray-200 w-1/3 mx-auto my-5"></div>
+    <Collapsible>
+      <p slot="trigger">Bizum</p>
+      <div class="font-light pt-5" slot="content">
+          {PHONE_NUMBER}
+      </div>
+    </Collapsible>
   </div>
 </div>

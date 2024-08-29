@@ -32,7 +32,7 @@ const { guest } = Astro.props;
     <p class="text-sm">{guest.allergies}</p>
 }
 
-<div class="mt-2">
+<div class="mt-6">
   <ButtonContentWithLoading
     type="submit"
     hx-get={`/${guest.uuid}/api/edit-confirm`}

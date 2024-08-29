@@ -7,40 +7,23 @@ const id = Astro.params.id || "";
 const guest = await getGuest(id);
 ---
 
-<div class="relative my-20">
+<div
+  :class="shown ? 'opacity-1' : 'opacity-0'"
+  class="w-full overflow-hidden transition-all ease-in-out duration-[1200ms] my-10"
+>
   <div
-    :class="shown ? 'opacity-1' : 'opacity-0'"
-    class="w-full overflow-hidden transition-all ease-in-out duration-[1200ms]"
+    :class="shown ? 'translate-y-0' : 'translate-y-[-100%]'"
+    class="p-5 flex flex-col justify-center items-center transition-all ease-out duration-700"
   >
-    <div
-      :class="shown ? 'translate-y-0' : 'translate-y-[100%]'"
-      class="p-5 flex flex-col justify-center items-center transition-all ease-out duration-700"
-    >
-      <h2 class="text-5xl font-hand mb-5">Te agradecemos</h2>
-      <div class="text-lg">
-        <p>La no asistencia de niños</p>
-      </div>
+    <h2 class="text-5xl font-hand mb-5">Hospedaje</h2>
+    <div class="mb-5">
+      <p>Si viajas para poder asistir</p>
+      <p>a nuestra celebración,</p>
+      <p>además de agradecertelo</p>
+      <p>de todo corazón,</p>
+      <p>te recomendamos un alojamiento</p>
+      <p>con descuento especial para el evento.</p>
     </div>
-  </div>
-  <div class="border-b-2 border-gray-200 w-2/3 lg:w-1/2 mx-auto my-5"></div>
-  <div
-    :class="shown ? 'opacity-1' : 'opacity-0'"
-    class="w-full overflow-hidden transition-all ease-in-out duration-[1200ms]"
-  >
-    <div
-      :class="shown ? 'translate-y-0' : 'translate-y-[-100%]'"
-      class="p-5 flex flex-col justify-center items-center transition-all ease-out duration-700"
-    >
-      <h2 class="text-5xl font-hand mb-5">Hospedaje</h2>
-      <div class="mb-5">
-        <p>Si viajas para poder asistir</p>
-        <p>a nuestra celebración,</p>
-        <p>además de agradecertelo</p>
-        <p>de todo corazón,</p>
-        <p>te recomendamos un alojamiento</p>
-        <p>con descuento especial para el evento.</p>
-      </div>
-      {!!guest?.accommodation ? <AccommodationFutureInfo /> : guest && <WantAccommodationInfo guest={guest} />}
-    </div>
+    {!!guest?.accommodation ? <AccommodationFutureInfo /> : guest && <WantAccommodationInfo guest={guest} />}
   </div>
 </div>
