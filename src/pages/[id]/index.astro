@@ -4,6 +4,8 @@ import invitationEnvelopImgLG from "../../assets/invitationEnvelop-lg.webp";
 import invitationEnvelopImgMD from "../../assets/invitationEnvelop-md.webp";
 import invitationEnvelopImgSM from "../../assets/invitationEnvelop-sm.webp";
 import invitationEnvelopImg from "../../assets/invitationEnvelop.webp";
+import Almunia from "../assets/almunia.webp";
+import Florecitas from "../assets/florecitas.png";
 
 const id = Astro.params.id as string;
 ---
@@ -19,4 +21,6 @@ const id = Astro.params.id as string;
       </picture>
     </a>
   </main>
+  <link rel="prefetch" href={Florecitas.src} as="image" />
+  <link rel="prefetch" href={Almunia.src} as="image" />
 </Layout>
