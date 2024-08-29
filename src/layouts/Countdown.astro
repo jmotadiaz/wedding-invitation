@@ -3,12 +3,12 @@ import Timer from "@components/Timer.astro";
 import Almunia from "../assets/almunia.webp";
 import Intersect from "../components/Intersect.astro";
 ---
-<div class="flex flex-col items-center duration-700 my-20" :class="shown ? 'opacity-1' : 'opacity-0'">
+<Intersect tresHold={10} class="flex flex-col items-center duration-700 my-20" :class="shown ? 'opacity-1' : 'opacity-0'">
   <p>A veces lo que empieza</p>
   <p>como una locura</p>
   <p>se convierte en lo mejor de</p>
   <p>tu vida</p>
-</div>
+</Intersect>
 <div class="relative bg-black w-full">
   <img src={Almunia.src} class="max-h-screen min-w-full opacity-50">
   <div class="absolute z-10 top-0 left-0 h-full w-full flex items-center justify-center py-20">
