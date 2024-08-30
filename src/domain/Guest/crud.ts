@@ -67,7 +67,7 @@ export const dumpGuests = async (csv: string): Promise<void> => {
       name: rawGuest["Invitación"],
       uuid: nameToUrl(rawGuest["URL"] || rawGuest["Invitación"]),
       expectedAttendees: arrayFrom(parseInt(rawGuest["N Pax"] || "0")).map(
-        (n) => rawGuest[`Field ${n}`] || `Invitado ${n}`
+        (n) => rawGuest[`Asistente ${n}`] || `Invitado ${n}`
       ),
     }))
   );
