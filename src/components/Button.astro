@@ -9,12 +9,12 @@ const { theme = "neutral", disabled, ...buttonProps } = Astro.props;
 
 const skin =
 	theme === "primary"
-		? "border border-2 border-blue-500 bg-blue-50 text-blue-600 hover:border-blue-600 hover:text-blue-700 active:border-blue-800 active:text-blue-800"
-		: "border border-2 border-gray-500 bg-gray-100 text-gray-600 hover:border-gray-600 hover:text-gray-700 active:border-gray-800 active:text-gray-800";
+		? `border border-2 border-blue-500 bg-blue-50 text-blue-600 ${disabled ? "opacity-50" : "hover:border-blue-600 hover:text-blue-700 active:border-blue-800 active:text-blue-800"}`
+		: `border border-2 border-gray-500 bg-gray-100 text-gray-600 ${disabled ? "opacity-50" : "hover:border-gray-600 hover:text-gray-700 active:border-gray-800 active:text-gray-800"}`;
 ---
 
 <button
-  class={`${skin} ${disabled ? "opacity-50" : ""} font-bold py-2 px-4 rounded-md w-full`}
+  class={`${skin} font-bold py-2 px-4 rounded-md w-full`}
   {...buttonProps}
   disabled={disabled}
 >

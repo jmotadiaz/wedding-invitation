@@ -16,6 +16,7 @@ if (Astro.request.method === "POST") {
 			httpOnly: true,
 			secure: import.meta.env.PROD,
 			sameSite: "strict",
+			maxAge: 60 * 60 * 24 * 365, // 1 year
 		});
 		return Astro.redirect("/guests");
 	} catch (error) {
@@ -34,7 +35,7 @@ if (Astro.request.method === "POST") {
       <input type="password" id="password" name="password" class="w-full border rounded-md px-4 py-2 border-gray-300" />
     </div>
     <div class="flex items-center justify-between">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+      <button class="bg-blue-500 hover:bg-sky-950 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
         Login
       </button>
     </div>

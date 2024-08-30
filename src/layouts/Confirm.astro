@@ -45,8 +45,8 @@ const guest = await getGuest(Astro.props.id);
 
 {
   guest && (
-    <div class="relative w-full overflow-hidden bg-black">
-      <img src={FaroImg.src} class="absolute z-0 top-0 left-0 w-auto min-h-full min-w-full opacity-40">
+    <div class="relative w-full overflow-hidden bg-sky-950">
+      <img src={FaroImg.src} class="absolute z-0 top-0 left-0 w-auto min-h-full min-w-full opacity-25">
       <h2
         class="relative z-1 py-20 transition-all duration-70 text-lg text-white"
         :class="shown ? 'opacity-1' : 'opacity-0'"
