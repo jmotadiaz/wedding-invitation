@@ -1,6 +1,6 @@
 ---
 import type { Guest } from "@domain/Guest/model";
-import ButtonContentWithLoading from "./ButtonContentWithLoading.astro";
+import ButtonWithLoading from "./ButtonWithLoading.astro";
 
 export interface Props {
 	guest: Guest;
@@ -43,12 +43,12 @@ const guest = Astro.props.guest;
 </style>
 
 <div class="slide">
-  <ButtonContentWithLoading
+  <ButtonWithLoading
     theme="neutral"
     hx-patch={`/${guest.uuid}/api/accommodation`}
     hx-target="closest .slide"
     hx-swap="innerHTML transition:true"
   >
     Quiero más información
-  </ButtonContentWithLoading>
+  </ButtonWithLoading>
 </div>

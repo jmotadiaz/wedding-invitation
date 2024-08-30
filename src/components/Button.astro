@@ -3,9 +3,15 @@ import type { HTMLAttributes } from "astro/types";
 
 export interface Props extends HTMLAttributes<"button"> {
 	theme?: "primary" | "neutral";
+	full?: boolean;
 }
 
-const { theme = "neutral", disabled, ...buttonProps } = Astro.props;
+const {
+	theme = "neutral",
+	full = true,
+	disabled,
+	...buttonProps
+} = Astro.props;
 
 const skin =
 	theme === "primary"
@@ -14,7 +20,7 @@ const skin =
 ---
 
 <button
-  class={`${skin} font-bold py-2 px-4 rounded-md w-full`}
+  class={`${skin} font-bold py-2 px-4 rounded-md ${full ? "w-full" : ""}`}
   {...buttonProps}
   disabled={disabled}
 >

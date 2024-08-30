@@ -1,4 +1,5 @@
 ---
+import ButtonWithLoading from "@components/ButtonWithLoading.astro";
 import ExpectedAttendee from "@components/ExpectedAttendee.astro";
 import GuestList from "@components/GuestList.astro";
 import Csv from "@components/icons/Csv.astro";
@@ -16,18 +17,26 @@ const guests = await getGuests();
     <div id="guest-list">
       <GuestList guests={guests} />
     </div>
-    <form class="mt-5" hx-post="/guests/api/add" hx-target="#guest-list">
-      <div class="flex flex-col space-y-2 mb-4 sm:w-full lg:w-2/3">
-        <input type="text" name="name" placeholder="Name" class="border  rounded-md px-4 py-2 w-full" required />
-        <ExpectedAttendee />
-        <input type="text" name="publicId" placeholder="URL" class="border rounded-md px-4 py-2 w-full" required />
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2">Add</button>
-      </div>
-    </form>
-    <form class="mt-20" hx-encoding='multipart/form-data' hx-post="/guests/api/add/dump" hx-target="#guest-list">
-      <div class="flex flex-col space-y-2 mb-4 sm:w-full lg:w-2/3">
-        <input type="file" name="csvFile" class="border  rounded-md px-4 py-2" required  accept=".csv"/>
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2">Dump</button>
-      </div>
-    </form>
+    <div class="w-full mt-10 flex flex-col md:flex-row md:space-x-10 max-md:space-y-10">
+      <form class="w-full" hx-post="/guests/api/add" hx-target="#guest-list">
+        <div class="flex flex-col space-y-2">
+          <input type="text" name="name" placeholder="Name" class="border  rounded-md px-4 py-2 w-full" required />
+          <ExpectedAttendee />
+          <input type="text" name="publicId" placeholder="URL" class="border rounded-md px-4 py-2 w-full" required />
+          <ButtonWithLoading theme="primary" type="submit" class="bg-blue-500 text-white px-4 py-2">
+            Añadir
+            <span slot="loading-content">Añadiendo...</span>
+          </ButtonWithLoading>
+        </div>
+      </form>
+      <form class="w-full" hx-encoding='multipart/form-data' hx-post="/guests/api/add/dump" hx-target="#guest-list">
+        <div class="flex flex-col space-y-2">
+          <input type="file" name="csvFile" class="border  rounded-md px-4 py-2" required  accept=".csv"/>
+          <ButtonWithLoading theme="primary" type="submit" class="bg-blue-500 text-white px-4 py-2">
+            Subir Archivo
+            <span slot="loading-content">Subiendo Archivo...</span>
+          </ButtonWithLoading>
+        </div>
+      </form>
+    </div>
 </Layout>

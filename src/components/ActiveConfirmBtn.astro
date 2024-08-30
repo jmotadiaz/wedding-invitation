@@ -1,6 +1,6 @@
 ---
 import type { Guest } from "@domain/Guest";
-import ButtonContentWithLoading from "./ButtonContentWithLoading.astro";
+import ButtonWithLoading from "./ButtonWithLoading.astro";
 
 export interface Props {
 	guest: Guest;
@@ -9,9 +9,9 @@ export interface Props {
 const guest = Astro.props.guest;
 ---
 
-<ButtonContentWithLoading
+<ButtonWithLoading
   type="submit"
 >
   {guest.hasAnswered() ? "Actualizar" : "Confirmar"}
   <span slot="loading-content">Confirmando...</span>
-</ButtonContentWithLoading>
+</ButtonWithLoading>

@@ -1,6 +1,6 @@
 ---
 import type { Guest } from "@domain/Guest";
-import ButtonContentWithLoading from "./ButtonContentWithLoading.astro";
+import ButtonWithLoading from "./ButtonWithLoading.astro";
 
 export interface Props {
 	guest: Guest;
@@ -33,7 +33,7 @@ const { guest } = Astro.props;
 }
 
 <div class="mt-6">
-  <ButtonContentWithLoading
+  <ButtonWithLoading
     type="submit"
     hx-get={`/${guest.uuid}/api/edit-confirm`}
     hx-target="#confirm"
@@ -41,5 +41,5 @@ const { guest } = Astro.props;
   >
     Editar confirmación
     <span slot="loading-content">Procesando...</span>
-  </ButtonContentWithLoading>
+  </ButtonWithLoading>
 </div>
