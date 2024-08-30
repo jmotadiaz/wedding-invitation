@@ -1,0 +1,15 @@
+---
+import GuestList from "@components/GuestList.astro";
+import { dumpGuests, getGuests } from "@domain/Guest";
+
+export const partial = true;
+if (Astro.request.method === "POST") {
+	const formData = await Astro.request.formData();
+	const csvFile = formData.get("csvFile");
+	const csv = csvFile instanceof File ? await csvFile.text() : "";
+	await dumpGuests(csv);
+}
+const guests = await getGuests();
+---
+
+<GuestList guests={guests} />

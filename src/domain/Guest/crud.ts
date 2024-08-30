@@ -1,5 +1,16 @@
 import * as GuestRepository from "@repository/GuestRepository";
+import csvToJson from "csvtojson";
 import { Guest } from "./model";
+import { arrayFrom } from "@utils";
+
+const DEFAULT_GUEST_VALUES = {
+  accommodation: false,
+  confirmedAttendees: null,
+  bus: false,
+  busStop: null,
+  busSeats: null,
+  allergies: "",
+} as const;
 
 export const stops = ["Sevilla", "Los Palacios", "Trajano"];
 export enum ValidationError {
@@ -39,17 +50,27 @@ export const addGuest = async ({
   expectedAttendees,
   uuid,
 }: Pick<Guest, "name" | "expectedAttendees" | "uuid">): Promise<void> => {
-  return GuestRepository.addGuest({
+  GuestRepository.addGuest({
     name,
     expectedAttendees,
-    accommodation: false,
     uuid: nameToUrl(uuid),
-    confirmedAttendees: null,
-    bus: false,
-    busStop: null,
-    busSeats: null,
-    allergies: "",
+    ...DEFAULT_GUEST_VALUES,
   });
+};
+
+export const dumpGuests = async (csv: string): Promise<void> => {
+  const rawGuests = await csvToJson().fromString(csv);
+
+  GuestRepository.dumpGuests(
+    rawGuests.map((rawGuest) => ({
+      ...DEFAULT_GUEST_VALUES,
+      name: rawGuest["Invitación"],
+      uuid: nameToUrl(rawGuest["URL"] || rawGuest["Invitación"]),
+      expectedAttendees: arrayFrom(parseInt(rawGuest["N Pax"] || "0")).map(
+        (n) => rawGuest[`Field ${n}`] || `Invitado ${n}`
+      ),
+    }))
+  );
 };
 
 export const deleteGuest = async (id: string): Promise<void> => {
@@ -108,7 +129,7 @@ export const confirmGuest = async (
   > & { declineInvitation: boolean }
 ): Promise<void> => {
   if (declineInvitation) {
-    return GuestRepository.updateGuest(id, {
+    GuestRepository.updateGuest(id, {
       confirmedAttendees,
       allergies: "",
       bus: false,
@@ -130,7 +151,7 @@ export const confirmGuest = async (
     return Promise.reject(errors);
   }
 
-  return GuestRepository.updateGuest(id, parsedGuest);
+  GuestRepository.updateGuest(id, parsedGuest);
 };
 
 export const updateAccommodation = async (

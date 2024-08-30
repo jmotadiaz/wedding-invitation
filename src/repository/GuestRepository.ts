@@ -20,8 +20,7 @@ export function getGuest(uuid: string): Promise<GuestSource | undefined> {
 }
 
 export async function addGuest(guest: DbGuest): Promise<void> {
-  await db
-    .insertInto("guest")
+  db.insertInto("guest")
     .values({
       uuid: guest.uuid,
       name: guest.name,
@@ -30,15 +29,30 @@ export async function addGuest(guest: DbGuest): Promise<void> {
       bus: guest.bus,
       allergies: guest.allergies,
     })
-    .executeTakeFirst();
+    .execute();
+}
+
+export async function dumpGuests(guests: DbGuest[]): Promise<void> {
+  await db
+    .insertInto("guest")
+    .values(
+      guests.map((guest) => ({
+        uuid: guest.uuid,
+        name: guest.name,
+        expected_attendees: guest.expectedAttendees,
+        confirmed_attendees: guest.confirmedAttendees,
+        bus: guest.bus,
+        allergies: guest.allergies,
+      }))
+    )
+    .execute();
 }
 
 export async function updateGuest(
   uuid: string,
   guest: Partial<DbGuest>
 ): Promise<void> {
-  await db
-    .updateTable("guest")
+  db.updateTable("guest")
     .set({
       name: guest.name,
       expected_attendees: guest.expectedAttendees,
