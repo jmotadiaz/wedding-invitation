@@ -1,11 +1,12 @@
 ---
+import Intersect from "./Intersect.astro";
+
 export interface Props {
 	side: "left" | "right";
 	type: "wedding" | "cocktail" | "celebration" | "dancing";
-	delay: number;
 }
 
-const { type, side, delay } = Astro.props;
+const { type, side } = Astro.props;
 ---
 
 <style>
@@ -38,19 +39,17 @@ const { type, side, delay } = Astro.props;
   }
 </style>
 
-<div class=`timeline-item ${type}`>
+<Intersect tresHold={100} class=`timeline-item py-7 ${type}`>
   <div
     class=`transition-all duration-700 opacity-0`
-    style=`transition-delay: ${delay + 150}ms;`
     :style="shown && { opacity: 1 }"
     >
     <slot />
   </div>
   <div
     class=`transition-all ease-out duration-1000 opacity-0 ${side} mx-auto w-[80px] h-[80px] lg:w-[100px] lg:h-[100px]`
-    style=`transition-delay: ${delay}ms;`
     :style="shown && { opacity: 1, transform: 'translateX(0)' }"
     >
     <slot name="icon" />
   </div>
-</div>
+</Intersect>

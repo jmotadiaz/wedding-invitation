@@ -10,22 +10,17 @@ export default {
 				sans: ["'Callingstone'", ...defaultTheme.fontFamily.sans],
 			},
 			animation: {
-				appear: "appear 0.5s ease-in-out",
-				ltr: "ltr 1s ease-out",
-				rtl: "rtl 1s ease-out",
+				ltr: "ltr 1.5s ease-out",
+				rtl: "rtl 1.5s ease-out",
 			},
 			keyframes: {
-				appear: {
-					"0%": {
-						opacity: "0",
-					},
-					"100%": {
-						opacity: "1",
-					},
-				},
 				ltr: {
 					"0%": {
+						opacity: 0,
 						transform: "translate(-80%)",
+					},
+					"75%": {
+						opacity: 1,
 					},
 					"100%": {
 						transform: "translate(0)",
@@ -33,7 +28,11 @@ export default {
 				},
 				rtl: {
 					"0%": {
+						opacity: 0,
 						transform: "translate(80%)",
+					},
+					"75%": {
+						opacity: 1,
 					},
 					"100%": {
 						transform: "translate(0)",

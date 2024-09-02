@@ -7,13 +7,13 @@ import frailesImg from "@components/../assets/hacienda.jpg";
 <div class="relative my-10 px-4">
   <h2
     :class="shown ? 'translate-y-0 opacity-1' : 'opacity-0 translate-y-[100%]'"
-    class="text-5xl font-hand mb-10 transition-all ease-in-out duration-700"
+    class="text-5xl font-hand mb-10 transition-all ease-out duration-700"
   >
     Dónde y Cuándo
   </h2>
   <div
     :class="shown ? 'opacity-1' : 'opacity-0'"
-    class="image-container overflow-hidden transition-all ease-in-out duration-700"
+    class="image-container overflow-hidden transition-all ease-out duration-700"
   >
     <!-- <picture>
       <source srcset=`${frailesImgSM.src}` media="(max-width: 360px)" width=`${frailesImgSM.width}` height=`${frailesImgSM.height}` />

@@ -5,17 +5,13 @@ import Cocktail from "@components/icons/Cocktail.astro";
 import Dancing from "@components/icons/Dancing.astro";
 import Heart from "@components/icons/Heart.astro";
 import Wedding from "@components/icons/Wedding.astro";
+import Intersect from "../components/Intersect.astro";
 ---
 
 <style>
-  .canvas {
-    position: relative;
-    height: 75%;
-  }
   .timeline-container {
     z-index: 1;
     position: relative;
-    height: 100%;
     display: grid;
     grid-auto-columns: minmax(0, 1fr);
     gap: 0;
@@ -52,40 +48,22 @@ import Wedding from "@components/icons/Wedding.astro";
   }
   .timeline-line {
     position: absolute;
-    height: 50%;
+    height: 100%;
     left: 50%;
+    top: 50%;
     border: 3px solid #939499;
     transform: translateX(-50%);
-  }
-  .filter {
-    position: absolute;
-    transition: transform 1800ms linear;
-    z-index: 2;
-    top: 0;
-    left: 50%;
-    width: 70px;
-    height: 100%;
-    background-color: #fff;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.10' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
-    opacity: 0.9;
-    transform: translateX(-50%) scaleY(1);
-    transform-origin: bottom;
   }
   .hide {
     transform: translateX(-50%) scaleY(0);
   }
 </style>
 <h2
-  class="relative text-lg my-10 transition-all duration-700"
-  :class="shown ? 'opacity-1' : 'opacity-0'"
+  class="text-lg my-10"
 >Te compartimos los detalles de la celebración.</h2>
-<div class="w-full max-w-screen-md mx-auto canvas pb-20">
-  <div
-    class="filter"
-    :class="shown ? 'hide' : ''"
-  ></div>
+<div class="w-full max-w-screen-md mx-auto pb-20">
   <div class="timeline-container">
-    <TimelineItem type="wedding" side="left" delay={0}>
+    <TimelineItem type="wedding" side="left" >
       <p class="text-sm mb-1">12:00 HRS</p>
       <p class="font-hand text-5xl">Ceremonia</p>
       <div slot="icon">
@@ -96,9 +74,9 @@ import Wedding from "@components/icons/Wedding.astro";
       <div class="timeline-dot">
         <Heart />
       </div>
-      <div class="timeline-line top-[50%]"></div>
+      <div class="timeline-line"></div>
     </div>
-    <TimelineItem type="cocktail" side="right" delay={400}>
+    <TimelineItem type="cocktail" side="right" >
       <p class="text-sm mb-1">13:00 HRS</p>
       <p class="font-hand text-5xl">Aperitivos</p>
       <div slot="icon">
@@ -109,10 +87,9 @@ import Wedding from "@components/icons/Wedding.astro";
       <div class="timeline-dot">
         <Heart />
       </div>
-      <div class="timeline-line top-0"></div>
-      <div class="timeline-line top-[50%]"></div>
+      <div class="timeline-line"></div>
     </div>
-    <TimelineItem type="celebration" side="left" delay={800}>
+    <TimelineItem type="celebration" side="left" >
       <p class="text-sm mb-1">15:00 HRS</p>
       <p class="font-hand text-5xl">Banquete</p>
       <div slot="icon">
@@ -123,10 +100,9 @@ import Wedding from "@components/icons/Wedding.astro";
       <div class="timeline-dot">
         <Heart />
       </div>
-      <div class="timeline-line top-0"></div>
-      <div class="timeline-line top-[50%]"></div>
+      <div class="timeline-line"></div>
     </div>
-    <TimelineItem type="dancing" side="right" delay={1200}>
+    <TimelineItem type="dancing" side="right" >
       <p class="text-sm mb-1">17:00 HRS</p>
       <p class="font-hand text-5xl">Fiesta</p>
       <div slot="icon">
@@ -137,7 +113,6 @@ import Wedding from "@components/icons/Wedding.astro";
       <div class="timeline-dot">
         <Heart />
       </div>
-      <div class="timeline-line top-0"></div>
     </div>
   </div>
 </div>
