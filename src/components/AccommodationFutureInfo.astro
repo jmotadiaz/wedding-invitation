@@ -9,7 +9,7 @@ export interface Props {
 const guest = Astro.props.guest;
 ---
 
-<p class="mt-2 mb-4 font-semibold">En breve recibirá mas información</p>
+<p class="mt-2 mb-4 font-semibold text-sky-950">En breve recibirá mas información</p>
 <ButtonWithLoading
   hx-patch={`/${guest.uuid}/api/accommodation`}
   hx-target="closest .slide"
