@@ -10,9 +10,8 @@ const { class: extraClass } = Astro.props;
 <Intersect
   htmlTag="section"
   class=`
-    max-w-screen-md md:mx-auto overflow-hidden
+    overflow-hidden
     flex flex-col justify-center items-center text-center
-    relative
     ${extraClass ?? ""}
   `
 >
