@@ -10,12 +10,13 @@ const { ...buttonProps } = Astro.props;
 
 <Button
   {...buttonProps}
+  class="relative"
 >
   <span class="htmx-base">
     <slot />
   </span>
-  <div class="htmx-indicator">
-    <div class="flex justify-center">
+  <div class="absolute h-full w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 htmx-indicator">
+    <div class="w-full h-full flex items-center justify-center">
       <span class="mr-2"><Spinner /></span>
       <slot name="loading-content" />
     </div>

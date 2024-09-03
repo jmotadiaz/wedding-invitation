@@ -1,7 +1,6 @@
 ---
-import WantAccommodationInfo from "@components/WantAccommodationInfo.astro";
+import AccommodationInfo from "@components/AccommodationInfo.astro";
 import { getGuest } from "@domain/Guest";
-import AccommodationFutureInfo from "../components/AccommodationFutureInfo.astro";
 
 const id = Astro.params.id || "";
 const guest = await getGuest(id);
@@ -24,6 +23,6 @@ const guest = await getGuest(id);
       <p>te recomendamos un alojamiento</p>
       <p>con descuento especial para el evento.</p>
     </div>
-    {!!guest?.accommodation ? <AccommodationFutureInfo /> : guest && <WantAccommodationInfo guest={guest} />}
+    <AccommodationInfo guest={guest} />
   </div>
 </div>
