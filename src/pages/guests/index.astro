@@ -23,7 +23,7 @@ const guests = await getGuests();
           <input type="text" name="name" placeholder="Name" class="border  rounded-md px-4 py-2 w-full" required />
           <ExpectedAttendee />
           <input type="text" name="publicId" placeholder="URL" class="border rounded-md px-4 py-2 w-full" required />
-          <ButtonWithLoading theme="primary" type="submit" class="bg-blue-500 text-white px-4 py-2">
+          <ButtonWithLoading type="submit" class="bg-blue-500 text-white px-4 py-2">
             Añadir
             <span slot="loading-content">Añadiendo...</span>
           </ButtonWithLoading>
@@ -32,7 +32,7 @@ const guests = await getGuests();
       <form class="w-full" hx-encoding='multipart/form-data' hx-post="/guests/api/add/dump" hx-target="#guest-list">
         <div class="flex flex-col space-y-2">
           <input type="file" name="csvFile" class="border  rounded-md px-4 py-2" required  accept=".csv"/>
-          <ButtonWithLoading theme="primary" type="submit" class="bg-blue-500 text-white px-4 py-2">
+          <ButtonWithLoading type="submit" class="bg-blue-500 text-white px-4 py-2">
             Subir Archivo
             <span slot="loading-content">Subiendo Archivo...</span>
           </ButtonWithLoading>

@@ -2,26 +2,21 @@
 import type { HTMLAttributes } from "astro/types";
 
 export interface Props extends HTMLAttributes<"button"> {
-	theme?: "primary" | "neutral";
 	full?: boolean;
 }
 
-const {
-	theme = "neutral",
-	full = true,
-	disabled,
-	class: className,
-	...buttonProps
-} = Astro.props;
-
-const skin =
-	theme === "primary"
-		? `border border-2 border-blue-500 bg-blue-50 text-blue-600 ${disabled ? "opacity-50" : "hover:border-blue-600 hover:text-blue-700 active:border-blue-800 active:text-blue-800"}`
-		: `border border-2 border-gray-500 bg-gray-100 text-gray-600 ${disabled ? "opacity-50" : "hover:border-gray-600 hover:text-gray-700 active:border-gray-800 active:text-gray-800"}`;
+const { full = true, disabled, class: className, ...buttonProps } = Astro.props;
 ---
 
 <button
-  class={`${skin} font-bold py-2 px-4 rounded-md cursor-pointer ${full ? "w-full" : ""} ${className}`}
+  class={`
+		border-2 border-sky-950 rounded-md
+		font-bold text-sky-950 bg-sky-900/5
+		${disabled ? "opacity-50" : "hover:bg-sky-900/[0.07] active:bg-sky-900/10"}
+		py-2 px-4 ${full ? "w-full" : ""}
+		cursor-pointer
+		${className}
+	`}
   {...buttonProps}
   disabled={disabled}
 >

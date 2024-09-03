@@ -4,7 +4,7 @@ import Intersect from "../components/Intersect.astro";
 
 interface Props extends HTMLAttributes<"section"> {}
 
-const { class: extraClass } = Astro.props;
+const { class: extraClass = "" } = Astro.props;
 ---
 
 <Intersect
@@ -12,7 +12,7 @@ const { class: extraClass } = Astro.props;
   class=`
     overflow-hidden
     flex flex-col justify-center items-center text-center
-    ${extraClass ?? ""}
+    ${extraClass}
   `
 >
   <slot />

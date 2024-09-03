@@ -11,7 +11,6 @@ const guest = Astro.props.guest;
 
 <p class="mt-2 mb-4 font-semibold">En breve recibirá mas información</p>
 <ButtonWithLoading
-  theme="neutral"
   hx-patch={`/${guest.uuid}/api/accommodation`}
   hx-target="closest .slide"
   hx-swap="outerHTML transition:true"
