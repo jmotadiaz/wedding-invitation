@@ -7,5 +7,8 @@ import alpinejs from "@astrojs/alpinejs";
 export default defineConfig({
 	integrations: [tailwind(), alpinejs({ entrypoint: "/src/config/alpine" })],
 	output: "server",
+	prefetch: {
+		defaultStrategy: "viewport"
+	},
 	adapter: vercel(),
 });
