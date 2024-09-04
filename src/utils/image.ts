@@ -6,7 +6,7 @@ export const getImage = (
 ): { src: ImageMetadata; widths: number[]; sizes: string; alt: string } =>
   ({
     src: image,
-    widths: [240, 540, 720, image.width],
-    sizes: `(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${image.width}px`,
+    widths: [420, 640, 768, image.width],
+    sizes: `(max-width: 420px) 420px, (max-width: 640px) 640px, (max-width: 768px) 768px, ${image.width}px`,
     alt,
   } as const);

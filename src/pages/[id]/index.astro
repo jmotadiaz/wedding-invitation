@@ -1,7 +1,9 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import Almunia from "../../assets/almunia.webp";
-import Florecitas from "../../assets/florecitas.png";
+import imgLG from "../../assets/florecitas-lg.webp";
+import imgMD from "../../assets/florecitas-md.webp";
+import imgSM from "../../assets/florecitas-sm.webp";
+import imgXS from "../../assets/florecitas-xs.webp";
 import invitationEnvelopImgLG from "../../assets/invitationEnvelop-lg.webp";
 import invitationEnvelopImgMD from "../../assets/invitationEnvelop-md.webp";
 import invitationEnvelopImgSM from "../../assets/invitationEnvelop-sm.webp";
@@ -21,6 +23,10 @@ const id = Astro.params.id;
       </picture>
     </a>
   </main>
-  <link rel="prefetch" href={Florecitas.src} as="image" />
-  <link rel="prefetch" href={Almunia.src} as="image" />
+  <Fragment slot="head">
+    <link rel="prefetch" href={imgXS.src} media="(max-width: 420px)" as="image" />
+    <link rel="prefetch" href={imgSM.src} media="(max-width: 640px)" as="image" />
+    <link rel="prefetch" href={imgMD.src} media="(max-width: 768px)" as="image" />
+    <link rel="prefetch" href={imgLG.src} media="(min-width: 769px)" as="image" />
+  </Fragment>
 </Layout>

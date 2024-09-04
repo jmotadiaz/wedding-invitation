@@ -1,11 +1,17 @@
 ---
-import { Image } from "astro:assets";
-import { getImage } from "@utils";
-import Florecitas from "../assets/florecitas.png";
+import imgLG from "../assets/florecitas-lg.webp";
+import imgMD from "../assets/florecitas-md.webp";
+import imgSM from "../assets/florecitas-sm.webp";
+import imgXS from "../assets/florecitas-xs.webp";
 ---
 
 <div class="relative bg-sky-950 w-full overflow-x-hidden">
-  <Image {...getImage(Florecitas)}  class="absolute z-0 top-0 left-0 h-full max-w-none w-auto min-w-full opacity-40" />
+  <picture>
+    <source media="(max-width: 420px)" srcset={imgXS.src} />
+    <source media="(max-width: 640px)" srcset={imgSM.src} />
+    <source media="(max-width: 768px)" srcset={imgMD.src} />
+    <img src={imgLG.src} alt="" class="absolute z-0 top-0 left-0 h-full max-w-none w-auto min-w-full opacity-40"/>
+  </picture>
   <div
     class="relative z-1 py-10 flex flex-col justify-center items-center text-white"
   >
