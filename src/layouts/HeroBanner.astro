@@ -7,10 +7,41 @@ import imgXS from "../assets/florecitas-xs.webp";
 
 <div class="relative bg-sky-950 w-full overflow-x-hidden">
   <picture>
-    <source media="(max-width: 420px)" srcset={imgXS.src} />
-    <source media="(max-width: 640px)" srcset={imgSM.src} />
-    <source media="(max-width: 768px)" srcset={imgMD.src} />
-    <img src={imgLG.src} alt="" class="absolute z-0 top-0 left-0 h-full max-w-none w-auto min-w-full opacity-40"/>
+    <source
+      media="(max-width: 420px)"
+      srcset={imgXS.src}
+      width={imgXS.width}
+      height={imgXS.height}
+    />
+    <source
+      media="(max-width: 640px)"
+      srcset={imgSM.src}
+      width={imgSM.width}
+      height={imgSM.height}
+    />
+    <source
+      media="(max-width: 768px)"
+      srcset={imgMD.src}
+      width={imgMD.width}
+      height={imgMD.height}
+    />
+    <img
+      src={imgLG.src}
+      width={imgLG.width}
+      height={imgLG.height}
+      alt=""
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        zIndex: 0,
+        height: "100%",
+        width: "auto",
+        minWidth: "100%",
+        maxWidth: "none",
+        opacity: 0.4,
+      }}
+    />
   </picture>
   <div
     class="relative z-1 py-10 flex flex-col justify-center items-center text-white"
@@ -19,7 +50,7 @@ import imgXS from "../assets/florecitas-xs.webp";
     <p class="text-9xl pt-5 self-stretch text-center font-title animate-ltr">
       Rocío
     </p>
-    <p class="text-6xl self-stretch text-center font-title ">y</p>
+    <p class="text-6xl self-stretch text-center font-title">y</p>
     <p class="text-9xl self-stretch text-center font-title animate-rtl">
       Javier
     </p>
