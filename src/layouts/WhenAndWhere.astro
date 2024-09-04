@@ -1,8 +1,10 @@
 ---
+import { Image } from "astro:assets";
 import frailesImgLG from "@components/../assets/hacienda-lg.webp";
 import frailesImgMD from "@components/../assets/hacienda-md.webp";
 import frailesImgSM from "@components/../assets/hacienda-sm.webp";
 import frailesImg from "@components/../assets/hacienda.jpg";
+import { getImage } from "@utils";
 ---
 <div class="relative my-10 px-4">
   <h2
@@ -22,7 +24,7 @@ import frailesImg from "@components/../assets/hacienda.jpg";
       <img src=`${frailesImg.src}` alt="Hacienda Los Frailes de San Alberto" width=`${frailesImg.width}` height=`${frailesImg.height}` class="w-full max-w-xl object-cover rounded-t-md">
     </picture> -->
     <div class="w-full max-w-xl object-cover rounded-t-md bg-sky-900">
-      <img src=`${frailesImg.src}` alt="Hacienda Los Frailes de San Alberto" width=`${frailesImg.width}` height=`${frailesImg.height}` class="w-full max-w-xl object-cover rounded-t-md opacity-70">
+      <Image {...getImage(frailesImg, "Hacienda Los Frailes de San Alberto")} class="w-full max-w-xl object-cover rounded-t-md opacity-70" />
     </div>
     <div
       class="bg-white border-b border-l border-r border-gray-300 rounded-b-md shadow-md p-10 mb-5 flex flex-col justify-center items-center"
