@@ -1,6 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import Divider from "@components/Divider.astro";
+import Intersect from "@components/Intersect.astro";
+import Heart from "@components/icons/Heart.astro";
 import Accommodation from "@layouts/Accommodation.astro";
 import ConfigForm from "@layouts/Confirm.astro";
 import Countdown from "@layouts/Countdown.astro";
@@ -12,7 +14,8 @@ import NoChildren from "@layouts/NoChildren.astro";
 import Section from "@layouts/Section.astro";
 import Timeline from "@layouts/Timeline.astro";
 import WhenAndWhere from "@layouts/WhenAndWhere.astro";
-import { getImage } from "@utils";
+import { getImage, onIntersect, show } from "@utils";
+import FaroImg from "../../assets/faro.png";
 import Figuera from "../../assets/figuera.png";
 
 const id = Astro.params.id as string;
@@ -31,6 +34,18 @@ const id = Astro.params.id as string;
       <HeroBannerSection />
     </Section>
     <Section>
+      <div
+        class="flex flex-col items-center my-20 transition-all ease-out duration-700 opacity-0"
+        {...onIntersect(show())}
+      >
+        <p>A veces lo que empieza</p>
+        <p>como una locura</p>
+        <p>se convierte en lo mejor de</p>
+        <p>tu vida</p>
+        <Heart size={28} class="fill-sky-950 mt-5" />
+      </div>
+    </Section>
+    <Section>
       <Countdown />
     </Section>
     <Section>
@@ -38,6 +53,24 @@ const id = Astro.params.id as string;
     </Section>
     <Section class="items-stretch">
       <Timeline />
+    </Section>
+    <Section>
+      <div class="relative w-full overflow-hidden bg-sky-950">
+        <Image {...getImage(FaroImg)} class="absolute z-0 top-0 left-0 w-auto min-h-full min-w-full opacity-25" />
+        <Intersect
+          tresHold={100}
+          htmlTag="h2"
+          class="relative z-1 py-20 transition-all ease-out duration-700 text-lg text-white"
+          {...onIntersect(show())}
+        >
+          <span class="block mb-1">
+            Nos complace invitarte
+          </span>
+          <span class="block mb-1">
+            a ser parte de este gran día
+          </span>
+        </Intersect>
+      </div>
     </Section>
     <Section>
       <ConfigForm id={id} />

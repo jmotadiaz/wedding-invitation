@@ -1,23 +1,26 @@
+---
+import { onIntersect, show, translate } from "@utils";
+---
 <div class="flex justify-center" x-data="timer" x-init="init();">
   <div class="flex flex-col justify-center items-center px-3">
     <div
-      :class="shown ? 'opacity-1' : 'opacity-0'"
-      class="overflow-hidden transition-all ease-out duration-1000 delay-300"
+      class="overflow-hidden transition-all ease-out duration-1000 delay-300 opacity-0"
+      {...onIntersect(show())}
     >
       <div
-        :class="shown ? 'translate-y-0' : 'translate-y-[100%]'"
-        class="transition-all ease-out duration-700 delay-300"
+        class="transition-all ease-out duration-700 delay-300 translate-y-[100%]"
+        {...onIntersect(show(translate()))}
       >
         <p class="text-xl " x-text="time().days"></p>
       </div>
     </div>
     <div
-      :class="shown ? 'opacity-1' : 'opacity-0'"
-      class="overflow-hidden transition-all ease-out duration-1000 delay-300"
+      class="overflow-hidden transition-all ease-out duration-1000 delay-300 opacity-0"
+      {...onIntersect(show())}
     >
       <div
-        :class="shown ? 'translate-y-0' : 'translate-y-[-100%]'"
-        class="transition-all ease-out duration-700 delay-300"
+        class="transition-all ease-out duration-700 delay-300 translate-y-[-100%]"
+        {...onIntersect(show(translate()))}
       >
         <p class="text-xl ">DIAS</p>
       </div>
@@ -25,23 +28,23 @@
   </div>
   <div class="flex flex-col justify-center items-center px-3">
     <div
-      :class="shown ? 'opacity-1' : 'opacity-0'"
-      class="overflow-hidden transition-all ease-out duration-1000 delay-300"
+      class="overflow-hidden transition-all ease-out duration-1000 delay-300 opacity-0"
+      {...onIntersect(show())}
     >
       <div
-        :class="shown ? 'translate-y-0' : 'translate-y-[100%]'"
-        class="transition-all ease-out duration-700 delay-300"
+        class="transition-all ease-out duration-700 delay-300 translate-y-[100%]"
+        {...onIntersect(show(translate()))}
       >
         <p class="text-xl " x-text="time().hours"></p>
       </div>
     </div>
     <div
-      :class="shown ? 'opacity-1' : 'opacity-0'"
-      class="overflow-hidden transition-all ease-out duration-1000 delay-300"
+      class="overflow-hidden transition-all ease-out duration-1000 delay-300 opacity-0"
+      {...onIntersect(show())}
     >
       <div
-        :class="shown ? 'translate-y-0' : 'translate-y-[-100%]'"
-        class="transition-all ease-out duration-700 delay-300"
+        class="transition-all ease-out duration-700 delay-300 translate-y-[-100%]"
+        {...onIntersect(show(translate()))}
       >
         <p class="text-xl ">HRS</p>
       </div>
@@ -49,23 +52,23 @@
   </div>
   <div class="flex flex-col justify-center items-center px-3">
     <div
-      :class="shown ? 'opacity-1' : 'opacity-0'"
-      class="overflow-hidden transition-all ease-out duration-1000 delay-300"
+      class="overflow-hidden transition-all ease-out duration-1000 delay-300 opacity-0"
+      {...onIntersect(show())}
     >
       <div
-        :class="shown ? 'translate-y-0' : 'translate-y-[100%]'"
-        class="transition-all ease-out duration-700 delay-300"
+        class="transition-all ease-out duration-700 delay-300 translate-y-[100%]"
+        {...onIntersect(show(translate()))}
       >
         <p class="text-xl " x-text="time().minutes"></p>
       </div>
     </div>
     <div
-      :class="shown ? 'opacity-1' : 'opacity-0'"
-      class="overflow-hidden transition-all ease-out duration-1000 delay-300"
+      class="overflow-hidden transition-all ease-out duration-1000 delay-300 opacity-0"
+      {...onIntersect(show())}
     >
       <div
-        :class="shown ? 'translate-y-0' : 'translate-y-[-100%]'"
-        class="transition-all ease-out duration-700 delay-300"
+        class="transition-all ease-out duration-700 delay-300 translate-y-[-100%]"
+        {...onIntersect(show(translate()))}
       >
         <p class="text-xl ">MIN</p>
       </div>
@@ -73,23 +76,23 @@
   </div>
   <div class="flex flex-col justify-center items-center px-3">
     <div
-      :class="shown ? 'opacity-1' : 'opacity-0'"
-      class="overflow-hidden transition-all ease-out duration-1000 delay-300"
+      class="overflow-hidden transition-all ease-out duration-1000 delay-300 opacity-0"
+      {...onIntersect(show())}
     >
       <div
-        :class="shown ? 'translate-y-0' : 'translate-y-[100%]'"
-        class="transition-all ease-out duration-700 delay-300"
+        class="transition-all ease-out duration-700 delay-300 translate-y-[100%]"
+        {...onIntersect(show(translate()))}
       >
         <p class="text-xl " x-text="time().seconds"></p>
       </div>
     </div>
     <div
-      :class="shown ? 'opacity-1' : 'opacity-0'"
-      class="overflow-hidden transition-all ease-out duration-1000 delay-300"
+      class="overflow-hidden transition-all ease-out duration-1000 delay-300 opacity-0"
+      {...onIntersect(show())}
     >
       <div
-        :class="shown ? 'translate-y-0' : 'translate-y-[-100%]'"
-        class="transition-all ease-out duration-700 delay-300"
+        class="transition-all ease-out duration-700 delay-300 translate-y-[-100%]"
+        {...onIntersect(show(translate()))}
       >
         <p class="text-xl ">SEG</p>
       </div>

@@ -1,4 +1,5 @@
 ---
+import { onIntersect, show, translate } from "@utils";
 import Intersect from "./Intersect.astro";
 
 export interface Props {
@@ -42,13 +43,13 @@ const { type, side } = Astro.props;
 <Intersect tresHold={100} class=`timeline-item py-7 ${type}`>
   <div
     class=`transition-all duration-700 opacity-0`
-    :style="shown && { opacity: 1 }"
+    {...onIntersect(show())}
     >
     <slot />
   </div>
   <div
     class=`transition-all ease-out duration-1000 opacity-0 ${side} mx-auto w-[80px] h-[80px] lg:w-[100px] lg:h-[100px]`
-    :style="shown && { opacity: 1, transform: 'translateX(0)' }"
+    {...onIntersect(show(translate()))}
     >
     <slot name="icon" />
   </div>

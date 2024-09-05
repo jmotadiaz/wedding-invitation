@@ -81,6 +81,16 @@ const { title } = Astro.props;
         transition: all 0.3s;
         opacity: 0;
       }
+      .hide {
+        transition-property: all;
+        transition-timing-function: ease-out;
+        opacity: 0;
+      }
+      .show {
+        transition-property: all;
+        transition-timing-function: ease-out;
+        opacity: 1;
+      }
     </style>
     <ViewTransitions />
     <script

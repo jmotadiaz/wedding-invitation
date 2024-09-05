@@ -1,33 +1,36 @@
 ---
 import { Image } from "astro:assets";
-import { getImage } from "@utils";
+import { getImage, onIntersect, show, translate } from "@utils";
 import frailesImg from "../assets/hacienda.jpg";
+import Intersect from "../components/Intersect.astro";
 ---
 <div class="relative my-10 px-4">
-  <h2
-    :class="shown ? 'translate-y-0 opacity-1' : 'opacity-0 translate-y-[100%]'"
-    class="text-5xl font-hand text-sky-950 mb-10 transition-all ease-out duration-700"
+  <Intersect
+    htmlTag="h2"
+    tresHold={100}
+    class="text-5xl font-hand text-sky-950 mb-10 transition-all ease-out duration-700 opacity-0 translate-y-[100%]"
+    {...onIntersect(show(translate()))}
   >
     Dónde y Cuándo
-  </h2>
-  <div
-    :class="shown ? 'opacity-1' : 'opacity-0'"
-    class="image-container overflow-hidden transition-all ease-out duration-700"
-  >
-    <!-- <picture>
-      <source srcset=`${frailesImgSM.src}` media="(max-width: 360px)" width=`${frailesImgSM.width}` height=`${frailesImgSM.height}` />
-      <source srcset=`${frailesImgMD.src}` media="(max-width: 720px)" width=`${frailesImgMD.width}` height=`${frailesImgMD.height}` />
-      <source srcset=`${frailesImgLG.src}` media="(max-width: 1600px)" width=`${frailesImgLG.width}` height=`${frailesImgLG.height}` />
-      <img src=`${frailesImg.src}` alt="Hacienda Los Frailes de San Alberto" width=`${frailesImg.width}` height=`${frailesImg.height}` class="w-full max-w-xl object-cover rounded-t-md">
-    </picture> -->
+  </Intersect>
+  <div class="image-container overflow-hidden">
     <div class="w-full max-w-xl object-cover rounded-t-md bg-sky-900">
       <Image {...getImage(frailesImg, "Hacienda Los Frailes de San Alberto")} class="w-full max-w-xl object-cover rounded-t-md opacity-70" />
     </div>
     <div
-      class="bg-white border-b border-l border-r border-gray-300 rounded-b-md shadow-md p-10 mb-5 flex flex-col justify-center items-center"
+      class=`
+        bg-white border-b border-l border-r border-gray-300 rounded-b-md shadow-md
+        flex flex-col justify-center items-center p-10 mb-5
+      `
     >
-      <p class="text-4xl font-hand text-sky-950">Hacienda Los Frailes</p>
-      <p class="text-4xl font-hand text-sky-950 mb-3">de San Alberto.</p>
+      <Intersect
+        tresHold={100}
+        class="transition-all ease-out duration-700 opacity-0 translate-y-[50%]"
+        {...onIntersect(show(translate()))}
+      >
+        <p class="text-4xl font-hand text-sky-950">Hacienda Los Frailes</p>
+        <p class="text-4xl font-hand text-sky-950 mb-3">de San Alberto.</p>
+      </Intersect>
       <p class=" mb-3 text-center">12:00 PM</p>
       <a
         href="https://www.google.com/maps/place/Hacienda+los+Frailes+de+San+Alberto/@37.1979631,-5.9244053,15z/data=!4m2!3m1!1s0x0:0xddf4a405f884e20b?sa=X&ved=1t:2428&ictx=111"
