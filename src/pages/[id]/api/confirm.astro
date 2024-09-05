@@ -1,10 +1,10 @@
 ---
 
+import ConfirmForm from "@components/ConfirmForm.astro";
 import ConfirmedGuestInfo from "@components/ConfirmedGuestInfo.astro";
 import { confirmGuest, getGuest, stops } from "@domain/Guest";
 import { ValidationError } from "@domain/Guest";
 import { createFormDataWrapper } from "@utils";
-import ConfirmForm from "../../../components/ConfirmForm.astro";
 
 export const partial = true;
 
@@ -15,7 +15,7 @@ let guest = await getGuest(id);
 if (Astro.request.method === "PATCH" && guest) {
 	const formData = createFormDataWrapper(await Astro.request.formData());
 	try {
-		await confirmGuest(id, {
+		guest = await confirmGuest(id, {
 			declineInvitation: formData.has("declineInvitation"),
 			confirmedAttendees: guest.expectedAttendees.filter((att) =>
 				formData.has(att),
@@ -25,7 +25,6 @@ if (Astro.request.method === "PATCH" && guest) {
 			bus: formData.has("bus"),
 			busStop: formData.get("busStop"),
 		});
-		guest = await getGuest(id);
 	} catch (e) {
 		errors = Array.isArray(e)
 			? (e as ValidationError[])
@@ -49,8 +48,12 @@ const getErrorMessage = (error: ValidationError) => {
 			return "Error desconocido, vuelva a intentarlo";
 	}
 };
+
+if (!guest) {
+	return Astro.error(404);
+}
 ---
-{errors && guest ?
+{errors ?
 	<ConfirmForm guest={guest} />
 	<div>
 		{errors.map((error) => (
@@ -58,6 +61,6 @@ const getErrorMessage = (error: ValidationError) => {
 		))}
 	</div>
 	:
-	guest && <ConfirmedGuestInfo guest={guest} />
+	<ConfirmedGuestInfo guest={guest} />
 }
 

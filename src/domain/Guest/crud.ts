@@ -49,13 +49,15 @@ export const addGuest = async ({
   name,
   expectedAttendees,
   uuid,
-}: Pick<Guest, "name" | "expectedAttendees" | "uuid">): Promise<void> => {
-  GuestRepository.addGuest({
-    name,
-    expectedAttendees,
-    uuid: nameToUrl(uuid),
-    ...DEFAULT_GUEST_VALUES,
-  });
+}: Pick<Guest, "name" | "expectedAttendees" | "uuid">): Promise<Guest> => {
+  return new Guest(
+    await GuestRepository.addGuest({
+      name,
+      expectedAttendees,
+      uuid: nameToUrl(uuid),
+      ...DEFAULT_GUEST_VALUES,
+    })
+  );
 };
 
 export const dumpGuests = async (csv: string): Promise<void> => {
@@ -127,7 +129,7 @@ export const confirmGuest = async (
     Guest,
     "confirmedAttendees" | "allergies" | "bus" | "busSeats" | "busStop"
   > & { declineInvitation: boolean }
-): Promise<void> => {
+): Promise<Guest | undefined> => {
   if (declineInvitation) {
     GuestRepository.updateGuest(id, {
       confirmedAttendees,
@@ -151,16 +153,19 @@ export const confirmGuest = async (
     return Promise.reject(errors);
   }
 
-  GuestRepository.updateGuest(id, parsedGuest);
+  const rawGuest = await GuestRepository.updateGuest(id, parsedGuest);
+
+  return rawGuest && new Guest(rawGuest);
 };
 
 export const updateAccommodation = async (
   id: string,
   accommodation: boolean
-) => {
+): Promise<Guest | undefined> => {
   const guest = await getGuest(id);
 
   if (!guest?.declined) {
-    return GuestRepository.updateGuest(id, { accommodation });
+    const rawGuest = await GuestRepository.updateGuest(id, { accommodation });
+    return rawGuest && new Guest(rawGuest);
   }
 };

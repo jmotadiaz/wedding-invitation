@@ -19,8 +19,9 @@ export function getGuest(uuid: string): Promise<GuestSource | undefined> {
     .executeTakeFirst();
 }
 
-export async function addGuest(guest: DbGuest): Promise<void> {
-  db.insertInto("guest")
+export async function addGuest(guest: DbGuest): Promise<GuestSource> {
+  return db
+    .insertInto("guest")
     .values({
       uuid: guest.uuid,
       name: guest.name,
@@ -29,7 +30,8 @@ export async function addGuest(guest: DbGuest): Promise<void> {
       bus: guest.bus,
       allergies: guest.allergies,
     })
-    .execute();
+    .returningAll()
+    .executeTakeFirstOrThrow();
 }
 
 export async function dumpGuests(guests: DbGuest[]): Promise<void> {
@@ -51,8 +53,9 @@ export async function dumpGuests(guests: DbGuest[]): Promise<void> {
 export async function updateGuest(
   uuid: string,
   guest: Partial<DbGuest>
-): Promise<void> {
-  db.updateTable("guest")
+): Promise<GuestSource | undefined> {
+  return db
+    .updateTable("guest")
     .set({
       name: guest.name,
       expected_attendees: guest.expectedAttendees,
@@ -64,7 +67,8 @@ export async function updateGuest(
       allergies: guest.allergies,
     })
     .where("uuid", "=", uuid)
-    .execute();
+    .returningAll()
+    .executeTakeFirst();
 }
 
 export async function deleteGuest(uuid: string): Promise<void> {

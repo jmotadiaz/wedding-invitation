@@ -1,19 +1,22 @@
 ---
 import AccommodationInfo from "@components/AccommodationInfo.astro";
-import { getGuest, updateAccommodation } from "@domain/Guest";
+import { type Guest, getGuest, updateAccommodation } from "@domain/Guest";
 import { createFormDataWrapper } from "@utils";
 
 export const partial = true;
 
 const id = Astro.params.id ?? "";
+let guest: Guest | undefined;
 
 if (Astro.request.method === "PATCH") {
 	const formData = createFormDataWrapper(await Astro.request.formData());
 
-	await updateAccommodation(id, formData.has("wantAccommodation"));
+	guest = await updateAccommodation(id, formData.has("wantAccommodation"));
 }
 
-const guest = await getGuest(id);
+if (!guest) {
+	return Astro.error(404);
+}
 ---
 
 <AccommodationInfo guest={guest}>
