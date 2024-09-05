@@ -10,44 +10,24 @@ export interface Props {
 const guest = Astro.props.guest;
 
 if (!guest) {
-	return null;
+	throw new Error("Invitado no encontrado");
 }
 ---
 
 <style is:global>
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
+  #accommodation-info {
+    view-transition-name: accommodation-info;
   }
 
-  @keyframes fade-out {
-    to {
-      opacity: 0;
-    }
+  ::view-transition-old(accommodation-info) {
+    animation: var(--fade-out);
   }
-
-  @keyframes slide-from-bottom {
-    from {
-      transform: translateY(50px);
-    }
-  }
-
-  .slide {
-    view-transition-name: slide;
-  }
-
-  ::view-transition-old(slide) {
-    animation: 180ms cubic-bezier(0.4, 0, 1, 1) both fade-out;
-  }
-  ::view-transition-new(slide) {
-    animation:
-      500ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
-      600ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-bottom;
+  ::view-transition-new(accommodation-info) {
+    animation: var(--fade-in), var(--slide-from-bottom);
   }
 </style>
 
-<div class="slide">
+<div id="accommodation-info">
   {
     !!guest.accommodation ? (
       <AccommodationFutureInfo guest={guest} />

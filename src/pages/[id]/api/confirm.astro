@@ -50,7 +50,10 @@ const getErrorMessage = (error: ValidationError) => {
 };
 
 if (!guest) {
-	return Astro.error(404);
+	return new Response("Invitado no encontrado", {
+		status: 500,
+		statusText: "Internal Server Error",
+	});
 }
 ---
 {errors ?

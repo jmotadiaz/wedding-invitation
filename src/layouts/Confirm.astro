@@ -10,43 +10,25 @@ export interface Props {
 const guest = await getGuest(Astro.props.id);
 
 if (!guest) {
-	throw new Error("Invitado no encontrado");
+	return new Response("Invitado no encontrado", {
+		status: 500,
+		statusText: "Internal Server Error",
+	});
 }
 ---
 
 <style is:global>
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-  }
-
-  @keyframes fade-out {
-    to {
-      opacity: 0;
-    }
-  }
-
-  @keyframes slide-from-bottom {
-    from {
-      transform: translateY(50px);
-    }
-  }
-
   #confirm {
     view-transition-name: confirm;
   }
 
   ::view-transition-old(confirm) {
-    animation: 180ms cubic-bezier(0.4, 0, 1, 1) both fade-out;
+    animation: var(--fade-out);
   }
   ::view-transition-new(confirm) {
-    animation:
-      500ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
-      600ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-bottom;
+    animation: var(--fade-in), var(--slide-from-bottom);
   }
 </style>
-
 
 <div class="flex flex-col justify-center items-center w-full mt-20 my-10 px-4">
   <h3 class="text-center mb-10">
@@ -63,15 +45,15 @@ if (!guest) {
       {guest.name}
     </span>
   </h3>
-  <div
-    class="bg-white p-6 shadow-md rounded-md w-full max-w-screen-sm mx-10"
-  >
+  <div class="bg-white p-6 shadow-md rounded-md w-full max-w-screen-sm mx-10">
     <div id="confirm">
-      {guest.hasAnswered() ? (
-        <ConfirmedGuestInfo guest={guest} />
-      ) : (
-        <ConfirmForm guest={guest} />
-      )}
+      {
+        guest.hasAnswered() ? (
+          <ConfirmedGuestInfo guest={guest} />
+        ) : (
+          <ConfirmForm guest={guest} />
+        )
+      }
     </div>
   </div>
 </div>

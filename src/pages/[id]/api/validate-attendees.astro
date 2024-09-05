@@ -8,7 +8,10 @@ export const partial = true;
 const guest = await getGuest(`${Astro.params.id}`);
 
 if (!guest) {
-	throw new Error("Guest not found");
+	return new Response("Invitado no encontrado", {
+		status: 500,
+		statusText: "Internal Server Error",
+	});
 }
 
 const answered =
