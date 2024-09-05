@@ -29,13 +29,13 @@ const id = Astro.params.id as string;
 </style>
 
 <Layout title="Boda Rocío y Javi">
-  <main class="max-w-screen-md mx-auto">
+  <main class="max-w-screen-md mx-auto text-base">
     <Section class="items-stretch">
       <HeroBannerSection />
     </Section>
-    <Section>
+    <Section class="py-16">
       <div
-        class="flex flex-col items-center my-20 transition-all ease-out duration-700 opacity-0"
+        class="flex flex-col items-center transition-all ease-out duration-700 opacity-0"
         {...onIntersect(show())}
       >
         <p>A veces lo que empieza</p>
@@ -48,19 +48,18 @@ const id = Astro.params.id as string;
     <Section>
       <Countdown />
     </Section>
-    <Section>
+    <Section class="py-10">
       <WhenAndWhere />
     </Section>
-    <Section class="items-stretch">
+    <Section class="items-stretch pb-10">
       <Timeline />
     </Section>
     <Section>
-      <div class="relative w-full overflow-hidden bg-sky-950">
-        <Image {...getImage(FaroImg)} class="absolute z-0 top-0 left-0 w-auto min-h-full min-w-full opacity-25" />
+      <div class="w-full overflow-hidden bg-sky-950">
         <Intersect
           tresHold={100}
           htmlTag="h2"
-          class="relative z-1 py-20 transition-all ease-out duration-700 text-lg text-white"
+          class="font-hand text-hand-lg text-white py-20 transition-all ease-out duration-700 opacity-0"
           {...onIntersect(show())}
         >
           <span class="block mb-1">
@@ -72,22 +71,20 @@ const id = Astro.params.id as string;
         </Intersect>
       </div>
     </Section>
-    <Section>
+    <Section class="py-10">
       <ConfigForm id={id} />
     </Section>
-    <Section>
+    <Section class="pb-10">
       <NoChildren />
     </Section>
     <Divider />
-    <Section>
+    <Section class="py-10">
       <DressCode />
     </Section>
-    <Divider /> ` `
-    <Section>
+    <Section class="py-10 bg-sky-950 text-white">
       <Accommodation />
     </Section>
-    <Divider />
-    <Section class="my-10">
+    <Section class="py-10">
       <Gifts />
     </Section>
     <Image {...getImage(Figuera)} class="w-full" />

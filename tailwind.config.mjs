@@ -5,9 +5,31 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				hand: ["'Bellandha'", "cursive", ...defaultTheme.fontFamily.sans],
-				title: ["'Bellandha'", "cursive", ...defaultTheme.fontFamily.sans],
-				sans: ["'Callingstone'", ...defaultTheme.fontFamily.sans],
+				hand: ["'Alloystan'", "cursive", ...defaultTheme.fontFamily.sans],
+				title: ["'Alloystan'", "cursive", ...defaultTheme.fontFamily.sans],
+				sans: ["'Jost'", ...defaultTheme.fontFamily.sans],
+			},
+			fontSize: {
+				sm: '1rem',
+				base: '1.20rem',
+				lg: '1.30rem',
+				xl: '1.50rem',
+				'2xl': '1.663rem',
+				'3xl': '2.053rem',
+				'4xl': '2.541rem',
+				'5xl': '3.152rem',
+				'base-hand': ['2.20rem', {
+					lineHeight: '1.5rem',
+				}],
+				'hand-lg': ['3.20rem', {
+					lineHeight: '2.50rem',
+				}],
+				'hand-xl': ['4rem', {
+					lineHeight: '3rem',
+				}],
+				'hand-2xl': ['5rem', {
+					lineHeight: '4rem',
+				}],
 			},
 			animation: {
 				ltr: "ltr 1.5s ease-out",

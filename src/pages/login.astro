@@ -27,15 +27,15 @@ if (Astro.request.method === "POST") {
 <Layout title="Login">
   <form class="w-full max-w-lg mx-auto p-10 mt-8" method="POST" action="/login">
     <div class="mb-4">
-      <label for="user" class="block text-gray-700 text-sm font-bold mb-2">Usuario</label>
+      <label for="user" class="block text-gray-700 text-sm font-[500] mb-2">Usuario</label>
       <input type="text" id="user" name="user" class="w-full border rounded-md px-4 py-2 border-gray-300" />
     </div>
     <div class="mb-6">
-      <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+      <label for="password" class="block text-gray-700 text-sm font-[500] mb-2">Password</label>
       <input type="password" id="password" name="password" class="w-full border rounded-md px-4 py-2 border-gray-300" />
     </div>
     <div class="flex items-center justify-between">
-      <button class="bg-blue-500 hover:bg-sky-950 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+      <button class="bg-blue-500 hover:bg-sky-950 text-white font-[500] py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
         Login
       </button>
     </div>

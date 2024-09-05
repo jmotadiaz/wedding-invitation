@@ -30,16 +30,16 @@ if (!guest) {
   }
 </style>
 
-<div class="flex flex-col justify-center items-center w-full mt-20 my-10 px-4">
-  <h3 class="text-center mb-10">
+<div class="flex flex-col justify-center items-center w-full px-4">
+  <h3 class="text-center mb-5">
     <span
-      class="block text-lg mb-5 transition-all ease-out duration-1000 opacity-0 translate-x-[50%]"
+      class="block text-lg mb-2 transition-all ease-out duration-1000 opacity-0 translate-x-[50%]"
       {...onIntersect(show(translate()))}
     >
       Invitación para:
     </span>
     <span
-      class="block text-5xl font-hand text-sky-950 transition-all ease-out duration-1000 opacity-0 translate-x-[-50%]"
+      class="block font-hand text-hand-xl text-sky-950 transition-all ease-out duration-1000 opacity-0 translate-x-[-50%]"
       {...onIntersect(show(translate()))}
     >
       {guest.name}

@@ -7,24 +7,24 @@ const PHONE_NUMBER = import.meta.env.PHONE_NUMBER;
 ---
 
 <div
-  class="transition-all ease-out duration-1000 my-10 w-full sm:w-2/3 opacity-0 translate-y-1/2"
+  class="transition-all ease-out duration-1000 w-full px-4 md:px-20 opacity-0 translate-y-1/2"
   {...onIntersect(show(translate()))}
 >
   <div class="px-5 transition-all">
-    <h2 class="text-5xl font-hand text-sky-950 mb-5">
+    <h2 class="font-hand text-hand-xl text-sky-950 mb-5">
       Regalo
     </h2>
     <p class="mb-8">Si quieres tener un detalle con nosotros</p>
     <Collapsible>
       <p slot="trigger">Número de cuenta</p>
-      <div class="pt-5" slot="content">
+      <div class="pt-5 text-sm" slot="content">
           {BANK_ACCOUNT}
       </div>
     </Collapsible>
     <div class="border-b-2 border-gray-200 w-1/3 mx-auto my-5"></div>
     <Collapsible>
       <p slot="trigger">Bizum</p>
-      <div class="pt-5" slot="content">
+      <div class="pt-5 text-sm" slot="content">
           {PHONE_NUMBER}
       </div>
     </Collapsible>
