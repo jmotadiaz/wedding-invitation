@@ -11,34 +11,34 @@ export interface Props {
 
 const guest = Astro.props.guest;
 ---
-
-<form
-  class="text-left"
-  hx-patch={`/${guest.uuid}/api/confirm`}
-  hx-target="#confirm"
-  hx-swap="innerHTML transition:true"
->
-  <AttendeesCheckboxList guest={guest} />
-  <div>
-    <Field>
-      <label for="allergies" class="font-[500]"
-        >Alergias y/o condición alimentaria:</label
-      >
-      <input
-        id="allergies"
-        name="allergies"
-        class="border rounded-md px-4 py-2 border-gray-300"
-        value={guest.allergies}
-      />
-    </Field>
-  </div>
-  <div id="confirm-submit" class="mt-2">
-    {
-      guest.hasAnswered() ? (
-        <ActiveConfirmBtn guest={guest} />
-      ) : (
-        <DisabledConfirmBtn guest={guest} />
-      )
-    }
-  </div>
-</form>
+<div id="confirm">
+  <form
+    class="text-left"
+    hx-patch={`/${guest.uuid}/api/confirm`}
+    hx-target="#confirm"
+  >
+    <AttendeesCheckboxList guest={guest} />
+    <div>
+      <Field>
+        <label for="allergies" class="font-[500]"
+          >Alergias y/o condición alimentaria:</label
+        >
+        <input
+          id="allergies"
+          name="allergies"
+          class="border rounded-md px-4 py-2 border-gray-300"
+          value={guest.allergies}
+        />
+      </Field>
+    </div>
+    <div id="confirm-submit" class="mt-2">
+      {
+        guest.hasAnswered() ? (
+          <ActiveConfirmBtn guest={guest} />
+        ) : (
+          <DisabledConfirmBtn guest={guest} />
+        )
+      }
+    </div>
+  </form>
+</div>

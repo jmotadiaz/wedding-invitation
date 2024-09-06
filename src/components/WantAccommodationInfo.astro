@@ -13,7 +13,6 @@ const guest = Astro.props.guest;
   theme="secondary"
   hx-patch={`/${guest.uuid}/api/accommodation`}
   hx-target="#accommodation-info"
-  hx-swap="outerHTML transition:true"
   hx-include="[name='wantAccommodation']"
 >
   <input type="checkbox" name="wantAccommodation" checked class="hidden" />

@@ -18,28 +18,29 @@ const join = (arr: string[]) => {
 
 const { guest } = Astro.props;
 ---
+<div id="confirm">
+  {guest.confirmed ?
+    <h3 class="text-xl mb-2 text-center w-full">Invitación confirmada.</h3>
+  <p>Se confirmó la asistencia de {join(guest.confirmedAttendees ?? [])}.</p> :
+    <h3 class="text-xl mb-2 text-center w-full">Ningún asistente podrá asistir.</h3>
+    <p>Sentimos mucho no poder contar con vosotros.</p>
+  }
 
-{guest.confirmed ?
-  <h3 class="text-xl mb-2 text-center w-full">Invitación confirmada.</h3>
-<p>Se confirmó la asistencia de {join(guest.confirmedAttendees ?? [])}.</p> :
-  <h3 class="text-xl mb-2 text-center w-full">Ningún asistente podrá asistir.</h3>
-  <p>Sentimos mucho no poder contar con vosotros.</p>
-}
+  {!!guest.allergies &&
+      <div class="border-b-2 border-gray-200 w-1/3 mx-auto my-5"></div>
+      <h4 class="font-[500] mb-1">Alergias y/o condición alimentaria</h4>
+      <p class="text-sm">{guest.allergies}</p>
+  }
 
-{!!guest.allergies &&
-    <div class="border-b-2 border-gray-200 w-1/3 mx-auto my-5"></div>
-    <h4 class="font-[500] mb-1">Alergias y/o condición alimentaria</h4>
-    <p class="text-sm">{guest.allergies}</p>
-}
-
-<div class="mt-6">
-  <ButtonWithLoading
-    type="submit"
-    hx-get={`/${guest.uuid}/api/edit-confirm`}
-    hx-target="#confirm"
-    hx-swap="innerHTML transition:true"
-  >
-    Editar confirmación
-    <span slot="loading-content">Procesando...</span>
-  </ButtonWithLoading>
+  <div class="mt-6">
+    <ButtonWithLoading
+      type="submit"
+      hx-get={`/${guest.uuid}/api/edit-confirm`}
+      hx-target="#confirm"
+      hx-swap="outerHTML"
+    >
+      Editar confirmación
+      <span slot="loading-content">Procesando...</span>
+    </ButtonWithLoading>
+  </div>
 </div>

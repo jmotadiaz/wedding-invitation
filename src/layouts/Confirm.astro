@@ -19,14 +19,14 @@ if (!guest) {
 
 <style is:global>
   #confirm {
-    view-transition-name: confirm;
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 600ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  ::view-transition-old(confirm) {
-    animation: var(--fade-out);
-  }
-  ::view-transition-new(confirm) {
-    animation: var(--fade-in), var(--slide-from-bottom);
+  #confirm.htmx-added {
+    opacity: 0;
+    transform: translateY(50%);
   }
 </style>
 
@@ -45,15 +45,13 @@ if (!guest) {
       {guest.name}
     </span>
   </h3>
-  <div class="bg-white p-6 shadow-md rounded-md w-full max-w-screen-sm mx-10">
-    <div id="confirm">
-      {
-        guest.hasAnswered() ? (
-          <ConfirmedGuestInfo guest={guest} />
-        ) : (
-          <ConfirmForm guest={guest} />
-        )
-      }
-    </div>
+  <div class="bg-white p-6 shadow-md rounded-md w-full max-w-screen-sm mx-10 overflow-hidden">
+    {
+      guest.hasAnswered() ? (
+        <ConfirmedGuestInfo guest={guest} />
+      ) : (
+        <ConfirmForm guest={guest} />
+      )
+    }
   </div>
 </div>

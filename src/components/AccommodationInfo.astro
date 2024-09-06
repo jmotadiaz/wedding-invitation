@@ -14,16 +14,16 @@ if (!guest) {
 }
 ---
 
-<style is:global>
+<style>
   #accommodation-info {
-    view-transition-name: accommodation-info;
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 600ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  ::view-transition-old(accommodation-info) {
-    animation: var(--fade-out);
-  }
-  ::view-transition-new(accommodation-info) {
-    animation: var(--fade-in), var(--slide-from-bottom);
+  #accommodation-info.htmx-added {
+    opacity: 0;
+    transform: translateY(50%);
   }
 </style>
 
