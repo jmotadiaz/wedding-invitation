@@ -14,7 +14,7 @@ const id = Astro.params.id;
 
 <Layout title="Boda Rocío y Javi">
   <main class="h-screen flex flex-col justify-center items-center p-5 relative">
-    <a href=`/${id}/invitacion` data-astro-prefetch class="scale-100 active:scale-90 transition-transform duration-300">
+    <a href=`/${id}/invitacion` data-astro-prefetch>
       <picture>
         <source srcset=`${invitationEnvelopImgSM.src}` media="(max-width: 360px)" width=`${invitationEnvelopImgSM.width}` height=`${invitationEnvelopImgSM.height}` />
         <source srcset=`${invitationEnvelopImgMD.src}` media="(max-width: 720px)" width=`${invitationEnvelopImgMD.width}` height=`${invitationEnvelopImgMD.height}` />
