@@ -87,5 +87,15 @@ const id = Astro.params.id as string;
       <Gifts />
     </Section>
     <Image {...getImage(Figuera)} class="w-full" />
+    <Section class="py-16">
+      <div
+        class="flex flex-col items-center transition-all ease-out duration-700 opacity-0"
+        {...onIntersect(show())}
+      >
+        <p>Gracias por acompañarnos</p>
+        <p>en este día tan especial para nosotros</p>
+        <Heart size={28} class="fill-sky-950 mt-5" />
+      </div>
+    </Section>
   </main>
 </Layout>
