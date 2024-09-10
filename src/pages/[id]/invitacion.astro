@@ -54,11 +54,11 @@ const id = Astro.params.id as string;
       <Timeline />
     </Section>
     <Section>
-      <div class="w-full overflow-hidden bg-sky-950">
+      <div class="w-full overflow-hidden bg-teal-800">
         <Intersect
           tresHold={100}
           htmlTag="h2"
-          class="font-hand text-hand-lg text-white py-20 transition-all ease-out duration-700 opacity-0"
+          class="text-lg text-white py-20 transition-all ease-out duration-700 opacity-0"
           {...onIntersect(show())}
         >
           <span class="block mb-1">
@@ -80,21 +80,31 @@ const id = Astro.params.id as string;
     <Section class="py-10">
       <DressCode />
     </Section>
-    <Section class="py-10 bg-sky-950 text-white">
+    <Section class="py-10 bg-teal-800 text-white">
       <Accommodation />
     </Section>
     <Section class="py-10">
       <Gifts />
     </Section>
-    <Image {...getImage(Figuera)} class="w-full" />
     <Section class="py-16">
-      <div
-        class="flex flex-col items-center transition-all ease-out duration-700 opacity-0"
-        {...onIntersect(show())}
-      >
-        <p>Gracias por acompañarnos</p>
-        <p>en este día tan especial para nosotros</p>
-        <Heart size={28} class="fill-sky-950 mt-5" />
+      <div class="relative bg-black w-full">
+        <Image {...getImage(Figuera)} class="w-full opacity-40" />
+        <div
+          class=`
+            absolute z-10 top-0 left-0
+            h-full w-full px-10
+            flex flex-col items-center justify-center
+            font-hand text-hand-xl text-white
+            transition-all ease-out duration-700 opacity-0
+          `
+          {...onIntersect(show())}
+        >
+          <p>Gracias</p>
+          <p>por acompañarnos</p>
+          <p>en este día tan especial</p>
+          <p>para nosotros</p>
+          <Heart size={28} class="fill-white mt-5" />
+        </div>
       </div>
     </Section>
   </main>
