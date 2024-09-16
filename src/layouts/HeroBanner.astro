@@ -1,4 +1,5 @@
 ---
+import { onIntersect, show } from "@utils";
 import imgLG from "../assets/florecitas-lg.webp";
 import imgMD from "../assets/florecitas-md.webp";
 import imgSM from "../assets/florecitas-sm.webp";
@@ -55,8 +56,7 @@ import imgXS from "../assets/florecitas-xs.webp";
       Javier
     </p>
     <p class="text-sm mt-12">14 DE DICIEMBRE 2024</p>
-    <p class="mt-20">Desliza hacia abajo</p>
-    <div class="animate-bounce w-10 h-10 mt-8">
+    <div {...onIntersect(show())} class="transition-all ease-out duration-1000 delay-[1.4s] opacity-0 animate-bounce w-10 h-10 mt-20 mb-10">
       <svg
         data-slot="icon"
         fill="none"
