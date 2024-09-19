@@ -13,7 +13,7 @@ const declined = guest.declined;
   class="grid grid-cols-1 space-y-2 py-2"
   x-data=`{ enable: ${!declined} }`
 >
-  <leyend class="font-[500]">Asistentes:</leyend>
+  <leyend class="font-medium">Asistentes:</leyend>
   {
     guest.expectedAttendees.map((att) => (
       <label for={att} class={`flex items-center ${declined ? 'opacity-40' : ''}`}>

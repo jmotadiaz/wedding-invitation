@@ -30,6 +30,10 @@ export class Guest {
     return this.confirmedAttendees?.length === 0;
   }
 
+  isConfirmed(): this is { confirmedAttendees: number } {
+    return this.hasAnswered() && this.confirmedAttendees.length > 0;
+  }
+
   hasAnswered(): this is { confirmedAttendees: number } {
     return this.confirmedAttendees !== null;
   }

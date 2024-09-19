@@ -3,7 +3,10 @@ import db from "./db";
 import type { GuestTable } from "./db";
 import type { Selectable } from "kysely";
 
-type DbGuest = Omit<Guest, "confirmed" | "declined" | "hasAnswered">;
+type DbGuest = Omit<
+  Guest,
+  "confirmed" | "declined" | "hasAnswered" | "isConfirmed"
+>;
 
 export type GuestSource = Selectable<GuestTable>;
 

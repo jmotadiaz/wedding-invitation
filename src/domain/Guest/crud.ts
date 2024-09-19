@@ -120,6 +120,10 @@ export const validateGuest = (
   return errors;
 };
 
+const buildGuest = (
+  rawGuest: GuestRepository.GuestSource | undefined
+): Guest | undefined => rawGuest && new Guest(rawGuest);
+
 export const confirmGuest = async (
   id: string,
   {
@@ -127,19 +131,20 @@ export const confirmGuest = async (
     allergies,
     bus,
     declineInvitation,
-  }: Pick<
-    Guest,
-    "confirmedAttendees" | "allergies" | "bus"
-  > & { declineInvitation: boolean }
+  }: Pick<Guest, "confirmedAttendees" | "allergies" | "bus"> & {
+    declineInvitation: boolean;
+  }
 ): Promise<Guest | undefined> => {
   if (declineInvitation) {
-    GuestRepository.updateGuest(id, {
-      confirmedAttendees,
-      allergies: "",
-      bus: false,
-      busSeats: null,
-      busStop: null,
-    });
+    return buildGuest(
+      await GuestRepository.updateGuest(id, {
+        confirmedAttendees: [],
+        allergies: "",
+        bus: false,
+        busSeats: null,
+        busStop: null,
+      })
+    );
   }
 
   const parsedGuest = {
@@ -154,9 +159,7 @@ export const confirmGuest = async (
     return Promise.reject(errors);
   }
 
-  const rawGuest = await GuestRepository.updateGuest(id, parsedGuest);
-
-  return rawGuest && new Guest(rawGuest);
+  return buildGuest(await GuestRepository.updateGuest(id, parsedGuest));
 };
 
 export const updateAccommodation = async (

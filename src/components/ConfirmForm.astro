@@ -20,7 +20,7 @@ const guest = Astro.props.guest;
     <AttendeesCheckboxList guest={guest} />
     <div>
       <Field>
-        <label for="allergies" class="font-[500]"
+        <label for="allergies" class="font-medium"
           >Alergias y/o condición alimentaria:</label
         >
         <input
@@ -32,7 +32,7 @@ const guest = Astro.props.guest;
       </Field>
     </div>
     <Field>
-      <label for="bus" class="font-[500] flex items-center">
+      <label for="bus" class="font-medium flex items-center">
         ¿{guest.expectedAttendees.length === 1 ? "Te" : "Os"} podría interesar traslado?:
         <input
           id="bus"
