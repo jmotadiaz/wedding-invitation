@@ -1,7 +1,8 @@
 ---
 import ActiveConfirmBtn from "@components/ActiveConfirmBtn.astro";
 import DisabledConfirmBtn from "@components/DisabledConfirmBtn.astro";
-import { getGuest } from "@domain/Guest";
+import NumberOptions from "@components/NumberOptions.astro";
+import { getGuest, validateGuest } from "@domain/Guest";
 
 export const partial = true;
 
@@ -14,15 +15,19 @@ if (!guest) {
 	});
 }
 
-const answered =
-	Boolean(Astro.url.searchParams.get("declineInvitation")) ||
-	guest.expectedAttendees.filter((att) =>
-		Boolean(Astro.url.searchParams.get(att)),
-	).length > 0;
+const valid =
+	validateGuest(
+		{
+			confirmedAttendees: guest.expectedAttendees.filter((att) =>
+				Boolean(Astro.url.searchParams.get(att)),
+			),
+		},
+		Boolean(Astro.url.searchParams.get("declineInvitation")),
+	).length === 0;
 ---
 
 {
-  answered ? (
+  valid ? (
     <ActiveConfirmBtn guest={guest} />
   ) : (
     <DisabledConfirmBtn guest={guest} />

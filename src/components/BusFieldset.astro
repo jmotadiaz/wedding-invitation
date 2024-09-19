@@ -1,0 +1,80 @@
+---
+import type { Guest } from "@domain/Guest";
+import { stops } from "@domain/Guest";
+import Field from "./Field.astro";
+import NumberOptions from "./NumberOptions.astro";
+
+export interface Props {
+	guest: Guest;
+	numSeats: number;
+}
+
+const { guest, numSeats } = Astro.props;
+---
+<div x-data=`{guestWantsBus: ${guest.bus}}`>
+  <Field>
+    <label for="bus" class="font-bold flex items-center">
+      ¿Te podría interesar traslado?:
+      <input
+        id="bus"
+        name="bus"
+        type="checkbox"
+        class="ml-2"
+        checked={guest.bus}
+        hx-get={`/${guest.uuid}/api/validate-attendees`}
+        hx-include="input,select"
+        hx-target="#confirm-submit"
+        x-on:change={`
+            guestWantsBus = $event.target.checked;
+            $refs.busStop.setCustomValidity('');
+            $refs.busSeats.setCustomValidity('');
+          `}
+      />
+    </label>
+  </Field>
+  <!-- Parada -->
+  <fieldset class="grid grid-cols-2 space-x-2" x-show="guestWantsBus" x-collapse>
+    <Field>
+      <label for="busStop" class="font-bold">Parada:</label>
+      <select
+        id="busStop"
+        name="busStop"
+        class="border rounded-md px-4 py-2 border-gray-300 bg-white"
+        x-ref="busStop"
+        hx-get={`/${guest.uuid}/api/validate-attendees`}
+        hx-include="input,select"
+        hx-target="#confirm-submit"
+        :required="guestWantsBus"
+        oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar una parada')"
+        oninput="this.setCustomValidity('')"
+      >
+        <option hidden disabled selected={!guest.busStop} value=""></option>
+        {
+          stops.map((busStop) => (
+            <option selected={guest.busStop === busStop} value={busStop}>
+              {busStop}
+            </option>
+          ))
+        }
+      </select>
+    </Field>
+    <!-- Asientos -->
+    <Field>
+      <label for="busSeats" class="font-bold">Asientos:</label>
+      <select
+        id="busSeats"
+        name="busSeats"
+        class="border rounded-md px-4 py-2 border-gray-300 bg-white"
+        hx-get={`/${guest.uuid}/api/validate-attendees`}
+        hx-include="input,select"
+        hx-target="#confirm-submit"
+        x-ref="busSeats"
+        :required="guestWantsBus"
+        oninvalid="this.setCustomValidity('Si quieres autobus, debes seleccionar el numero de asientos')"
+        oninput="this.setCustomValidity('')"
+      >
+        <NumberOptions numOptions={numSeats} selectedOption={guest.busSeats} />
+      </select>
+    </Field>
+  </fieldset>
+</div>

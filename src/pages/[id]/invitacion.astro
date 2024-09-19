@@ -15,6 +15,10 @@ import Section from "@layouts/Section.astro";
 import Timeline from "@layouts/Timeline.astro";
 import WhenAndWhere from "@layouts/WhenAndWhere.astro";
 import { getImage, onIntersect, show } from "@utils";
+import Divertida from "../../assets/Divertida.jpg";
+import Paseo from "../../assets/Paseo.jpg";
+import Peque from "../../assets/Peque.jpg";
+import Romantica from "../../assets/Romantica.jpg";
 import Figuera from "../../assets/figuera.png";
 
 const id = Astro.params.id as string;
@@ -106,6 +110,12 @@ const id = Astro.params.id as string;
           <Heart size={28} class="fill-white mt-5" />
         </div>
       </div>
+    </Section>
+    <Section>
+      <Image {...getImage(Romantica)} class="w-full" />
+      <Image {...getImage(Peque)} class="w-full" />
+      <Image {...getImage(Divertida)} class="w-full" />
+      <Image {...getImage(Paseo)} class="w-full" />
     </Section>
   </main>
 </Layout>

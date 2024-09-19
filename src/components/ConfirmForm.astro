@@ -2,6 +2,7 @@
 import type { Guest } from "@domain/Guest/model";
 import ActiveConfirmBtn from "./ActiveConfirmBtn.astro";
 import AttendeesCheckboxList from "./AttendeesCheckboxList.astro";
+import BusFieldset from "./BusFieldset.astro";
 import DisabledConfirmBtn from "./DisabledConfirmBtn.astro";
 import Field from "./Field.astro";
 
@@ -31,6 +32,18 @@ const guest = Astro.props.guest;
         />
       </Field>
     </div>
+    <Field>
+      <label for="bus" class="font-[500] flex items-center">
+        ¿{guest.expectedAttendees.length === 1 ? "Te" : "Os"} podría interesar traslado?:
+        <input
+          id="bus"
+          name="bus"
+          type="checkbox"
+          class="ml-2"
+          checked={guest.bus}
+        />
+      </label>
+    </Field>
     <div id="confirm-submit" class="mt-2">
       {
         guest.hasAnswered() ? (

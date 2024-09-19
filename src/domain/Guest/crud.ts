@@ -79,19 +79,10 @@ export const deleteGuest = async (id: string): Promise<void> => {
   return GuestRepository.deleteGuest(id);
 };
 
-const validateGuest = (
-  guest: Pick<
-    Guest,
-    "allergies" | "confirmedAttendees" | "bus" | "busSeats" | "busStop"
-  >,
-  declineInvitation: boolean
+export const validateBus = (
+  guest: Pick<Guest, "confirmedAttendees" | "bus" | "busSeats" | "busStop">
 ): ValidationError[] => {
   const errors: ValidationError[] = [];
-
-  if (guest.confirmedAttendees?.length === 0 && !declineInvitation) {
-    errors.push(ValidationError.CONFIRMATION_REQUIRED);
-  }
-
   if (guest.bus) {
     if (!guest.busStop) {
       errors.push(ValidationError.BUS_STOP_REQUIRED);
@@ -111,6 +102,19 @@ const validateGuest = (
     if (guest.busStop && !stops.includes(guest.busStop)) {
       errors.push(ValidationError.BUS_STOP_ERROR);
     }
+  }
+
+  return errors;
+};
+
+export const validateGuest = (
+  guest: Pick<Guest, "confirmedAttendees">,
+  declineInvitation: boolean
+): ValidationError[] => {
+  const errors: ValidationError[] = [];
+
+  if (guest.confirmedAttendees?.length === 0 && !declineInvitation) {
+    errors.push(ValidationError.CONFIRMATION_REQUIRED);
   }
 
   return errors;
