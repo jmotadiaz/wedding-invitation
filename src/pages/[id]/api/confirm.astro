@@ -26,6 +26,8 @@ if (Astro.request.method === "PATCH" && guest) {
 			busStop: formData.get("busStop"),
 		});
 	} catch (e) {
+		console.log(e);
+
 		errors = Array.isArray(e)
 			? (e as ValidationError[])
 			: [ValidationError.GENERIC];

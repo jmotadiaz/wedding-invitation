@@ -148,11 +148,10 @@ export const confirmGuest = async (
     allergies,
     confirmedAttendees,
     bus,
-    busSeats: bus ? busSeats : null,
-    busStop: bus ? busStop : null,
   };
 
   const errors = validateGuest(parsedGuest, declineInvitation);
+
   if (errors.length) {
     return Promise.reject(errors);
   }
