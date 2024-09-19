@@ -126,12 +126,10 @@ export const confirmGuest = async (
     confirmedAttendees,
     allergies,
     bus,
-    busSeats,
-    busStop,
     declineInvitation,
   }: Pick<
     Guest,
-    "confirmedAttendees" | "allergies" | "bus" | "busSeats" | "busStop"
+    "confirmedAttendees" | "allergies" | "bus"
   > & { declineInvitation: boolean }
 ): Promise<Guest | undefined> => {
   if (declineInvitation) {

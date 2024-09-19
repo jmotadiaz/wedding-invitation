@@ -21,9 +21,7 @@ if (Astro.request.method === "PATCH" && guest) {
 				formData.has(att),
 			),
 			allergies: formData.get("allergies"),
-			busSeats: Number.parseInt(formData.get("busSeats")),
 			bus: formData.has("bus"),
-			busStop: formData.get("busStop"),
 		});
 	} catch (e) {
 		console.log(e);
