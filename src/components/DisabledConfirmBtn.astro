@@ -12,6 +12,7 @@ const guest = Astro.props.guest;
 <Button
   type="submit"
   disabled
+  id="confirm-btn"
 >
   {guest.hasAnswered() ? "Actualizar" : "Confirmar"}
 </Button>

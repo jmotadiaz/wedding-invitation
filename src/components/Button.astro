@@ -16,20 +16,21 @@ const {
 
 const skin =
 	theme === "primary"
-		? `
-	border-sky-950
-	 bg-sky-900/5
-	${disabled ? "opacity-50" : "hover:bg-sky-900/[0.07] active:bg-sky-900/10"}
-`
+		? `${
+				disabled
+					? "opacity-50 text-neutral-200 bg-neutral-200/5 border-neutral-200"
+					: "border-teal-800 text-teal-800 bg-teal-800/5 hover:bg-teal-800/[0.07] active:bg-teal-800/10"
+			}`
 		: `
-	border-neutral-200
-	text-neutral-200 bg-neutral-200/5
-	${disabled ? "opacity-50" : "hover:bg-neutral-200/[0.07] active:bg-neutral-200/10"}
+		border-neutral-200
+		text-neutral-200 bg-neutral-200/5
+		${disabled ? "opacity-50" : "hover:bg-neutral-200/[0.07] active:bg-neutral-200/10"}
 `;
 ---
 
 <button
   class={`
+		transition-all ease-out duration-150
 		border-2 rounded-md
 		font-medium
 		py-2 px-4 ${full ? "w-full" : ""}

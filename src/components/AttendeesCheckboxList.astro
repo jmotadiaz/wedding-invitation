@@ -26,8 +26,8 @@ const declined = guest.declined;
           checked={!declined && guest.confirmedAttendees?.includes(att)}
           hx-get={`/${guest.uuid}/api/validate-attendees`}
           hx-include=".attendee-checkbox"
-          hx-target="#confirm-submit"
-          hx-swap="innerHTML"
+          hx-target="#confirm-btn"
+          hx-swap="outerHTML"
           @decline-changed.window={`
             $event.detail.declined ? $el.setAttribute('disabled','disabled') : $el.removeAttribute("disabled");
             $el.closest("label").classList.toggle('opacity-40', $event.detail.declined);
@@ -48,8 +48,8 @@ const declined = guest.declined;
       x-on:change="$dispatch('decline-changed', {declined: $el.checked})"
       hx-get={`/${guest.uuid}/api/validate-attendees`}
       hx-include=".attendee-checkbox"
-      hx-target="#confirm-submit"
-      hx-swap="innerHTML"
+      hx-target="#confirm-btn"
+      hx-swap="outerHTML"
     />
     No podremos asistir
   </label>

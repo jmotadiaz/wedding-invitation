@@ -11,6 +11,7 @@ const guest = Astro.props.guest;
 
 <ButtonWithLoading
   type="submit"
+  id="confirm-btn"
 >
   {guest.hasAnswered() ? "Actualizar" : "Confirmar"}
   <span slot="loading-content">Confirmando...</span>
