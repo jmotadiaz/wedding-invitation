@@ -7,38 +7,36 @@ export interface Props {
 
 const guests = Astro.props.guests;
 ---
-<div class="w-full overflow-x-auto">
-  <table class="table-auto w-full mb-4">
-    <thead>
+<table class="relative table-auto w-full mb-4">
+  <thead>
+    <tr>
+      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Actions</th>
+      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Name</th>
+      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Asistentes Esperados</th>
+      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Asistentes Confirmados</th>
+      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Alergias</th>
+      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Hotel</th>
+      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Autobus</th>
+      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {guests.map(guest => (
       <tr>
-        <th class="border px-4 py-2">Actions</th>
-        <th class="border px-4 py-2">Name</th>
-        <th class="border px-4 py-2">Asistentes Esperados</th>
-        <th class="border px-4 py-2">Asistentes Confirmados</th>
-        <th class="border px-4 py-2">Alergias</th>
-        <th class="border px-4 py-2">Hotel</th>
-        <th class="border px-4 py-2">Autobus</th>
-        <th class="border px-4 py-2">Actions</th>
+        <td class="border border-gray-200 px-4 py-2 whitespace-nowrap">
+          <a href={`/${guest.uuid}`} class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 text-nowrap rounded mr-5">Ir a Invitacion</a>
+        </td>
+        <td class="border border-gray-200 px-4 py-2">{guest.name}</td>
+        <td class="border border-gray-200 px-4 py-2">{guest.expectedAttendees.map((att) => <div>{att}</div>)}</td>
+        <td class="border border-gray-200 px-4 py-2">{guest.confirmedAttendees?.map((att) => <div>{att}</div>)}</td>
+        <td class="border border-gray-200 px-4 py-2">{guest.allergies}</td>
+        <td class="border border-gray-200 px-4 py-2">{guest.accommodation ? "SI" : "NO"}</td>
+        <td class="border border-gray-200 px-4 py-2">{guest.bus ? "SI" : "NO"}</td>
+        <td class="border border-gray-200 px-4 py-2 whitespace-nowrap">
+          <a href="#" hx-delete={`/guests/api/delete/${guest.uuid}`} hx-confirm={`¿Estas seguro de eliminar la invitación para ${guest.name}`} hx-target="#guest-list" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-5">Borrar</a>
+          <a href={`/${guest.uuid}`} class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 text-nowrap rounded mr-5">Ir a Invitacion</a>
+        </td>
       </tr>
-    </thead>
-    <tbody>
-      {guests.map(guest => (
-        <tr>
-          <td class="border px-4 py-2 whitespace-nowrap">
-            <a href={`/${guest.uuid}`} class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 text-nowrap rounded mr-5">Ir a Invitacion</a>
-          </td>
-          <td class="border px-4 py-2">{guest.name}</td>
-          <td class="border px-4 py-2">{guest.expectedAttendees.map((att) => <div>{att}</div>)}</td>
-          <td class="border px-4 py-2">{guest.confirmedAttendees?.map((att) => <div>{att}</div>)}</td>
-          <td class="border px-4 py-2">{guest.allergies}</td>
-          <td class="border px-4 py-2">{guest.accommodation ? "SI" : "NO"}</td>
-          <td class="border px-4 py-2">{guest.bus ? "SI" : "NO"}</td>
-          <td class="border px-4 py-2 whitespace-nowrap">
-            <a href="#" hx-delete={`/guests/api/delete/${guest.uuid}`} hx-confirm={`¿Estas seguro de eliminar la invitación para ${guest.name}`} hx-target="#guest-list" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-5">Borrar</a>
-            <a href={`/${guest.uuid}`} class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 text-nowrap rounded mr-5">Ir a Invitacion</a>
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
+    ))}
+  </tbody>
+</table>
