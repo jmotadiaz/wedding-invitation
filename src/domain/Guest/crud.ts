@@ -173,3 +173,11 @@ export const updateAccommodation = async (
     return rawGuest && new Guest(rawGuest);
   }
 };
+
+export const updateInfo = async (
+  id: string,
+  info: string
+): Promise<Guest | undefined> => {
+  const rawGuest = await GuestRepository.updateGuest(id, { busStop: info });
+  return rawGuest && new Guest(rawGuest);
+};

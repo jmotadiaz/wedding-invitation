@@ -8,11 +8,13 @@ export interface Props {
 const guests = Astro.props.guests;
 const booleanToText = (value: boolean) => (value ? "SI" : "NO");
 ---
-<table class="relative table-auto w-full mb-4">
+<table class="relative table-auto w-full mb-4" x-init>
   <thead>
     <tr>
       <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Actions</th>
-      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Name</th>
+      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Informacion</th>
+      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Nombre</th>
+      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">URL</th>
       <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Asistentes Esperados</th>
       <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Asistentes Confirmados</th>
       <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Invitacion Declinada</th>
@@ -24,11 +26,14 @@ const booleanToText = (value: boolean) => (value ? "SI" : "NO");
   </thead>
   <tbody>
     {guests.map(guest => (
-      <tr>
+      <tr id={`${guest.uuid}`}>
         <td class="border border-gray-200 px-4 py-2 whitespace-nowrap">
           <a href={`/${guest.uuid}`} class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 text-nowrap rounded mr-5">Ir a Invitacion</a>
+          <button @click={`$clipboard('https://' + location.hostname + '/${guest.uuid}')`} class="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 text-nowrap rounded mr-5">Copiar</button>
         </td>
+        <td hx-get={`/guests/api/edit/${guest.uuid}`} class="info border border-gray-200 px-4 py-2">{guest.info}</td>
         <td class="border border-gray-200 px-4 py-2">{guest.name}</td>
+        <td class="border border-gray-200 px-4 py-2">{guest.uuid}</td>
         <td class="border border-gray-200 px-4 py-2">{guest.expectedAttendees.map((att) => <div>{att}</div>)}</td>
         <td class="border border-gray-200 px-4 py-2">{guest.confirmedAttendees?.map((att) => <div>{att}</div>)}</td>
         <td class="border border-gray-200 px-4 py-2">{booleanToText(guest.declined)}</td>

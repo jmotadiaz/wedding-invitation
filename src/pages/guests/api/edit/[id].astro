@@ -1,0 +1,43 @@
+---
+import GuestList from "@components/GuestList.astro";
+import { type Guest, getGuest, updateInfo } from "@domain/Guest";
+import { createFormDataWrapper } from "@utils";
+
+export const partial = true;
+const { id } = Astro.params as { id: string };
+let guest: Guest | null | undefined = null;
+if (Astro.request.method === "PATCH") {
+	const formData = createFormDataWrapper(await Astro.request.formData());
+	guest = await updateInfo(id, formData.get("info"));
+}
+
+if (Astro.request.method === "GET") {
+	guest = await getGuest(id);
+}
+
+if (!guest) {
+	return new Response("Invitado no encontrado", {
+		status: 500,
+		statusText: "Internal Server Error",
+	});
+}
+---
+
+{
+  Astro.request.method === "PATCH" ? (
+    <GuestList guests={[guest]} />
+  ) : (
+    <input
+      id={`info-${guest.uuid}`}
+      name="info"
+      class="border rounded-md px-4 py-2 border-gray-300 w-auto"
+      hx-patch={`/guests/api/edit/${guest.uuid}`}
+      hx-target={`#${guest.uuid}`}
+      hx-swap="outerHTML"
+      hx-trigger="blur"
+      x-init="() => { $el.focus() }"
+      hx-select={`#${guest.uuid}`}
+      value={guest.info}
+    />
+  )
+}

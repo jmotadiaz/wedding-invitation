@@ -5,7 +5,7 @@ import type { Selectable } from "kysely";
 
 type DbGuest = Omit<
   Guest,
-  "confirmed" | "declined" | "hasAnswered" | "isConfirmed"
+  "confirmed" | "declined" | "hasAnswered" | "isConfirmed" | "info"
 >;
 
 export type GuestSource = Selectable<GuestTable>;
