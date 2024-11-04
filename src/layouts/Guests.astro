@@ -7,6 +7,7 @@ import {
 	filterByConfirmed,
 	filterByDeclined,
 	filterByNotAnswered,
+	filterByWantBus,
 	getGuests,
 } from "@domain/Guest";
 let guests = await getGuests();
@@ -18,8 +19,11 @@ switch (filterBy) {
 	case "declined":
 		guests = filterByDeclined(guests);
 		break;
-	case "not-answered":
+	case "notAnswered":
 		guests = filterByNotAnswered(guests);
+		break;
+	case "wantBus":
+		guests = filterByWantBus(guests);
 		break;
 }
 ---
@@ -34,8 +38,15 @@ switch (filterBy) {
       data-astro-prefetch="false"><Csv size={40} /></a
     >
   </div>
-  <div class="flex items-center space-x-4 pb-8 pt-2" hx-push-url={true} hx-target="#admin-root">
-    <label class="inline-flex items-center cursor-pointer" for="filterByConfirmed">
+  <div
+    class="flex flex-col items-start space-y-2 lg:flex-row lg:items-center lg:space-x-4 lg:space-y-0 pb-8 pt-2"
+    hx-push-url={true}
+    hx-target="#admin-root"
+  >
+    <label
+      class="inline-flex items-center cursor-pointer"
+      for="filterByConfirmed"
+    >
       <input
         id="filterByConfirmed"
         type="radio"
@@ -45,10 +56,15 @@ switch (filterBy) {
         class="form-radio text-blue-600"
         hx-get="/guests"
       />
-      <span class="ml-2 text-gray-700 font-semibold">Filtrar por confirmados</span>
+      <span class="ml-2 text-gray-700 font-semibold"
+        >Filtrar por confirmados</span
+      >
     </label>
 
-    <label class="inline-flex items-center cursor-pointer" for="filterByDeclined">
+    <label
+      class="inline-flex items-center cursor-pointer"
+      for="filterByDeclined"
+    >
       <input
         id="filterByDeclined"
         type="radio"
@@ -58,22 +74,50 @@ switch (filterBy) {
         class="form-radio text-blue-600"
         hx-get="/guests"
       />
-      <span class="ml-2 text-gray-700 font-semibold">Filtrar por declinados</span>
+      <span class="ml-2 text-gray-700 font-semibold"
+        >Filtrar por declinados</span
+      >
     </label>
 
-    <label class="inline-flex items-center cursor-pointer" for="filterByNotAnswered">
+    <label
+      class="inline-flex items-center cursor-pointer"
+      for="filterByNotAnswered"
+    >
       <input
         id="filterByNotAnswered"
         type="radio"
         name="filterBy"
-        value="not-answered"
-        checked={filterBy === "not-answered"}
+        value="notAnswered"
+        checked={filterBy === "notAnswered"}
         class="form-radio text-blue-600"
         hx-get="/guests"
       />
-      <span class="ml-2 text-gray-700 font-semibold">Filtrar por no contestados</span>
+      <span class="ml-2 text-gray-700 font-semibold"
+        >Filtrar por no contestados</span
+      >
     </label>
-    <a hx-get="/guests" class="inline-flex items-center cursor-pointer text-blue-500 hover:text-blue-600 font-semibold underline">Limpiar filtros</a>
+    <label
+      class="inline-flex items-center cursor-pointer"
+      for="filterByWantBus"
+    >
+      <input
+        id="filterByWantBus"
+        type="radio"
+        name="filterBy"
+        value="wantBus"
+        checked={filterBy === "wantBus"}
+        class="form-radio text-blue-600"
+        hx-get="/guests"
+      />
+      <span class="ml-2 text-gray-700 font-semibold"
+        >Filtrar por interesados en bus</span
+      >
+    </label>
+    <a
+      hx-get="/guests"
+      class="inline-flex items-center cursor-pointer text-blue-500 hover:text-blue-600 font-semibold underline"
+      >Limpiar filtros</a
+    >
   </div>
   <div id="guest-list">
     <GuestList guests={guests} />

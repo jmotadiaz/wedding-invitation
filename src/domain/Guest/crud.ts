@@ -57,6 +57,10 @@ export const filterByNotAnswered = (guests: Guest[]): Guest[] => {
   return guests.filter((guest) => !guest.hasAnswered());
 };
 
+export const filterByWantBus = (guests: Guest[]): Guest[] => {
+  return guests.filter((guest) => guest.bus);
+};
+
 export const addGuest = async ({
   name,
   expectedAttendees,
