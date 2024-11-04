@@ -46,6 +46,16 @@ const booleanToText = (value: boolean) => (value ? "SI" : "NO");
   </tbody>
 </table>
 
-<div class="text-lg">
-  <span class="font-semibold">Total:</span> {guests.length}
+<div class="flex space-x-4 pt-2">
+  <div>
+    <span class="font-semibold">Num de invitaciones:</span> {guests.length}
+  </div>
+  <div class="border-r border-gray-400"></div>
+  <div>
+    <span class="font-semibold">Num de invitados esperados:</span> {guests.reduce((acc, guest) => acc + guest.expectedAttendees.length, 0)}
+  </div>
+  <div class="border-r border-gray-400"></div>
+  <div>
+    <span class="font-semibold">Num de invitados confirmados:</span> {guests.reduce((acc, guest) => acc + (guest.confirmedAttendees?.length ?? 0), 0)}
+  </div>
 </div>
