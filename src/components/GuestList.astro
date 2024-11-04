@@ -1,5 +1,6 @@
 ---
 import type { Guest } from "@domain/Guest/model";
+import GuestListActions from "./GuestListActions.astro";
 
 export interface Props {
 	guests: Guest[];
@@ -12,7 +13,6 @@ const booleanToText = (value: boolean) => (value ? "SI" : "NO");
   <thead>
     <tr>
       <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Actions</th>
-      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Informacion</th>
       <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Nombre</th>
       <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">URL</th>
       <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Asistentes Esperados</th>
@@ -28,10 +28,8 @@ const booleanToText = (value: boolean) => (value ? "SI" : "NO");
     {guests.map(guest => (
       <tr id={`${guest.uuid}`}>
         <td class="border border-gray-200 px-4 py-2 whitespace-nowrap">
-          <a href={`/${guest.uuid}`} class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 text-nowrap rounded mr-5">Ir a Invitacion</a>
-          <button @click={`$clipboard('https://' + location.hostname + '/${guest.uuid}')`} class="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 text-nowrap rounded mr-5">Copiar</button>
+          <GuestListActions guest={guest} />
         </td>
-        <td hx-get={`/guests/api/edit/${guest.uuid}`} class="info border border-gray-200 px-4 py-2">{guest.info}</td>
         <td class="border border-gray-200 px-4 py-2">{guest.name}</td>
         <td class="border border-gray-200 px-4 py-2">{guest.uuid}</td>
         <td class="border border-gray-200 px-4 py-2">{guest.expectedAttendees.map((att) => <div>{att}</div>)}</td>
@@ -41,8 +39,7 @@ const booleanToText = (value: boolean) => (value ? "SI" : "NO");
         <td class="border border-gray-200 px-4 py-2">{booleanToText(guest.accommodation)}</td>
         <td class="border border-gray-200 px-4 py-2">{booleanToText(guest.bus)}</td>
         <td class="border border-gray-200 px-4 py-2 whitespace-nowrap">
-          <a href="#" hx-delete={`/guests/api/delete/${guest.uuid}`} hx-confirm={`¿Estas seguro de eliminar la invitación para ${guest.name}`} hx-target="#guest-list" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-5">Borrar</a>
-          <a href={`/${guest.uuid}`} class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 text-nowrap rounded mr-5">Ir a Invitacion</a>
+          <GuestListActions guest={guest} />
         </td>
       </tr>
     ))}

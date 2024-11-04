@@ -1,0 +1,20 @@
+---
+import { updateGuest } from "@domain/Guest";
+import EditGuest from "@layouts/EditGuest.astro";
+import Guests from "@layouts/Guests.astro";
+import { createFormDataWrapper } from "@utils";
+
+export const partial = true;
+
+const id = `${Astro.params.id}`;
+const method = Astro.request.method;
+if (method === "PUT") {
+	const formData = createFormDataWrapper(await Astro.request.formData());
+	await updateGuest(id, {
+		name: formData.get("name"),
+		expectedAttendees: formData.getAll("expectedAttendees[]"),
+	});
+}
+---
+
+{method === "PUT" ? <Guests /> : <EditGuest id={id} />}

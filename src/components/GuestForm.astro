@@ -1,0 +1,23 @@
+---
+import type { Guest } from "@domain/Guest";
+import ButtonWithLoading from "./ButtonWithLoading.astro";
+import ExpectedAttendee from "./ExpectedAttendee.astro";
+
+export interface Props {
+	guest?: Guest;
+}
+
+const { guest } = Astro.props;
+---
+
+<div class="flex flex-col space-y-2">
+  <input type="text" name="name" placeholder="Name" class="border  rounded-md px-4 py-2 w-full" value={guest?.name} required />
+  {(guest?.expectedAttendees ?? [""]).map((attendee) => (
+    <ExpectedAttendee attendee={attendee} />
+  ))}
+  {!guest && <input type="text" name="publicId" placeholder="URL" class="border rounded-md px-4 py-2 w-full" required />}
+  <ButtonWithLoading type="submit" class="bg-blue-500 text-white px-4 py-2">
+    {guest ? "Editar" : "Añadir"}
+    <span slot="loading-content">{guest ? "Editando" : "Añadiendo"}...</span>
+  </ButtonWithLoading>
+</div>

@@ -1,0 +1,9 @@
+---
+import AdminLayout from "@layouts/AdminLayout.astro";
+import EditGuest from "@layouts/EditGuest.astro";
+
+const id = `${Astro.params.id}`;
+---
+<AdminLayout title="Guests">
+  <EditGuest id={id} />
+</AdminLayout>

@@ -1,42 +1,8 @@
 ---
-import ButtonWithLoading from "@components/ButtonWithLoading.astro";
-import ExpectedAttendee from "@components/ExpectedAttendee.astro";
-import GuestList from "@components/GuestList.astro";
-import Csv from "@components/icons/Csv.astro";
-import { getGuests } from "@domain/Guest";
-import Layout from "@layouts/Layout.astro";
-const guests = await getGuests();
+import AdminLayout from "@layouts/AdminLayout.astro";
+import Guests from "@layouts/Guests.astro";
 ---
 
-<Layout title="Guest List">
-  <div class="container mx-auto py-10 px-5">
-    <div class="flex items-center mb-5">
-      <h1 class="text-4xl lg:text-6xl">Lista de invitados</h1>
-      <a target="_blank" class="ml-5" href="/guests/api/csv"><Csv size={40} /></a>
-    </div>
-    <div id="guest-list">
-      <GuestList guests={guests} />
-    </div>
-    <div class="w-full mt-10 flex flex-col md:flex-row md:space-x-10 max-md:space-y-10">
-      <form class="w-full" hx-post="/guests/api/add" hx-target="#guest-list">
-        <div class="flex flex-col space-y-2">
-          <input type="text" name="name" placeholder="Name" class="border  rounded-md px-4 py-2 w-full" required />
-          <ExpectedAttendee />
-          <input type="text" name="publicId" placeholder="URL" class="border rounded-md px-4 py-2 w-full" required />
-          <ButtonWithLoading type="submit" class="bg-blue-500 text-white px-4 py-2">
-            Añadir
-            <span slot="loading-content">Añadiendo...</span>
-          </ButtonWithLoading>
-        </div>
-      </form>
-      <form class="w-full" hx-encoding='multipart/form-data' hx-post="/guests/api/add/dump" hx-target="#guest-list">
-        <div class="flex flex-col space-y-2">
-          <input type="file" name="csvFile" class="border  rounded-md px-4 py-2" required  accept=".csv"/>
-          <ButtonWithLoading type="submit" class="bg-blue-500 text-white px-4 py-2">
-            Subir Archivo
-            <span slot="loading-content">Subiendo Archivo...</span>
-          </ButtonWithLoading>
-        </div>
-      </form>
-    </div>
-</Layout>
+<AdminLayout title="Guests">
+  <Guests />
+</AdminLayout>

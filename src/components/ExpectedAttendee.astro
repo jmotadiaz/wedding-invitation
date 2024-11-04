@@ -1,8 +1,42 @@
 ---
 import Button from "./Button.astro";
+
+export interface Props {
+	attendee?: string;
+}
+
+const { attendee } = Astro.props;
 ---
 
-<div class="flex space-x-2">
-  <input type="text" name="expectedAttendees[]" placeholder="Expected Attendee" class="border rounded-md px-4 py-2 w-full" required />
-  <Button full={false} type="button" hx-get="/guests/api/atendee" hx-target="closest div" hx-swap="afterend">Más</Button>
+<script>
+  document.addEventListener("click", (e: MouseEvent) => {
+    if (
+      e.target instanceof Element &&
+      e.target.classList.contains("expected-attendee-delete-btn") &&
+      document.querySelectorAll(".expected-attendee").length > 1
+    ) {
+      e.target.closest(".expected-attendee")?.remove();
+    }
+  });
+</script>
+
+<div class="flex space-x-2 expected-attendee">
+  <input
+    type="text"
+    name="expectedAttendees[]"
+    placeholder="Expected Attendee"
+    class="border rounded-md px-4 py-2 w-full"
+    value={attendee}
+    required
+  />
+  <Button
+    full={false}
+    type="button"
+    hx-get="/guests/api/atendee"
+    hx-target="closest div"
+    hx-swap="afterend">Más</Button
+  >
+  <Button full={false} type="button" class="expected-attendee-delete-btn"
+    >Borrar</Button
+  >
 </div>

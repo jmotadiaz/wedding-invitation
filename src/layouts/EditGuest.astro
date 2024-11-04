@@ -1,0 +1,33 @@
+---
+import GuestForm from "@components/GuestForm.astro";
+import { getGuest } from "@domain/Guest";
+
+export interface Props {
+	id: string;
+}
+
+const { id } = Astro.props;
+
+const guest = await getGuest(id);
+---
+
+<div class="max-w-screen-lg mx-auto p-20">
+  <h1 class="text-xl font-bold mb-6">Editar invitación</h1>
+  <form
+    class="w-full"
+    hx-put={`/guests/api/${id}/edit`}
+    hx-target="#admin-root"
+    hx-swap="innerHTML transition:true"
+    hx-push-url="/guests"
+  >
+    <GuestForm guest={guest} />
+  </form>
+  <a
+    hx-get="/guests"
+    hx-target="#admin-root"
+    hx-push-url="/guests"
+    hx-swap="innerHTML transition:true"
+    class="text-blue-500 font-semibold block mt-4 cursor-pointer"
+    >Volver a la lista de invitados</a
+  >
+</div>

@@ -174,6 +174,14 @@ export const updateAccommodation = async (
   }
 };
 
+export const updateGuest = async (
+  id: string,
+  guest: Partial<Omit<Guest, "uuid">>
+): Promise<Guest | undefined> => {
+  const rawGuest = await GuestRepository.updateGuest(id, guest);
+  return rawGuest && new Guest(rawGuest);
+};
+
 export const updateInfo = async (
   id: string,
   info: string

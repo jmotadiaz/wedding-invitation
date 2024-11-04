@@ -1,0 +1,29 @@
+---
+import type { Guest } from "../domain/Guest";
+
+export interface Props {
+	guest: Guest;
+}
+
+const { guest } = Astro.props;
+---
+
+<a
+  href={`/${guest.uuid}`}
+  class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 text-nowrap rounded mr-5"
+  data-astro-prefetch="false"
+  >Ir a Invitacion</a
+>
+<button
+  @click={`$clipboard('https://' + location.hostname + '/${guest.uuid}')`}
+  class="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 text-nowrap rounded mr-5"
+  >Copiar</button
+>
+<a
+  hx-get={`guests/api/${guest.uuid}/edit`}
+  hx-push-url={`/guests/${guest.uuid}/edit`}
+  hx-swap="innerHTML transition:true"
+  hx-target="#admin-root"
+  class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 text-nowrap rounded mr-5 cursor-pointer"
+  >Editar</a
+>
