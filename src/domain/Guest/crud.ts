@@ -45,6 +45,18 @@ export const getGuest = async (id: string): Promise<Guest | undefined> => {
   return guestSource && new Guest(guestSource);
 };
 
+export const filterByConfirmed = (guests: Guest[]): Guest[] => {
+  return guests.filter((guest) => guest.confirmed);
+};
+
+export const filterByDeclined = (guests: Guest[]): Guest[] => {
+  return guests.filter((guest) => guest.declined);
+};
+
+export const filterByNotAnswered = (guests: Guest[]): Guest[] => {
+  return guests.filter((guest) => !guest.hasAnswered());
+};
+
 export const addGuest = async ({
   name,
   expectedAttendees,

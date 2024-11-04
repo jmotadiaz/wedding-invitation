@@ -3,14 +3,77 @@ import ButtonWithLoading from "@components/ButtonWithLoading.astro";
 import GuestForm from "@components/GuestForm.astro";
 import GuestList from "@components/GuestList.astro";
 import Csv from "@components/icons/Csv.astro";
-import { getGuests } from "@domain/Guest";
-const guests = await getGuests();
+import {
+	filterByConfirmed,
+	filterByDeclined,
+	filterByNotAnswered,
+	getGuests,
+} from "@domain/Guest";
+let guests = await getGuests();
+const filterBy = Astro.url.searchParams.get("filterBy");
+switch (filterBy) {
+	case "confirmed":
+		guests = filterByConfirmed(guests);
+		break;
+	case "declined":
+		guests = filterByDeclined(guests);
+		break;
+	case "not-answered":
+		guests = filterByNotAnswered(guests);
+		break;
+}
 ---
 
 <div class="container mx-auto py-10 px-5">
   <div class="flex items-center mb-5">
     <h1 class="text-4xl lg:text-6xl">Lista de invitados</h1>
-    <a target="_blank" class="ml-5" href="/guests/api/csv" data-astro-prefetch="false"><Csv size={40} /></a>
+    <a
+      target="_blank"
+      class="ml-5"
+      href="/guests/api/csv"
+      data-astro-prefetch="false"><Csv size={40} /></a
+    >
+  </div>
+  <div class="flex items-center space-x-4 pb-8 pt-2" hx-push-url={true} hx-target="#admin-root">
+    <label class="inline-flex items-center cursor-pointer" for="filterByConfirmed">
+      <input
+        id="filterByConfirmed"
+        type="radio"
+        name="filterBy"
+        value="confirmed"
+        checked={filterBy === "confirmed"}
+        class="form-radio text-blue-600"
+        hx-get="/guests"
+      />
+      <span class="ml-2 text-gray-700 font-semibold">Filtrar por confirmados</span>
+    </label>
+
+    <label class="inline-flex items-center cursor-pointer" for="filterByDeclined">
+      <input
+        id="filterByDeclined"
+        type="radio"
+        name="filterBy"
+        value="declined"
+        checked={filterBy === "declined"}
+        class="form-radio text-blue-600"
+        hx-get="/guests"
+      />
+      <span class="ml-2 text-gray-700 font-semibold">Filtrar por declinados</span>
+    </label>
+
+    <label class="inline-flex items-center cursor-pointer" for="filterByNotAnswered">
+      <input
+        id="filterByNotAnswered"
+        type="radio"
+        name="filterBy"
+        value="not-answered"
+        checked={filterBy === "not-answered"}
+        class="form-radio text-blue-600"
+        hx-get="/guests"
+      />
+      <span class="ml-2 text-gray-700 font-semibold">Filtrar por no contestados</span>
+    </label>
+    <a hx-get="/guests" class="inline-flex items-center cursor-pointer text-blue-500 hover:text-blue-600 font-semibold underline">Limpiar filtros</a>
   </div>
   <div id="guest-list">
     <GuestList guests={guests} />
