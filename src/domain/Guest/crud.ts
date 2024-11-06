@@ -1,6 +1,6 @@
 import * as GuestRepository from "@repository/GuestRepository";
 import csvToJson from "csvtojson";
-import { Guest } from "./model";
+import { Guest, Guests } from "./model";
 import { arrayFrom } from "@utils";
 
 const DEFAULT_GUEST_VALUES = {
@@ -33,32 +33,36 @@ function nameToUrl(name: string): string {
     .replace(/\s+/g, "-");
 }
 
-export const getGuests = async (): Promise<Guest[]> => {
-  return (await GuestRepository.getGuests()).map(
-    (guestSource) => new Guest(guestSource)
+export const getGuests = async (): Promise<Guests> => {
+  return new Guests(
+    ...(await GuestRepository.getGuests()).map(
+      (guestSource) => new Guest(guestSource)
+    )
   );
+};
+
+export const filterGuestsBy = (
+  guests: Guests,
+  filter: string | undefined | null
+): Guests => {
+  switch (filter) {
+    case "confirmed":
+      return guests.filter((guest) => guest.confirmed);
+    case "declined":
+      return guests.filter((guest) => guest.declined);
+    case "notAnswered":
+      return guests.filter((guest) => !guest.hasAnswered());
+    case "wantBus":
+      return guests.filter((guest) => guest.bus);
+    default:
+      return guests;
+  }
 };
 
 export const getGuest = async (id: string): Promise<Guest | undefined> => {
   const guestSource = await GuestRepository.getGuest(id);
 
   return guestSource && new Guest(guestSource);
-};
-
-export const filterByConfirmed = (guests: Guest[]): Guest[] => {
-  return guests.filter((guest) => guest.confirmed);
-};
-
-export const filterByDeclined = (guests: Guest[]): Guest[] => {
-  return guests.filter((guest) => guest.declined);
-};
-
-export const filterByNotAnswered = (guests: Guest[]): Guest[] => {
-  return guests.filter((guest) => !guest.hasAnswered());
-};
-
-export const filterByWantBus = (guests: Guest[]): Guest[] => {
-  return guests.filter((guest) => guest.bus);
 };
 
 export const addGuest = async ({

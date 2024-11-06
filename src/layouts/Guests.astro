@@ -3,29 +3,21 @@ import ButtonWithLoading from "@components/ButtonWithLoading.astro";
 import GuestForm from "@components/GuestForm.astro";
 import GuestList from "@components/GuestList.astro";
 import Csv from "@components/icons/Csv.astro";
-import {
-	filterByConfirmed,
-	filterByDeclined,
-	filterByNotAnswered,
-	filterByWantBus,
-	getGuests,
-} from "@domain/Guest";
-let guests = await getGuests();
+import { filterGuestsBy, getGuests } from "@domain/Guest";
+import type { HTMLAttributes } from "astro/types";
+
 const filterBy = Astro.url.searchParams.get("filterBy");
-switch (filterBy) {
-	case "confirmed":
-		guests = filterByConfirmed(guests);
-		break;
-	case "declined":
-		guests = filterByDeclined(guests);
-		break;
-	case "notAnswered":
-		guests = filterByNotAnswered(guests);
-		break;
-	case "wantBus":
-		guests = filterByWantBus(guests);
-		break;
-}
+const guests = filterGuestsBy(await getGuests(), filterBy);
+
+const filterCheckBoxProps = (
+	value: string,
+): HTMLAttributes<"input"> & { "hx-get": string } => ({
+	value,
+	checked: filterBy === value,
+	type: "radio",
+	name: "filterBy",
+	"hx-get": "/guests",
+});
 ---
 
 <div class="container mx-auto py-10 px-5">
@@ -49,12 +41,8 @@ switch (filterBy) {
     >
       <input
         id="filterByConfirmed"
-        type="radio"
-        name="filterBy"
-        value="confirmed"
-        checked={filterBy === "confirmed"}
         class="form-radio text-blue-600"
-        hx-get="/guests"
+        {...filterCheckBoxProps("confirmed")}
       />
       <span class="ml-2 text-gray-700 font-semibold"
         >Filtrar por confirmados</span
@@ -67,12 +55,8 @@ switch (filterBy) {
     >
       <input
         id="filterByDeclined"
-        type="radio"
-        name="filterBy"
-        value="declined"
-        checked={filterBy === "declined"}
         class="form-radio text-blue-600"
-        hx-get="/guests"
+        {...filterCheckBoxProps("declined")}
       />
       <span class="ml-2 text-gray-700 font-semibold"
         >Filtrar por declinados</span
@@ -85,12 +69,8 @@ switch (filterBy) {
     >
       <input
         id="filterByNotAnswered"
-        type="radio"
-        name="filterBy"
-        value="notAnswered"
-        checked={filterBy === "notAnswered"}
         class="form-radio text-blue-600"
-        hx-get="/guests"
+        {...filterCheckBoxProps("notAnswered")}
       />
       <span class="ml-2 text-gray-700 font-semibold"
         >Filtrar por no contestados</span
@@ -102,12 +82,8 @@ switch (filterBy) {
     >
       <input
         id="filterByWantBus"
-        type="radio"
-        name="filterBy"
-        value="wantBus"
-        checked={filterBy === "wantBus"}
         class="form-radio text-blue-600"
-        hx-get="/guests"
+        {...filterCheckBoxProps("wantBus")}
       />
       <span class="ml-2 text-gray-700 font-semibold"
         >Filtrar por interesados en bus</span

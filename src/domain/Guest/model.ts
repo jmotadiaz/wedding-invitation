@@ -41,6 +41,21 @@ export class Guest {
   }
 }
 
+export class Guests extends Array<Guest> {
+  get numOfExpectedAttendees(): number {
+    return this.reduce((acc, guest) => acc + guest.expectedAttendees.length, 0);
+  }
+  get numOfConfirmedAttendees(): number {
+    return this.reduce(
+      (acc, guest) => acc + (guest.confirmedAttendees?.length ?? 0),
+      0
+    );
+  }
+  filter(...args: Parameters<Array<Guest>["filter"]>): Guests {
+    return super.filter(...args) as Guests;
+  }
+}
+
 export interface Stats {
   totalConfirmedGuests: number;
   totalCancelledAttendees: number;

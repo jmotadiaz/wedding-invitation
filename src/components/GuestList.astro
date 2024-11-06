@@ -1,61 +1,63 @@
 ---
-import type { Guest } from "@domain/Guest/model";
+import type { Guests } from "@domain/Guest/model";
 import GuestListActions from "./GuestListActions.astro";
 
 export interface Props {
-	guests: Guest[];
+	guests: Guests;
 }
 
 const guests = Astro.props.guests;
 const booleanToText = (value: boolean) => (value ? "SI" : "NO");
 ---
-<table class="relative table-auto w-full mb-4" x-init>
-  <thead>
-    <tr>
-      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Actions</th>
-      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Nombre</th>
-      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">URL</th>
-      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Asistentes Esperados</th>
-      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Asistentes Confirmados</th>
-      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Invitacion Declinada</th>
-      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Alergias</th>
-      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Hotel</th>
-      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Autobus</th>
-      <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {guests.map(guest => (
-      <tr id={`${guest.uuid}`}>
-        <td class="border border-gray-200 px-4 py-2 whitespace-nowrap">
-          <GuestListActions guest={guest} />
-        </td>
-        <td class="border border-gray-200 px-4 py-2">{guest.name}</td>
-        <td class="border border-gray-200 px-4 py-2">{guest.uuid}</td>
-        <td class="border border-gray-200 px-4 py-2">{guest.expectedAttendees.map((att) => <div>{att}</div>)}</td>
-        <td class="border border-gray-200 px-4 py-2">{guest.confirmedAttendees?.map((att) => <div>{att}</div>)}</td>
-        <td class="border border-gray-200 px-4 py-2">{booleanToText(guest.declined)}</td>
-        <td class="border border-gray-200 px-4 py-2">{guest.allergies}</td>
-        <td class="border border-gray-200 px-4 py-2">{booleanToText(guest.accommodation)}</td>
-        <td class="border border-gray-200 px-4 py-2">{booleanToText(guest.bus)}</td>
-        <td class="border border-gray-200 px-4 py-2 whitespace-nowrap">
-          <GuestListActions guest={guest} />
-        </td>
+<div class="max-w-full overflow-auto lg:max-h-none lg:overflow-visible">
+  <table class="relative table-auto min-w-full mb-4" x-init>
+    <thead>
+      <tr>
+        <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Actions</th>
+        <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Nombre</th>
+        <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">URL</th>
+        <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Asistentes Esperados</th>
+        <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Asistentes Confirmados</th>
+        <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Invitacion Declinada</th>
+        <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Alergias</th>
+        <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Hotel</th>
+        <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Autobus</th>
+        <th class="sticky top-0 bg-white border border-gray-200 px-4 py-2">Actions</th>
       </tr>
-    ))}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {guests.map(guest => (
+        <tr id={`${guest.uuid}`}>
+          <td class="border border-gray-200 px-4 py-2 whitespace-nowrap">
+            <GuestListActions guest={guest} />
+          </td>
+          <td class="border border-gray-200 px-4 py-2">{guest.name}</td>
+          <td class="border border-gray-200 px-4 py-2">{guest.uuid}</td>
+          <td class="border border-gray-200 px-4 py-2">{guest.expectedAttendees.map((att) => <div>{att}</div>)}</td>
+          <td class="border border-gray-200 px-4 py-2">{guest.confirmedAttendees?.map((att) => <div>{att}</div>)}</td>
+          <td class="border border-gray-200 px-4 py-2">{booleanToText(guest.declined)}</td>
+          <td class="border border-gray-200 px-4 py-2">{guest.allergies}</td>
+          <td class="border border-gray-200 px-4 py-2">{booleanToText(guest.accommodation)}</td>
+          <td class="border border-gray-200 px-4 py-2">{booleanToText(guest.bus)}</td>
+          <td class="border border-gray-200 px-4 py-2 whitespace-nowrap">
+            <GuestListActions guest={guest} />
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
 
-<div class="flex space-x-4 pt-2">
+<div class="flex flex-col space-y-2 lg:flex-row lg:space-y-0 lg:space-x-4 pt-2">
   <div>
     <span class="font-semibold">Num de invitaciones:</span> {guests.length}
   </div>
   <div class="border-r border-gray-400"></div>
   <div>
-    <span class="font-semibold">Num de invitados esperados:</span> {guests.reduce((acc, guest) => acc + guest.expectedAttendees.length, 0)}
+    <span class="font-semibold">Num de invitados esperados:</span> {guests.numOfExpectedAttendees}
   </div>
   <div class="border-r border-gray-400"></div>
   <div>
-    <span class="font-semibold">Num de invitados confirmados:</span> {guests.reduce((acc, guest) => acc + (guest.confirmedAttendees?.length ?? 0), 0)}
+    <span class="font-semibold">Num de invitados confirmados:</span> {guests.numOfConfirmedAttendees}
   </div>
 </div>
