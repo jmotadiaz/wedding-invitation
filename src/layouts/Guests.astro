@@ -1,23 +1,22 @@
 ---
 import ButtonWithLoading from "@components/ButtonWithLoading.astro";
+import CheckBox from "@components/CheckBox.astro";
 import GuestForm from "@components/GuestForm.astro";
 import GuestList from "@components/GuestList.astro";
 import Csv from "@components/icons/Csv.astro";
 import { filterGuestsBy, getGuests } from "@domain/Guest";
-import type { HTMLAttributes } from "astro/types";
 
 const filterBy = Astro.url.searchParams.get("filterBy");
 const guests = filterGuestsBy(await getGuests(), filterBy);
 
-const filterCheckBoxProps = (
-	value: string,
-): HTMLAttributes<"input"> & { "hx-get": string } => ({
-	value,
-	checked: filterBy === value,
-	type: "radio",
-	name: "filterBy",
-	"hx-get": "/guests",
-});
+const filterRadioBtnProps = (value: string) =>
+	({
+		value,
+		checked: filterBy === value,
+		type: "radio",
+		name: "filterBy",
+		"hx-get": "/guests",
+	}) as const;
 ---
 
 <div class="container mx-auto py-10 px-5">
@@ -35,60 +34,30 @@ const filterCheckBoxProps = (
     hx-push-url={true}
     hx-target="#admin-root"
   >
-    <label
-      class="inline-flex items-center cursor-pointer"
-      for="filterByConfirmed"
+    <CheckBox
+      id="filterByConfirmed"
+      {...filterRadioBtnProps("confirmed")}
     >
-      <input
-        id="filterByConfirmed"
-        class="form-radio text-blue-600"
-        {...filterCheckBoxProps("confirmed")}
-      />
-      <span class="ml-2 text-gray-700 font-semibold"
-        >Filtrar por confirmados</span
-      >
-    </label>
-
-    <label
-      class="inline-flex items-center cursor-pointer"
-      for="filterByDeclined"
+      Filtrar por confirmados
+    </CheckBox>
+    <CheckBox
+      id="filterByDeclined"
+      {...filterRadioBtnProps("declined")}
     >
-      <input
-        id="filterByDeclined"
-        class="form-radio text-blue-600"
-        {...filterCheckBoxProps("declined")}
-      />
-      <span class="ml-2 text-gray-700 font-semibold"
-        >Filtrar por declinados</span
-      >
-    </label>
-
-    <label
-      class="inline-flex items-center cursor-pointer"
-      for="filterByNotAnswered"
+      Filtrar por confirmados
+    </CheckBox>
+    <CheckBox
+      id="filterByNotAnswered"
+      {...filterRadioBtnProps("notAnswered")}
     >
-      <input
-        id="filterByNotAnswered"
-        class="form-radio text-blue-600"
-        {...filterCheckBoxProps("notAnswered")}
-      />
-      <span class="ml-2 text-gray-700 font-semibold"
-        >Filtrar por no contestados</span
-      >
-    </label>
-    <label
-      class="inline-flex items-center cursor-pointer"
-      for="filterByWantBus"
+      Filtrar por confirmados
+    </CheckBox>
+    <CheckBox
+      id="filterByWantBus"
+      {...filterRadioBtnProps("wantBus")}
     >
-      <input
-        id="filterByWantBus"
-        class="form-radio text-blue-600"
-        {...filterCheckBoxProps("wantBus")}
-      />
-      <span class="ml-2 text-gray-700 font-semibold"
-        >Filtrar por interesados en bus</span
-      >
-    </label>
+      Filtrar por confirmados
+    </CheckBox>
     <a
       hx-get="/guests"
       class="inline-flex items-center cursor-pointer text-blue-500 hover:text-blue-600 font-semibold underline"

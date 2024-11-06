@@ -1,0 +1,17 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends HTMLAttributes<"input"> {
+	id: string;
+	type: "checkbox" | "radio";
+	className?: string;
+	[key: `hx-${string}`]: unknown;
+}
+
+const { id, className, ...props } = Astro.props;
+---
+
+<label class="inline-flex items-center cursor-pointer" for={id}>
+  <input id={id} class={`text-blue-600 ${className || ""}`} {...props} />
+  <span class="ml-2 text-gray-700 font-semibold"><slot /></span>
+</label>
