@@ -44,19 +44,19 @@ const filterRadioBtnProps = (value: string) =>
       id="filterByDeclined"
       {...filterRadioBtnProps("declined")}
     >
-      Filtrar por confirmados
+      Filtrar por declinados
     </CheckBox>
     <CheckBox
       id="filterByNotAnswered"
       {...filterRadioBtnProps("notAnswered")}
     >
-      Filtrar por confirmados
+      Filtrar por no contestados
     </CheckBox>
     <CheckBox
       id="filterByWantBus"
       {...filterRadioBtnProps("wantBus")}
     >
-      Filtrar por confirmados
+      Filtrar por interesados en bus
     </CheckBox>
     <a
       hx-get="/guests"
