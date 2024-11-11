@@ -11,7 +11,11 @@ type DbGuest = Omit<
 export type GuestSource = Selectable<GuestTable>;
 
 export function getGuests(): Promise<GuestSource[]> {
-  return db.selectFrom("guest").selectAll().orderBy("modified_at").execute();
+  return db
+    .selectFrom("guest")
+    .selectAll()
+    .orderBy("modified_at", "desc")
+    .execute();
 }
 
 export function getGuest(uuid: string): Promise<GuestSource | undefined> {

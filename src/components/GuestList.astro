@@ -40,7 +40,7 @@ const booleanToText = (value: boolean) => (value ? "SI" : "NO");
           <td class="border border-gray-200 px-4 py-2">{guest.allergies}</td>
           <td class="border border-gray-200 px-4 py-2">{booleanToText(guest.accommodation)}</td>
           <td class="border border-gray-200 px-4 py-2">{booleanToText(guest.bus)}</td>
-          <td class="border border-gray-200 px-4 py-2">{guest.modifiedAt.toLocaleDateString()}</td>
+          <td class="border border-gray-200 px-4 py-2">{guest.modifiedAt.toLocaleDateString("es-ES")}</td>
           <td class="border border-gray-200 px-4 py-2 whitespace-nowrap">
             <GuestListActions guest={guest} />
           </td>
