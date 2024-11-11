@@ -15,7 +15,7 @@ export interface GuestTable {
   allergies: string | null;
   bus_stop: string | null;
   bus_seats: number | null;
-  modified_at?: ColumnType<Date, string | undefined, never>;
+  modified_at?: ColumnType<Date, string | undefined, string | undefined>;
 }
 
 export type SelectableGuest = Selectable<GuestTable>;

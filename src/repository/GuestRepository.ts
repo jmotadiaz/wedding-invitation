@@ -76,6 +76,7 @@ export async function updateGuest(
       bus_stop: guest.busStop,
       bus_seats: guest.busSeats,
       allergies: guest.allergies,
+      modified_at: new Date().toISOString(),
     })
     .where("uuid", "=", uuid)
     .returningAll()
