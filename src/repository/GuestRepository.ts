@@ -11,7 +11,7 @@ type DbGuest = Omit<
 export type GuestSource = Selectable<GuestTable>;
 
 export function getGuests(): Promise<GuestSource[]> {
-  return db.selectFrom("guest").selectAll().execute();
+  return db.selectFrom("guest").selectAll().orderBy("modified_at").execute();
 }
 
 export function getGuest(uuid: string): Promise<GuestSource | undefined> {
@@ -22,7 +22,9 @@ export function getGuest(uuid: string): Promise<GuestSource | undefined> {
     .executeTakeFirst();
 }
 
-export async function addGuest(guest: DbGuest): Promise<GuestSource> {
+export async function addGuest(
+  guest: Omit<DbGuest, "modifiedAt">
+): Promise<GuestSource> {
   return db
     .insertInto("guest")
     .values({
@@ -37,7 +39,9 @@ export async function addGuest(guest: DbGuest): Promise<GuestSource> {
     .executeTakeFirstOrThrow();
 }
 
-export async function dumpGuests(guests: DbGuest[]): Promise<void> {
+export async function dumpGuests(
+  guests: Omit<DbGuest, "modifiedAt">[]
+): Promise<void> {
   await db
     .insertInto("guest")
     .values(

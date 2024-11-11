@@ -11,6 +11,7 @@ export class Guest {
   busSeats: number | null;
   allergies: string | null;
   info: string | null;
+  modifiedAt: Date;
 
   constructor(guestSource: GuestSource) {
     this.uuid = guestSource.uuid;
@@ -23,6 +24,7 @@ export class Guest {
     this.busSeats = guestSource.bus_seats;
     this.allergies = guestSource.allergies;
     this.info = guestSource.bus_stop;
+    this.modifiedAt = guestSource.modified_at ?? new Date();
   }
   get confirmed(): boolean {
     return this.hasAnswered() && this.confirmedAttendees.length > 0;
