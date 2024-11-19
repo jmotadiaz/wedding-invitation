@@ -19,7 +19,7 @@ function showTmpMsg(msg: string, duration = 50000) {
 
   container.setAttribute(
     "class",
-    "fixed bottom-0 w-full flex justify-center items-center p-4"
+    "fixed z-40 bottom-0 w-full flex justify-center items-center p-4"
   );
   msgElement.setAttribute(
     "class",
