@@ -5,21 +5,24 @@ export interface Props {
 
 const { className = "" } = Astro.props;
 ---
+
 <style>
   .htmx-base {
-        transition: all 0.6s;
-      }
-      .htmx-indicator {
-        transition: all 0.6s;
-      }
+    transition: all 0.6s;
+  }
+  .htmx-indicator {
+    transition: all 0.6s;
+  }
 </style>
 
 <td class={`border border-gray-200 px-4 py-2 ${className}`}>
   <div class="relative">
-    <div class="htmx-base">
+    <div class="htmx-base relative z-10">
       <slot />
     </div>
-    <div class="htmx-indicator absolute top-0 left-0 h-full w-full flex items-center">
+    <div
+      class="htmx-indicator z-0 absolute top-0 left-0 h-full w-full flex items-center"
+    >
       <div class="h-4 w-full bg-slate-600 rounded animate-pulse"></div>
     </div>
   </div>
