@@ -13,7 +13,7 @@ export default (Alpine: Alpine) => {
   });
 };
 
-function showTmpMsg(msg: string, duration = 50000) {
+function showTmpMsg(msg: string, duration = 5000) {
   const msgElement = document.createElement("div");
   const container = document.createElement("div");
 
@@ -36,8 +36,9 @@ function showTmpMsg(msg: string, duration = 50000) {
 
   setTimeout(() => {
     msgElement.style.opacity = "0";
-    setTimeout(() => {
-      document.body.removeChild(container);
-    }, 500);
   }, duration);
+
+  setTimeout(() => {
+    document.body.removeChild(container);
+  }, duration + 500);
 }
