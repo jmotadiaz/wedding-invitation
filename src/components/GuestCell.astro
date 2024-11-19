@@ -5,6 +5,14 @@ export interface Props {
 
 const { className = "" } = Astro.props;
 ---
+<style>
+  .htmx-base {
+        transition: all 0.6s;
+      }
+      .htmx-indicator {
+        transition: all 0.6s;
+      }
+</style>
 
 <td class={`border border-gray-200 px-4 py-2 ${className}`}>
   <div class="relative">
