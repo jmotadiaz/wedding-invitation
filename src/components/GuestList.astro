@@ -1,5 +1,6 @@
 ---
 import type { Guests } from "@domain/Guest/model";
+import GuestCell from "./GuestCell.astro";
 import GuestListActions from "./GuestListActions.astro";
 
 export interface Props {
@@ -29,21 +30,21 @@ const booleanToText = (value: boolean) => (value ? "SI" : "NO");
     <tbody>
       {guests.map(guest => (
         <tr id={`${guest.uuid}`}>
-          <td class="border border-gray-200 px-4 py-2 whitespace-nowrap">
+          <GuestCell className="whitespace-nowrap">
             <GuestListActions guest={guest} />
-          </td>
-          <td class="border border-gray-200 px-4 py-2">{guest.name}</td>
-          <td class="border border-gray-200 px-4 py-2">{guest.uuid}</td>
-          <td class="border border-gray-200 px-4 py-2">{guest.expectedAttendees.map((att) => <div>{att}</div>)}</td>
-          <td class="border border-gray-200 px-4 py-2">{guest.confirmedAttendees?.map((att) => <div>{att}</div>)}</td>
-          <td class="border border-gray-200 px-4 py-2">{booleanToText(guest.declined)}</td>
-          <td class="border border-gray-200 px-4 py-2">{guest.allergies}</td>
-          <td class="border border-gray-200 px-4 py-2">{booleanToText(guest.accommodation)}</td>
-          <td class="border border-gray-200 px-4 py-2">{booleanToText(guest.bus)}</td>
-          <td class="border border-gray-200 px-4 py-2">{guest.modifiedAt.toLocaleDateString("es-ES")}</td>
-          <td class="border border-gray-200 px-4 py-2 whitespace-nowrap">
+          </GuestCell>
+          <GuestCell>{guest.name}</GuestCell>
+          <GuestCell>{guest.uuid}</GuestCell>
+          <GuestCell>{guest.expectedAttendees.map((att) => <div>{att}</div>)}</GuestCell>
+          <GuestCell>{guest.confirmedAttendees?.map((att) => <div>{att}</div>)}</GuestCell>
+          <GuestCell>{booleanToText(guest.declined)}</GuestCell>
+          <GuestCell>{guest.allergies}</GuestCell>
+          <GuestCell>{booleanToText(guest.accommodation)}</GuestCell>
+          <GuestCell>{booleanToText(guest.bus)}</GuestCell>
+          <GuestCell>{guest.modifiedAt.toLocaleDateString("es-ES")}</GuestCell>
+          <GuestCell className="whitespace-nowrap">
             <GuestListActions guest={guest} />
-          </td>
+          </GuestCell>
         </tr>
       ))}
     </tbody>
