@@ -24,7 +24,7 @@ const guest = await getGuest(id);
     <GuestForm guest={guest} />
   </form>
   <a
-    hx-get="/guests"
+    hx-get="/guests/api/get/guests"
     hx-target="#admin-root"
     hx-push-url="/guests"
     hx-swap="innerHTML transition:true"
