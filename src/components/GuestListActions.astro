@@ -1,5 +1,6 @@
 ---
 import type { Guest } from "../domain/Guest";
+import Spinner from "./icons/Spinner.astro";
 
 export interface Props {
 	guest: Guest;
@@ -11,8 +12,7 @@ const { guest } = Astro.props;
 <a
   href={`/${guest.uuid}`}
   class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 text-nowrap rounded mr-5"
-  data-astro-prefetch="false"
-  >Ir a Invitacion</a
+  data-astro-prefetch="false">Ir a Invitacion</a
 >
 <button
   @click={`$clipboard('https://' + location.hostname + '/${guest.uuid}')`}
@@ -24,6 +24,17 @@ const { guest } = Astro.props;
   hx-push-url={`/guests/${guest.uuid}/edit`}
   hx-swap="innerHTML transition:true"
   hx-target="#admin-root"
-  class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 text-nowrap rounded mr-5 cursor-pointer"
-  >Editar</a
+  class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 text-nowrap rounded mr-5 cursor-pointer relative"
 >
+  <span class="htmx-base">
+    Editar
+  </span>
+  <div
+    class="absolute h-full w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 htmx-indicator"
+  >
+    <div class="w-full h-full flex items-center justify-center">
+      <span class="mr-2"><Spinner /></span>
+      <slot name="loading-content" />
+    </div>
+  </div>
+</a>
