@@ -13,7 +13,7 @@ const { title } = Astro.props;
 const anim = {
 	old: {
 		name: "page",
-		duration: "0.2s",
+		duration: "0.5s",
 		direction: "reverse",
 		easing: "ease-in-out",
 	},
@@ -60,11 +60,11 @@ const customTransition = {
       @keyframes page {
         0% {
           opacity: 0;
-          transform: translateY(1rem);
+          transform: translate3d(0, 1rem, 0);
         }
         100% {
           opacity: 1;
-          transform: translateY(0);
+          transform: translate3d(0, 0, 0);
         }
       }
       .htmx-request .htmx-base {
