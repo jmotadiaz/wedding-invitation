@@ -15,7 +15,7 @@ interface Timer {
 
 export default (Alpine: Alpine) => {
 	Alpine.data<Timer, []>("timer", () => ({
-		expiry: new Date("12/14/2024 12:00 AM").getTime(),
+		expiry: new Date("12/14/2024 12:00 PM").getTime(),
 		remaining: 0,
 		init() {
 			this.setRemaining();
